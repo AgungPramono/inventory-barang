@@ -45,7 +45,7 @@ public class KategoriTableModel extends AbstractTableModel{
         switch(columnIndex){
             case 0:return kategori.getId();
             case 1:return kategori.getKode();
-            case 2:return kategori.getNamaKategori();
+            case 2:return kategori.getNama();
             default:return "";
         }
 

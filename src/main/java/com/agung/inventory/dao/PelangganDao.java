@@ -7,14 +7,15 @@ package com.agung.inventory.dao;
 
 import com.agung.inventory.entity.Pelanggan;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sql.DataSource;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 /**
  *
@@ -23,43 +24,33 @@ import javax.sql.DataSource;
 public class PelangganDao implements BaseCrudDao<Pelanggan> {
 
     private DataSource dataSource;
+    private JdbcTemplate jdbcTemplate;
+    private SimpleJdbcInsert simpleJdbcInsert;
 
-    private static final String SQL_SIMPAN_PELANGGAN = "insert into pelanggan (kode,nama,alamat,telepon) value (?,?,?,?)";
     private static final String SQL_UPDATE_PELANGGAN = "update pelanggan set kode=?,nama=?,alamat=?,telepon=? where id=?";
     private static final String SQL_SELECT_ALL_PELANGGAN = "select * from pelanggan";
     private static final String SQL_DELETE_PELANGGAN = "delete from pelanggan where id=?";
 
     public PelangganDao(DataSource dataSource) {
         this.dataSource = dataSource;
+        this.jdbcTemplate = new JdbcTemplate(this.dataSource);
+        this.simpleJdbcInsert = new SimpleJdbcInsert(this.dataSource)
+                .withTableName("pelanggan")
+                .usingGeneratedKeyColumns("id");
     }
 
     @Override
     public void simpan(Pelanggan t) {
         if (t.getId() == null) {
-            try {
-                Connection con = dataSource.getConnection();
-                PreparedStatement ps = con.prepareStatement(SQL_SIMPAN_PELANGGAN);
-                ps.setString(1, t.getKode());
-                ps.setString(2, t.getNama());
-                ps.setString(3, t.getAlamat());
-                ps.setString(4, t.getNoTelepon());
-                ps.executeUpdate();
-            } catch (SQLException ex) {
-                Logger.getLogger(PelangganDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(t);
+            simpleJdbcInsert.execute(parameterSource);
         } else {
-            try {
-                Connection con = dataSource.getConnection();
-                PreparedStatement ps = con.prepareStatement(SQL_UPDATE_PELANGGAN);
-                ps.setString(1, t.getKode());
-                ps.setString(2, t.getNama());
-                ps.setString(3, t.getAlamat());
-                ps.setString(4, t.getNoTelepon());
-                ps.setInt(5, t.getId());
-                ps.executeUpdate();
-            } catch (SQLException ex) {
-                Logger.getLogger(PelangganDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            jdbcTemplate.update(SQL_UPDATE_PELANGGAN,
+                    t.getKode(),
+                    t.getNama(),
+                    t.getAlamat(),
+                    t.getTelepon(),
+                    t.getId());
         }
 
     }
@@ -71,43 +62,34 @@ public class PelangganDao implements BaseCrudDao<Pelanggan> {
 
     @Override
     public void deleteById(Pelanggan t) {
-        try {
-            Connection conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(SQL_DELETE_PELANGGAN);
-            ps.setInt(1, t.getId());
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(BarangDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        jdbcTemplate.update(SQL_DELETE_PELANGGAN, t.getId());
     }
 
     @Override
     public List<Pelanggan> cariSemua() {
-        List<Pelanggan> listPelanggans = new ArrayList<>();
-
-        try {
-            Connection con = dataSource.getConnection();
-            PreparedStatement ps = con.prepareStatement(SQL_SELECT_ALL_PELANGGAN);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Pelanggan p = new Pelanggan();
-                p.setId(rs.getInt("id"));
-                p.setKode(rs.getString("kode"));
-                p.setNama(rs.getString("nama"));
-                p.setAlamat(rs.getString("alamat"));
-                p.setNoTelepon(rs.getString("telepon"));
-                listPelanggans.add(p);
-            }
-            return listPelanggans;
-        } catch (SQLException ex) {
-            Logger.getLogger(PelangganDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return new ArrayList<>();
+        return jdbcTemplate.query(SQL_SELECT_ALL_PELANGGAN, new PelangganRowMapper());
     }
 
+    private static class PelangganRowMapper implements RowMapper<Pelanggan> {
+
+        public PelangganRowMapper() {
+        }
+
+        @Override
+        public Pelanggan mapRow(ResultSet rs, int i) throws SQLException {
+            Pelanggan p = new Pelanggan();
+            p.setId(rs.getInt("id"));
+            p.setKode(rs.getString("kode"));
+            p.setNama(rs.getString("nama"));
+            p.setAlamat(rs.getString("alamat"));
+            p.setTelepon(rs.getString("telepon"));
+            return p;
+        }
+    }
+
+    
     @Override
     public void setDataSource(Connection dataSource) {
 
     }
-
 }

@@ -82,6 +82,7 @@ public class DlgPetugas extends javax.swing.JDialog {
         txtNama.setText("");
         txtUsername.setText("");
         txtPassword.setText("");
+        petugas = null;
     }
 
     private void enableForm(Boolean enable) {
@@ -345,7 +346,7 @@ public class DlgPetugas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
-        // TODO add your handling code here:
+        clearForm();
     }//GEN-LAST:event_btnTambahActionPerformed
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed

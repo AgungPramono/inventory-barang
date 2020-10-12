@@ -45,9 +45,9 @@ public class SupplierTableModel extends AbstractTableModel{
         switch(columnIndex){
             case 0:return s.getId();
             case 1:return s.getKode();
-            case 2:return s.getName();
+            case 2:return s.getNama();
             case 3:return s.getAlamat();
-            case 4:return s.getNoTelpon();
+            case 4:return s.getTelepon();
             default:return "";
         }
 

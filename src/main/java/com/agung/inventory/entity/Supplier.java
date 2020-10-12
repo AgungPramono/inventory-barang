@@ -18,13 +18,13 @@ public class Supplier {
     
     private Integer id;
     private String kode;
-    private String name;
+    private String nama;
     private String alamat;
-    private String noTelpon;
+    private String telepon;
 
     @Override
     public String toString() {
-        return kode+"|"+name;
+        return kode+"|"+nama;
     }
     
     

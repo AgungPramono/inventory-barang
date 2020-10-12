@@ -35,9 +35,6 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
     private String SQL_CARI_BARANG_MASUK;
     private String SQL_HAPUS_HEADER = "delete from barang_masuk where id=?";
 
-    
-    
-
     @Override
     public void simpan(BarangMasuk t) {
         if (t.getId() == null) {
@@ -58,10 +55,6 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
             }
 
         }
-    }
-
-    private void simpanDetail(BarangMasukDetail bmd) {
-        
     }
 
     private void hapusDetail(BarangMasukDetail bmd) {

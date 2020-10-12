@@ -7,14 +7,13 @@ package com.agung.inventory.dao;
 
 import com.agung.inventory.entity.Supplier;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sql.DataSource;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 /**
  *
@@ -23,43 +22,33 @@ import javax.sql.DataSource;
 public class SupplierDao implements BaseCrudDao<Supplier> {
     
     private DataSource dataSource;
-
-    private static final String SQL_SIMPAN_SUPPLIER = "insert into supplier (kode,nama,alamat,telepon) value (?,?,?,?)";
+    private JdbcTemplate jdbcTemplate;
+    private SimpleJdbcInsert simpleJdbcInsert;
+    
     private static final String SQL_UPDATE_SUPPLIER = "update supplier set kode=?,nama=?,alamat=?,telepon=? where id=?";
     private static final String SQL_SELECT_ALL_SUPPLIER = "select * from supplier";
     private static final String SQL_DELETE_SUPPLIER = "delete from supplier where id=?";
 
     public SupplierDao(DataSource dataSource) {
         this.dataSource = dataSource;
+        this.jdbcTemplate = new JdbcTemplate(this.dataSource);
+        this.simpleJdbcInsert = new SimpleJdbcInsert(this.dataSource)
+                .withTableName("supplier")
+                .usingGeneratedKeyColumns("id");
     }
 
     @Override
     public void simpan(Supplier t) {
         if (t.getId() == null) {
-            try {
-                Connection con = dataSource.getConnection();
-                PreparedStatement ps = con.prepareStatement(SQL_SIMPAN_SUPPLIER);
-                ps.setString(1, t.getKode());
-                ps.setString(2, t.getName());
-                ps.setString(3, t.getAlamat());
-                ps.setString(4, t.getNoTelpon());
-                ps.executeUpdate();
-            } catch (SQLException ex) {
-                Logger.getLogger(PelangganDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(t);
+            simpleJdbcInsert.execute(parameterSource);
         } else {
-            try {
-                Connection con = dataSource.getConnection();
-                PreparedStatement ps = con.prepareStatement(SQL_UPDATE_SUPPLIER);
-                ps.setString(1, t.getKode());
-                ps.setString(2, t.getName());
-                ps.setString(3, t.getAlamat());
-                ps.setString(4, t.getNoTelpon());
-                ps.setInt(5, t.getId());
-                ps.executeUpdate();
-            } catch (SQLException ex) {
-                Logger.getLogger(PelangganDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            jdbcTemplate.update(SQL_UPDATE_SUPPLIER,
+                    t.getKode(),
+                    t.getNama(),
+                    t.getAlamat(),
+                    t.getTelepon(),
+                    t.getId());
         }
 
     }
@@ -71,38 +60,12 @@ public class SupplierDao implements BaseCrudDao<Supplier> {
 
     @Override
     public void deleteById(Supplier t) {
-        try {
-            Connection conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(SQL_DELETE_SUPPLIER);
-            ps.setInt(1, t.getId());
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(BarangDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        jdbcTemplate.update(SQL_DELETE_SUPPLIER, t.getId());
     }
 
     @Override
     public List<Supplier> cariSemua() {
-        List<Supplier> listSupplier = new ArrayList<>();
-
-        try {
-        Connection con = dataSource.getConnection();
-            PreparedStatement ps = con.prepareStatement(SQL_SELECT_ALL_SUPPLIER);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Supplier p = new Supplier();
-                p.setId(rs.getInt("id"));
-                p.setKode(rs.getString("kode"));
-                p.setName(rs.getString("nama"));
-                p.setAlamat(rs.getString("alamat"));
-                p.setNoTelpon(rs.getString("telepon"));
-                listSupplier.add(p);
-            }
-            return listSupplier;
-        } catch (SQLException ex) {
-            Logger.getLogger(PelangganDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return new ArrayList<>();
+        return jdbcTemplate.query(SQL_SELECT_ALL_SUPPLIER, new BeanPropertyRowMapper(Supplier.class));
     }
     
      

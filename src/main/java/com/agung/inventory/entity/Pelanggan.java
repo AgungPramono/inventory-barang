@@ -17,6 +17,6 @@ public class Pelanggan {
     private Integer id;
     private String kode;
     private String nama;
-    private String noTelepon;
+    private String telepon;
     private String alamat;
 }

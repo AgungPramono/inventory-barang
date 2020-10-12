@@ -18,11 +18,11 @@ public class Kategori {
     
     private Integer id;
     private String kode;
-    private String namaKategori;
+    private String nama;
 
     @Override
     public String toString() {
-        return namaKategori;
+        return nama;
     }
     
     

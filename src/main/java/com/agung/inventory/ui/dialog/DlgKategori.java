@@ -50,12 +50,12 @@ public class DlgKategori extends javax.swing.JDialog {
             kategori = new Kategori();
         }
         kategori.setKode(txtKode.getText());
-        kategori.setNamaKategori(txtNama.getText());
+        kategori.setNama(txtNama.getText());
     }
 
     private void loadModelToForm() {
         txtKode.setText(kategori.getKode());
-        txtNama.setText(kategori.getNamaKategori());
+        txtNama.setText(kategori.getNama());
     }
 
     private void enableForm(boolean enable) {
@@ -66,6 +66,7 @@ public class DlgKategori extends javax.swing.JDialog {
     private void clearForm() {
         txtKode.setText("");
         txtNama.setText("");
+        kategori = null;
     }
 
     /**

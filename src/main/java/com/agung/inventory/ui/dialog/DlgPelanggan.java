@@ -57,14 +57,14 @@ public class DlgPelanggan extends javax.swing.JDialog {
         pelanggan.setKode(txtKode.getText());
         pelanggan.setNama(txtNama.getText());
         pelanggan.setAlamat(txtAlamat.getText());
-        pelanggan.setNoTelepon(txtTelepon.getText());
+        pelanggan.setTelepon(txtTelepon.getText());
     }
 
     private void loadDomainToForm() {
         txtKode.setText(pelanggan.getKode());
         txtNama.setText(pelanggan.getNama());
         txtAlamat.setText(pelanggan.getAlamat());
-        txtTelepon.setText(pelanggan.getNoTelepon());
+        txtTelepon.setText(pelanggan.getTelepon());
     }
 
     private void clearForm() {
@@ -72,6 +72,7 @@ public class DlgPelanggan extends javax.swing.JDialog {
         txtNama.setText("");
         txtAlamat.setText("");
         txtTelepon.setText("");
+        pelanggan = null;
     }
 
     private void enableForm(Boolean enable) {

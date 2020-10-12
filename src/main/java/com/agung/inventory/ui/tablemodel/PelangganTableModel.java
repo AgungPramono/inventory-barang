@@ -47,7 +47,7 @@ public class PelangganTableModel extends AbstractTableModel{
             case 1:return pelanggan.getKode();
             case 2:return pelanggan.getNama();
             case 3:return pelanggan.getAlamat();
-            case 4:return pelanggan.getNoTelepon();
+            case 4:return pelanggan.getTelepon();
             default:return "";
         }
 

@@ -7,14 +7,16 @@ package com.agung.inventory.dao;
 
 import com.agung.inventory.entity.Kategori;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sql.DataSource;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 /**
  *
@@ -23,7 +25,9 @@ import javax.sql.DataSource;
 public class KategoriDao implements BaseCrudDao<Kategori> {
 
     private DataSource dataSource;
-    private static final String SQL_INSERT_KATEGORI = "insert into kategori (kode,nama) value (?,?)";
+    private JdbcTemplate jdbcTemplate;
+    private SimpleJdbcInsert simpleJdbcInsert;
+
     private static final String SQL_SELECT_ALL_KATEGORI = "select * from kategori";
     private final String SQL_UPDATE_KATEGORI = "update kategori set kode=?,nama=? where id=? ";
     private int result = 0;
@@ -31,34 +35,25 @@ public class KategoriDao implements BaseCrudDao<Kategori> {
     @Override
     public void setDataSource(Connection dataSource) {
     }
-    
-    public KategoriDao(DataSource dataSource){
+
+    public KategoriDao(DataSource dataSource) {
         this.dataSource = dataSource;
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+        this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
+                .withTableName("kategori")
+                .usingGeneratedKeyColumns("id");
     }
 
     @Override
     public void simpan(Kategori t) {
         if (t.getId() == null) {
-            try {
-                Connection con = dataSource.getConnection();
-                PreparedStatement ps = con.prepareStatement(SQL_INSERT_KATEGORI);
-                ps.setString(1, t.getKode());
-                ps.setString(2, t.getNamaKategori());
-                int resp = ps.executeUpdate();
-            } catch (SQLException ex) {
-                Logger.getLogger(KategoriDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            SqlParameterSource params = new BeanPropertySqlParameterSource(t);
+            simpleJdbcInsert.execute(params);
         } else {
-            try {
-                Connection con = dataSource.getConnection();
-                PreparedStatement ps = con.prepareStatement(SQL_UPDATE_KATEGORI);
-                ps.setString(1, t.getKode());
-                ps.setString(2, t.getNamaKategori());
-                ps.setInt(3, t.getId());
-                int resp = ps.executeUpdate();
-            } catch (SQLException ex) {
-                Logger.getLogger(KategoriDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            jdbcTemplate.update(SQL_UPDATE_KATEGORI,
+                    t.getKode(),
+                    t.getNama(),
+                    t.getId());
         }
     }
 
@@ -74,24 +69,22 @@ public class KategoriDao implements BaseCrudDao<Kategori> {
 
     @Override
     public List<Kategori> cariSemua() {
-        List<Kategori> kategoris = new ArrayList<>();
-        try {
-            Connection con = dataSource.getConnection();
-            PreparedStatement ps = con.prepareStatement(SQL_SELECT_ALL_KATEGORI);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Kategori k = new Kategori();
-                k.setId(rs.getInt("id"));
-                k.setKode(rs.getString("kode"));
-                k.setNamaKategori(rs.getString("nama"));
-                kategoris.add(k);
-            }
-            return kategoris;
-        } catch (SQLException ex) {
-            Logger.getLogger(KategoriDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return new ArrayList<>();
+        return jdbcTemplate.query(SQL_SELECT_ALL_KATEGORI, new BeanPropertyRowMapper(Kategori.class));
+    }
 
+    private class KategoriRowMapper implements RowMapper<Kategori> {
+
+        public KategoriRowMapper() {
+        }
+
+        @Override
+        public Kategori mapRow(ResultSet rs, int i) throws SQLException {
+            Kategori k = new Kategori();
+            k.setId(rs.getInt("id"));
+            k.setKode(rs.getString("kode"));
+            k.setNama(rs.getString("nama"));
+            return k;
+        }
     }
 
 }

@@ -55,16 +55,16 @@ public class DlgSupplier extends javax.swing.JDialog {
             supplier = new Supplier();
         }
         supplier.setKode(txtKode.getText());
-        supplier.setName(txtNama.getText());
+        supplier.setNama(txtNama.getText());
         supplier.setAlamat(txtAlamat.getText());
-        supplier.setNoTelpon(txtTelepon.getText());
+        supplier.setTelepon(txtTelepon.getText());
     }
 
     private void loadDomainToForm() {
         txtKode.setText(supplier.getKode());
-        txtNama.setText(supplier.getName());
+        txtNama.setText(supplier.getNama());
         txtAlamat.setText(supplier.getAlamat());
-        txtTelepon.setText(supplier.getNoTelpon());
+        txtTelepon.setText(supplier.getTelepon());
     }
 
     private void clearForm() {
@@ -72,6 +72,7 @@ public class DlgSupplier extends javax.swing.JDialog {
         txtNama.setText("");
         txtAlamat.setText("");
         txtTelepon.setText("");
+        supplier = null;
     }
 
     private void enableForm(Boolean enable) {
