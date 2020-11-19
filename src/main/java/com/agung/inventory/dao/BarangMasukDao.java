@@ -5,133 +5,90 @@
  */
 package com.agung.inventory.dao;
 
-import com.agung.inventory.entity.Barang;
 import com.agung.inventory.entity.BarangMasuk;
-import com.agung.inventory.entity.BarangMasukDetail;
-import com.agung.inventory.entity.Gudang;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Map;
 import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author agung
  */
+@Repository
 public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
 
-    private DataSource dataSource;
+    private final String SQL_INSERT = "insert into barang_masuk (tanggal,id_petugas,id_supplier) values (?,?,?)";
+    private final String SQL_DELETE_DETAIL = "delete from barang_masuk_detail where id=?";
+    private final String SQL_CARI_BARAN_MASUK = "";
+    private final String SQL_HAPUS_HEADER = "delete from barang_masuk where id=?";
+    private final String FIND_ALL_TRANSACTION = "select b.kode,b.nama as nama_barang,bm.tanggal,p.nama as nama_petugas,"
+            + "s.nama as nama_supplier,bmd.qty "
+            + "from barang_masuk bm "
+            + "join barang_masuk_detail bmd "
+            + "on bm.id = bmd.id_header "
+            + "join barang b "
+            + "on bmd.id_barang = b.id "
+            + "join petugas p "
+            + "on p.id = bm.id_petugas "
+            + "join supplier s "
+            + "on s.id = bm.id_supplier";
+
+    private final DataSource dataSource;
+    private SimpleJdbcInsert simpleJdbcInsert;
+    private JdbcTemplate jdbcTemplate;
 
     public BarangMasukDao(DataSource dataSource) {
         this.dataSource = dataSource;
+        this.jdbcTemplate = new JdbcTemplate(this.dataSource);
+        this.simpleJdbcInsert = new SimpleJdbcInsert(this.dataSource)
+                .withTableName("barang_masuk")
+                .usingColumns("tanggal", "id_petugas", "id_supplier")
+                .usingGeneratedKeyColumns("id");
     }
-    private String SQL_INSERT = "insert into barang_masuk (tanggal,id_petugas,id_supplier) values (?,?,?)";
-    private String SQL_DELETE_DETAIL = "delete from barang_masuk_detail where id=?";
-    private String SQL_CARI_BARANG_MASUK;
-    private String SQL_HAPUS_HEADER = "delete from barang_masuk where id=?";
+
+    @Autowired
+    public void setDataSource(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+        this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
+                .withTableName("barang_masuk")
+                .usingColumns("tanggal", "id_petugas", "id_supplier")
+                .usingGeneratedKeyColumns("id");
+    }
 
     @Override
     public void simpan(BarangMasuk t) {
         if (t.getId() == null) {
-            try {
-                Connection conn = dataSource.getConnection();
-                PreparedStatement ps = conn.prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-                ps.setTimestamp(1, Timestamp.valueOf(t.getTanggalMasuk()));
-                ps.setInt(2, t.getPetugas().getId());
-                ps.setInt(3, t.getSupplier().getId());
-                ps.executeUpdate();
-                ResultSet rs  = ps.getGeneratedKeys();
-                if (rs.next()) {
-                    t.setId(rs.getInt(1));
-                }
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(BarangMasukDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
-    }
-
-    private void hapusDetail(BarangMasukDetail bmd) {
-        try {
-            Connection conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(SQL_DELETE_DETAIL);
-            ResultSet executeQuery = ps.executeQuery();
-        } catch (SQLException ex) {
-            Logger.getLogger(BarangMasukDao.class.getName()).log(Level.SEVERE, null, ex);
+            Map<String, Object> params = new HashMap<>();
+            params.put("tanggal", t.getTanggalMasuk());
+            params.put("id_petugas", t.getPetugas().getId());
+            params.put("id_supplier", t.getSupplier().getId());
+            int retId = simpleJdbcInsert.executeAndReturnKey(params).intValue();
+            t.setId(retId);
         }
     }
 
     @Override
     public BarangMasuk cariById(BarangMasuk t) {
-        try {
-            Connection conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(SQL_CARI_BARANG_MASUK);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                BarangMasuk barangMasuk = new BarangMasuk();
-                return barangMasuk;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(BarangMasukDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+        return (BarangMasuk) jdbcTemplate.queryForObject(SQL_CARI_BARAN_MASUK, new Object[]{t.getId()}, new BeanPropertyRowMapper(BarangMasuk.class));
     }
 
     @Override
     public void deleteById(BarangMasuk t) {
-        try {
-            Connection conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(SQL_HAPUS_HEADER);
-            ps.executeUpdate();
-            for(BarangMasukDetail detail:t.getBarangMasukDetails()){
-                hapusDetail(detail);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(BarangMasukDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }
 
     @Override
     public List<BarangMasuk> cariSemua() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return jdbcTemplate.query(FIND_ALL_TRANSACTION, new BarangMasukRowMapper());
     }
 
-    private BarangMasukDetail ResultSetMapper(ResultSet rs) throws SQLException {
-
-        BarangMasukDetail bmd = new BarangMasukDetail();
-        bmd.setId(rs.getInt("id"));
-        bmd.setQty(rs.getBigDecimal("qty"));
-
-        //relasi ke barang
-        Barang barang = new Barang();
-        barang.setId(rs.getInt("id_barang"));
-        barang.setKodeBarang(rs.getString("kode_barang"));
-        barang.setNamaBarang(rs.getString("nama_barang"));
-        bmd.setBarang(barang);
-
-        //relasi ke gudang
-        Gudang gudang = new Gudang();
-        gudang.setId(rs.getInt("id"));
-        gudang.setKodeGudang(rs.getString("kode_gudang"));
-        gudang.setNamaGudang(rs.getString("nama_gudang"));
-
-        //relasi ke barang masuk
-        BarangMasuk barangMasuk = new BarangMasuk();
-        barangMasuk.setId(rs.getInt("id"));
-        barangMasuk.setTanggalMasuk(rs.getTimestamp("tanggal_masuk").toLocalDateTime());
-        bmd.setBarangMasuk(barangMasuk);
-
-        return bmd;
-
-    }
-
-    
     @Override
     public void setDataSource(Connection dataSource) {
     }

@@ -14,12 +14,12 @@ import com.zaxxer.hikari.HikariDataSource;
  */
 public class ConnectionHelper {
     
-    private static HikariConfig config = new HikariConfig();
-    private static HikariDataSource hikariDataSource;
+    private static final HikariConfig config = new HikariConfig();
+    private static final HikariDataSource hikariDataSource;
     
     static{
         config.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        config.setJdbcUrl( "jdbc:mysql://localhost:3306/inventory?serverTimezone=UTC" );
+        config.setJdbcUrl( "jdbc:mysql://localhost:3306/inventory?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC" );
         config.setUsername( "admin" );
         config.setPassword( "admin123" );
         config.setMaxLifetime(30000);

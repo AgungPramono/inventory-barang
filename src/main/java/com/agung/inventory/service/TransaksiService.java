@@ -24,14 +24,15 @@ import javax.sql.DataSource;
 public class TransaksiService {
 
     private static TransaksiService INSTANCE;
-    private BarangDao barangDao;
-    private BarangMasukDao barangMasukDao;
-    private BarangMasukDetailDao detailDao;
-    private DataSource dataSource;
+    private final BarangDao barangDao;
+    private final BarangMasukDao barangMasukDao;
+    private final BarangMasukDetailDao detailDao;
+    private final DataSource dataSource;
 
     public TransaksiService(DataSource dataSource) {
         this.dataSource = dataSource;
-        barangDao = new BarangDao(dataSource);
+        barangDao = new BarangDao();
+        barangDao.setDataSource(dataSource);
         barangMasukDao = new BarangMasukDao(dataSource);
         detailDao = new BarangMasukDetailDao(dataSource);
     }

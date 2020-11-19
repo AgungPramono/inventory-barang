@@ -5,10 +5,18 @@
  */
 package com.agung.inventory.entity;
 
+import java.math.BigDecimal;
+import lombok.Data;
+
 /**
  *
  * @author agung
  */
+
+@Data
 public class BarangKeluarDetail {
-    
+    private Integer id;
+    private BarangKeluar barangKeluar;
+    private Barang barang;
+    private BigDecimal qty;
 }

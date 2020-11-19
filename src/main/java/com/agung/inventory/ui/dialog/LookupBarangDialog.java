@@ -5,7 +5,7 @@
  */
 package com.agung.inventory.ui.dialog;
 
-import com.agung.inventory.di.InventoryInjector;
+import com.agung.inventory.config.AppContainer;
 import com.agung.inventory.entity.Barang;
 import com.agung.inventory.ui.tablemodel.BarangTableModel;
 import java.util.ArrayList;
@@ -27,18 +27,23 @@ public class LookupBarangDialog extends javax.swing.JDialog {
     public LookupBarangDialog() {
         super(new JFrame(), true);
         initComponents();
-        loadDataToTable();
+        refreshTable();
         setLocationRelativeTo(null);
         tblBarang.getSelectionModel().addListSelectionListener(new TableSelection());
     }
     
-    private void loadDataToTable() {
-        listBarangs = InventoryInjector.getInstance().getBarangDao().cariSemua();
+    private void loadDataToTable(List<Barang> listBarangs) {
+        
         if (listBarangs != null) {
             tblBarang.setModel(new BarangTableModel(listBarangs));
         } else {
             tblBarang.setModel(new BarangTableModel(new ArrayList<>()));
         }
+    }
+    
+    private void refreshTable(){
+        listBarangs = AppContainer.getBarangDao().cariSemua();
+        loadDataToTable(listBarangs);
     }
     
     public Barang showDialog(){
@@ -68,7 +73,13 @@ public class LookupBarangDialog extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
-        jLabel1.setText("Pencarian");
+        jLabel1.setText("Cari");
+
+        txtCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCariKeyReleased(evt);
+            }
+        });
 
         tblBarang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,11 +133,11 @@ public class LookupBarangDialog extends javax.swing.JDialog {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(20, 20, 20)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -181,6 +192,16 @@ public class LookupBarangDialog extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Tidak ada data yang dipilih !!");
         }
     }//GEN-LAST:event_btnPilihActionPerformed
+
+    private void txtCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCariKeyReleased
+        if(txtCari.getText().trim().length() > 3){
+            listBarangs = AppContainer.getBarangDao().cariBarangByName(txtCari.getText());
+            loadDataToTable(listBarangs);
+        }else if (txtCari.getText().equals("")){
+            listBarangs = AppContainer.getBarangDao().cariSemua();
+            loadDataToTable(listBarangs);
+        }
+    }//GEN-LAST:event_txtCariKeyReleased
 
      private class TableSelection implements ListSelectionListener {
 

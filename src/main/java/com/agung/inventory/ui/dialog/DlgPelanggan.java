@@ -5,9 +5,12 @@
  */
 package com.agung.inventory.ui.dialog;
 
-import com.agung.inventory.di.InventoryInjector;
+import com.agung.inventory.config.AppContainer;
+import com.agung.inventory.di.Injector;
 import com.agung.inventory.entity.Pelanggan;
 import com.agung.inventory.ui.tablemodel.PelangganTableModel;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
@@ -42,7 +45,7 @@ public class DlgPelanggan extends javax.swing.JDialog {
     }
 
     private void loadDataToTable() {
-        listPelanggans = InventoryInjector.getInstance().getPelangganDao().cariSemua();
+        listPelanggans = AppContainer.getPelangganDao().cariSemua();
         if (listPelanggans != null) {
             tblPelanggan.setModel(new PelangganTableModel(listPelanggans));
         } else {
@@ -212,9 +215,9 @@ public class DlgPelanggan extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4, jLabel5});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, jLabel2, jLabel3, jLabel4, jLabel5);
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBatal, btnSimpan});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, btnBatal, btnSimpan);
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,11 +245,11 @@ public class DlgPelanggan extends javax.swing.JDialog {
                 .addContainerGap(65, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel3, jLabel4, jLabel5});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, jLabel3, jLabel4, jLabel5);
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtKode, txtNama, txtTelepon});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, txtKode, txtNama, txtTelepon);
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnBatal, btnSimpan});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, btnBatal, btnSimpan);
 
         btnTambah.setText("Tambah");
         btnTambah.addActionListener(new java.awt.event.ActionListener() {
@@ -291,7 +294,7 @@ public class DlgPelanggan extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnHapus, btnTambah, btnUbah});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, btnHapus, btnTambah, btnUbah);
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -313,7 +316,7 @@ public class DlgPelanggan extends javax.swing.JDialog {
                 .addGap(6, 6, 6))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnHapus, btnTambah, btnUbah});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, btnHapus, btnTambah, btnUbah);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -335,10 +338,16 @@ public class DlgPelanggan extends javax.swing.JDialog {
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         loadFormToDomain();
-        InventoryInjector.getInstance().getPelangganDao().simpan(pelanggan);
-        clearForm();
-        enableForm(false);
-        loadDataToTable();
+        try {
+            AppContainer.getPelangganDao().simpan(pelanggan);
+            clearForm();
+            enableForm(false);
+            loadDataToTable();
+            JOptionPane.showMessageDialog(this, "Berhasil Simpan", null, JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException throwables) {
+            JOptionPane.showMessageDialog(this, "Gagal Hapus", null, JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
@@ -357,7 +366,7 @@ public class DlgPelanggan extends javax.swing.JDialog {
         if (tblPelanggan.getSelectedRow() >= 0 && pelanggan != null) {
             int retval = JOptionPane.showConfirmDialog(this, "Yakin Hapus?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
             if (retval == JOptionPane.YES_OPTION) {
-                InventoryInjector.getInstance().getPelangganDao().deleteById(pelanggan);
+                AppContainer.getPelangganDao().deleteById(pelanggan);
                 JOptionPane.showMessageDialog(this, "Berhasil Hapus", null, JOptionPane.INFORMATION_MESSAGE);
                 loadDataToTable();
             }

@@ -16,8 +16,8 @@ import javax.swing.table.AbstractTableModel;
  */
 public class BarangMasukTableModel extends AbstractTableModel {
 
-    private String[] header = {"Kode Barang", "Nama Barang", "Jumlah"};
-    private List<BarangMasukDetail> listBarangMasukDetails;
+    private final String[] header = {"Kode Barang", "Nama Barang", "Jumlah"};
+    private final List<BarangMasukDetail> listBarangMasukDetails;
 
     public BarangMasukTableModel(List<BarangMasukDetail> barangMasukDetails) {
         this.listBarangMasukDetails = barangMasukDetails;
@@ -54,7 +54,7 @@ public class BarangMasukTableModel extends AbstractTableModel {
     }
 
     @Override
-    public Class<?> getColumnClass(int columnIndex) {
+    public Class<?> getColumnClass(int columnIndex) {   
         if (columnIndex == 2) {
             return BigDecimal.class;
         }
@@ -63,10 +63,7 @@ public class BarangMasukTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if (columnIndex == 2) {
-            return true;
-        }
-        return false;
+        return columnIndex == 2;
     }
 
     @Override

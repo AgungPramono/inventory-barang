@@ -5,8 +5,9 @@
  */
 package com.agung.inventory.entity;
 
-import java.math.BigDecimal;
 import lombok.Data;
+
+import java.math.BigDecimal;
 
 /**
  *

@@ -6,9 +6,10 @@
 package com.agung.inventory.ui.tablemodel;
 
 import com.agung.inventory.entity.Barang;
+
+import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -17,12 +18,11 @@ import javax.swing.table.AbstractTableModel;
 public class BarangTableModel extends AbstractTableModel{
     
     private List<Barang> listBarang = new ArrayList<>();
-    private String[]headerTitle = {"id","kode","Nama Barang","kategori","Jumlah","Keterangan"};
+    private final String[]headerTitle = {"id","kode","Nama","kategori","Stok","Keterangan"};
 
     public BarangTableModel(List<Barang> barangs) {
         this.listBarang = barangs;
     }
-    
 
     @Override
     public int getRowCount() {

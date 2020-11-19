@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
 public class PelangganTableModel extends AbstractTableModel{
     
     private List<Pelanggan> listPelanggans = new ArrayList<>();
-    private String[]headerTitle = {"id","kode","Nama Pelanggan","Alamat","Telepon"};
+    private final String[]headerTitle = {"id","kode","Nama Pelanggan","Alamat","Telepon"};
 
     public PelangganTableModel(List<Pelanggan> pelanggans) {
         this.listPelanggans = pelanggans;

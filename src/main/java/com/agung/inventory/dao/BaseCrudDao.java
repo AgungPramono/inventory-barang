@@ -12,17 +12,18 @@ import java.util.List;
 /**
  *
  * @author agung
+ * @param <T>
  */
 public interface BaseCrudDao<T> {
     
-    public void setDataSource(Connection dataSource);
+    void setDataSource(Connection dataSource);
     
-    public void simpan(T t)throws SQLException;
+    void simpan(T t)throws SQLException;
     
-    public T cariById(T t)throws SQLException;
+    T cariById(T t)throws SQLException;
     
-    public void deleteById(T t)throws SQLException;
+    void deleteById(T t)throws SQLException;
     
-    public List<T> cariSemua()throws SQLException;
+    List<T> cariSemua()throws SQLException;
     
 }

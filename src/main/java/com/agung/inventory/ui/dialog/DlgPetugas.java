@@ -5,11 +5,11 @@
  */
 package com.agung.inventory.ui.dialog;
 
-import com.agung.inventory.di.InventoryInjector;
+import com.agung.inventory.config.AppContainer;
 import com.agung.inventory.entity.Petugas;
 import com.agung.inventory.ui.tablemodel.PetugasTableModel;
+import com.agung.inventory.util.PasswordHelper;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.event.ListSelectionEvent;
@@ -42,7 +42,7 @@ public class DlgPetugas extends javax.swing.JDialog {
     }
 
     private void loadDataToTable() {
-        listPetugas = InventoryInjector.getInstance().getPetugasDao().cariSemua();
+        listPetugas = AppContainer.getPetugasDao().cariSemua();
         if (listPetugas != null) {
             tblPetugas.setModel(new PetugasTableModel(listPetugas));
         } else {
@@ -51,24 +51,20 @@ public class DlgPetugas extends javax.swing.JDialog {
     }
 
     private void loadFormToModel() {
-        if (petugas != null) {
+        if (petugas == null) {
             petugas = new Petugas();
         }
         petugas.setNama(txtNama.getText());
         petugas.setUsername(txtUsername.getText());
-        petugas.setPassword(Arrays.toString(txtPassword.getPassword()));
+        petugas.setPassword(PasswordHelper.getEncryptedTextFromPlainText(String.valueOf(txtPassword.getPassword())));
         String cmbResult = (String) cmbStatus.getSelectedItem();
-        if (cmbResult.equals("Aktif")) {
-            petugas.setActive(true);
-        }else{
-            petugas.setActive(false);
-        }
+        petugas.setActive(cmbResult.equals("Aktif"));
     }
 
     private void loadModelToForm() {
         txtNama.setText(petugas.getNama());
         txtUsername.setText(petugas.getUsername());
-        txtPassword.setText(petugas.getPassword());
+        txtPassword.setText(PasswordHelper.getPlainTextFromEncryptedText(petugas.getPassword()));
         txtRePassword.setText(petugas.getPassword());
         boolean active = petugas.isActive();
         if (active) {
@@ -227,9 +223,9 @@ public class DlgPetugas extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel3, jLabel4, jLabel5, jLabel6});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, jLabel3, jLabel4, jLabel5, jLabel6);
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBatal, btnSimpan});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, btnBatal, btnSimpan);
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,11 +257,11 @@ public class DlgPetugas extends javax.swing.JDialog {
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel3, jLabel4, jLabel5});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, jLabel3, jLabel4, jLabel5);
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnBatal, btnSimpan});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, btnBatal, btnSimpan);
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cmbStatus, jLabel7, txtNama, txtPassword, txtRePassword, txtUsername});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, cmbStatus, jLabel7, txtNama, txtPassword, txtRePassword, txtUsername);
 
         btnTambah.setText("Tambah");
         btnTambah.addActionListener(new java.awt.event.ActionListener() {
@@ -310,7 +306,7 @@ public class DlgPetugas extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnHapus, btnTambah, btnUbah});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, btnHapus, btnTambah, btnUbah);
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,7 +325,7 @@ public class DlgPetugas extends javax.swing.JDialog {
                 .addGap(6, 6, 6))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnHapus, btnTambah, btnUbah});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, btnHapus, btnTambah, btnUbah);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -347,22 +343,36 @@ public class DlgPetugas extends javax.swing.JDialog {
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
         clearForm();
+        enableForm(true);
     }//GEN-LAST:event_btnTambahActionPerformed
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
-        // TODO add your handling code here:
+        if (tblPetugas.getSelectedRow()>=0 && petugas != null){
+            loadModelToForm();
+            enableForm(true);
+        }
     }//GEN-LAST:event_btnUbahActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        // TODO add your handling code here:
+        if (tblPetugas.getSelectedRow()>=0 && petugas != null){
+            AppContainer.getPetugasDao().deleteById(petugas);
+        }
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
-        // TODO add your handling code here:
+        petugas = null;
+        clearForm();
+        enableForm(false);
+        this.dispose();
+
     }//GEN-LAST:event_btnBatalActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        // TODO add your handling code here:
+        loadFormToModel();
+        AppContainer.getPetugasDao().simpan(petugas);
+        loadDataToTable();
+        clearForm();
+        enableForm(false);
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private class TableSelection implements ListSelectionListener {

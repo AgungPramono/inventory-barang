@@ -11,26 +11,31 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author agung
  */
+
+@Repository
 public class PelangganDao implements BaseCrudDao<Pelanggan> {
 
-    private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
-    private SimpleJdbcInsert simpleJdbcInsert;
+    private final DataSource dataSource;
+    private final JdbcTemplate jdbcTemplate;
+    private final SimpleJdbcInsert simpleJdbcInsert;
 
     private static final String SQL_UPDATE_PELANGGAN = "update pelanggan set kode=?,nama=?,alamat=?,telepon=? where id=?";
     private static final String SQL_SELECT_ALL_PELANGGAN = "select * from pelanggan";
     private static final String SQL_DELETE_PELANGGAN = "delete from pelanggan where id=?";
 
+    @Autowired
     public PelangganDao(DataSource dataSource) {
         this.dataSource = dataSource;
         this.jdbcTemplate = new JdbcTemplate(this.dataSource);
@@ -40,7 +45,7 @@ public class PelangganDao implements BaseCrudDao<Pelanggan> {
     }
 
     @Override
-    public void simpan(Pelanggan t) {
+    public void simpan(Pelanggan t)throws SQLException {
         if (t.getId() == null) {
             SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(t);
             simpleJdbcInsert.execute(parameterSource);

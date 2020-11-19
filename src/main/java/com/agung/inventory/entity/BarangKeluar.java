@@ -5,10 +5,23 @@
  */
 package com.agung.inventory.entity;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.Data;
+
 /**
  *
  * @author agung
  */
+
+@Data
 public class BarangKeluar {
+    private Integer id;
+    private LocalDateTime tanggalMasuk;
+    private Petugas petugas;
+    private Pelanggan pelanggan;
+    private List<BarangKeluarDetail> barangKeluarDetails = 
+            new ArrayList<>();
     
 }

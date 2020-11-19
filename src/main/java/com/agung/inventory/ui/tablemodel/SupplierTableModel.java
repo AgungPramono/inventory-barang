@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
 public class SupplierTableModel extends AbstractTableModel{
     
     private List<Supplier> listSuppliers = new ArrayList<>();
-    private String[]headerTitle = {"id","kode","Nama Supplier","Alamat","Telepon"};
+    private final String[]headerTitle = {"id","kode","Nama Supplier","Alamat","Telepon"};
 
     public SupplierTableModel(List<Supplier> suppliers) {
         this.listSuppliers = suppliers;

@@ -5,8 +5,18 @@
  */
 package com.agung.inventory;
 
+import com.agung.inventory.config.AppContainer;
+import com.agung.inventory.config.SecurityConfig;
 import com.agung.inventory.ui.MainFrame;
+import com.jgoodies.looks.Options;
+import com.jgoodies.looks.plastic.PlasticLookAndFeel;
+import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
+import com.jgoodies.looks.plastic.theme.ExperienceRoyale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -14,14 +24,36 @@ import javax.swing.SwingUtilities;
  */
 public class Main {
 
-    public static void main(String[]args){
+    public static MainFrame mainFrame;
+
+    public static MainFrame getMainFrame() {
+        return mainFrame;
+    }
+
+    private static void SystemInfo() {
+        System.out.println("Number Processor :" + Runtime.getRuntime().availableProcessors());
+        System.out.println("Total Memory :" + Runtime.getRuntime().totalMemory());
+    }
+
+    public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                MainFrame mainFrame = new MainFrame();
-                mainFrame.setVisible(true);
+                try {
+                    SystemInfo();
+                    AppContainer.initContainer();
+                    PlasticLookAndFeel laf = new PlasticXPLookAndFeel();
+                    PlasticLookAndFeel.setCurrentTheme(new ExperienceRoyale());
+                    Options.setPopupDropShadowEnabled(true);
+                    UIManager.setLookAndFeel(laf);
+                    mainFrame = new MainFrame();
+                    SecurityConfig.setMainFrame(mainFrame);
+                    SecurityConfig.initLogin();
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
-    
+
 }

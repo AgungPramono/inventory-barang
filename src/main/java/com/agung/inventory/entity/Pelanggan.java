@@ -5,13 +5,15 @@
  */
 package com.agung.inventory.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author agung
  */
-@Data
+@Getter
+@Setter
 public class Pelanggan {
     
     private Integer id;
@@ -19,4 +21,11 @@ public class Pelanggan {
     private String nama;
     private String telepon;
     private String alamat;
+
+    @Override
+    public String toString() {
+        return nama;
+    }
+    
+    
 }

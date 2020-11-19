@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
 public class KategoriTableModel extends AbstractTableModel{
     
     private List<Kategori> listKategori = new ArrayList<>();
-    private String[]headerTitle = {"id","kode","Nama Kategori"};
+    private final String[]headerTitle = {"id","kode","Nama Kategori"};
 
     public KategoriTableModel(List<Kategori> kategoris) {
         this.listKategori = kategoris;

@@ -11,41 +11,48 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author agung
  */
+
+@Repository
 public class KategoriDao implements BaseCrudDao<Kategori> {
 
-    private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
-    private SimpleJdbcInsert simpleJdbcInsert;
+    private final DataSource dataSource;
+    private final JdbcTemplate jdbcTemplate;
+    private final SimpleJdbcInsert simpleJdbcInsert;
 
     private static final String SQL_SELECT_ALL_KATEGORI = "select * from kategori";
     private final String SQL_UPDATE_KATEGORI = "update kategori set kode=?,nama=? where id=? ";
-    private int result = 0;
+    private final String SQL_DELETE_KATEGORI = "delete from katefori where id=? ";
+    private final int result = 0;
 
     @Override
     public void setDataSource(Connection dataSource) {
     }
 
+    
+    @Autowired
     public KategoriDao(DataSource dataSource) {
         this.dataSource = dataSource;
         this.jdbcTemplate = new JdbcTemplate(dataSource);
-        this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
+        this.simpleJdbcInsert = new SimpleJdbcInsert(this.dataSource)
                 .withTableName("kategori")
                 .usingGeneratedKeyColumns("id");
     }
 
     @Override
-    public void simpan(Kategori t) {
+    public void simpan(Kategori t)throws SQLException{
         if (t.getId() == null) {
             SqlParameterSource params = new BeanPropertySqlParameterSource(t);
             simpleJdbcInsert.execute(params);
@@ -63,9 +70,10 @@ public class KategoriDao implements BaseCrudDao<Kategori> {
     }
 
     @Override
-    public void deleteById(Kategori t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deleteById(Kategori t) throws SQLException{
+        jdbcTemplate.update(SQL_DELETE_KATEGORI, t.getId());
     }
+
 
     @Override
     public List<Kategori> cariSemua() {

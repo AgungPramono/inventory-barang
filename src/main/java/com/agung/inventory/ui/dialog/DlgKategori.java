@@ -1,10 +1,14 @@
 package com.agung.inventory.ui.dialog;
 
-import com.agung.inventory.di.InventoryInjector;
+import com.agung.inventory.config.AppContainer;
+import com.agung.inventory.di.Injector;
 import com.agung.inventory.entity.Kategori;
 import com.agung.inventory.ui.tablemodel.KategoriTableModel;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
@@ -16,13 +20,20 @@ import javax.swing.event.ListSelectionListener;
  */
 public class DlgKategori extends javax.swing.JDialog {
 
+    private static DlgKategori INSTANCE;
     private Kategori kategori;
     private List<Kategori> listKategori;
 
     public DlgKategori() {
         super(new JFrame(), true);
         initComponents();
-        initForm();
+    }
+    
+    public static synchronized DlgKategori getInstance(){
+        if (INSTANCE == null) {
+            INSTANCE = new DlgKategori();
+        }
+        return INSTANCE;
     }
 
     private void initForm() {
@@ -33,11 +44,12 @@ public class DlgKategori extends javax.swing.JDialog {
     }
 
     public void showDialog() {
+        initForm();
         this.setVisible(true);
     }
 
     private void loadDataToTable() {
-        listKategori = InventoryInjector.getInstance().getKategoriDao().cariSemua();
+        listKategori = AppContainer.getKategoriDao().cariSemua();
         if (listKategori != null) {
             tblKategori.setModel(new KategoriTableModel(listKategori));
         } else {
@@ -181,7 +193,7 @@ public class DlgKategori extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBatal, btnSimpan});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, btnBatal, btnSimpan);
 
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,9 +213,9 @@ public class DlgKategori extends javax.swing.JDialog {
                 .addContainerGap(68, Short.MAX_VALUE))
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel2, jLabel3, txtKode, txtNama});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, jLabel2, jLabel3, txtKode, txtNama);
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnBatal, btnSimpan});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, btnBatal, btnSimpan);
 
         btnTambah.setText("Tambah");
         btnTambah.addActionListener(new java.awt.event.ActionListener() {
@@ -247,7 +259,7 @@ public class DlgKategori extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnTambah, btnUbah});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, btnTambah, btnUbah);
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,7 +279,7 @@ public class DlgKategori extends javax.swing.JDialog {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnTambah, btnUbah});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, btnTambah, btnUbah);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -323,19 +335,29 @@ public class DlgKategori extends javax.swing.JDialog {
         if (tblKategori.getSelectedRow() >= 0 && kategori != null) {
             int retval = JOptionPane.showConfirmDialog(this, "Yakin Hapus?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (retval == JOptionPane.YES_OPTION) {
-                InventoryInjector.getInstance().getKategoriDao().deleteById(kategori);
+                try {
+                   AppContainer.getKategoriDao().deleteById(kategori);
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(this, "Gagal Hapus", "Gagal", JOptionPane.ERROR_MESSAGE);
+                    Logger.getLogger(DlgKategori.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
 
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        loadFormToModel();
-        InventoryInjector.getInstance().getKategoriDao().simpan(kategori);
-        loadDataToTable();
-        clearForm();
-        enableForm(false);
-        JOptionPane.showMessageDialog(this, "Berhasil Simpan", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        try {
+            loadFormToModel();
+            AppContainer.getKategoriDao().simpan(kategori);
+            loadDataToTable();
+            clearForm();
+            enableForm(false);
+            JOptionPane.showMessageDialog(this, "Berhasil Simpan", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Gagal Simpan", "Gagal", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(DlgKategori.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private class TableSelection implements ListSelectionListener {

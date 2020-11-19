@@ -63,3 +63,24 @@ create table barang_masuk_detail(
      constraint fk_barang_masuk_id foreign key (id_header) references barang_masuk (id),
      constraint fk_barang_id foreign key (id_barang) references barang (id)
 );
+
+create table barang_keluar(
+     id INTEGER NOT NULL AUTO_INCREMENT,
+     tanggal TIMESTAMP NOT NULL,
+     id_petugas INTEGER(10) NOT NULL,
+     id_pelanggan INTEGER(10) not null,
+     PRIMARY KEY(id),
+     constraint fk_petugas_id foreign key (id_petugas) references petugas (id),
+     constraint fk_pelanggan_id foreign key (id_pelanggan) references pelanggan (id)
+);
+
+create table barang_keluar_detail(
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    id_header INTEGER(10) NOT NULL,
+    id_barang INTEGER(10) NOT NULL,
+    qty DECIMAL(19,2) NOT NULL,
+    PRIMARY KEY(id),
+     constraint fk_barang_keluar_id foreign key (id_header) references barang_keluar (id),
+     constraint fk_out_barang_id foreign key (id_barang) references barang (id)
+);
+

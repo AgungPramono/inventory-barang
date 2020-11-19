@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
 public class PetugasTableModel extends AbstractTableModel{
     
     private List<Petugas> listPetugases = new ArrayList<>();
-    private String[]headerTitle = {"id","nama","Username"};
+    private final String[]headerTitle = {"id","nama","Username"};
 
     public PetugasTableModel(List<Petugas> listPetugases) {
         this.listPetugases = listPetugases;

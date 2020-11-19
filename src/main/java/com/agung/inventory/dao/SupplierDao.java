@@ -9,26 +9,31 @@ import com.agung.inventory.entity.Supplier;
 import java.sql.Connection;
 import java.util.List;
 import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author agung
  */
+
+@Repository
 public class SupplierDao implements BaseCrudDao<Supplier> {
     
-    private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
-    private SimpleJdbcInsert simpleJdbcInsert;
+    private final DataSource dataSource;
+    private final JdbcTemplate jdbcTemplate;
+    private final SimpleJdbcInsert simpleJdbcInsert;
     
     private static final String SQL_UPDATE_SUPPLIER = "update supplier set kode=?,nama=?,alamat=?,telepon=? where id=?";
     private static final String SQL_SELECT_ALL_SUPPLIER = "select * from supplier";
     private static final String SQL_DELETE_SUPPLIER = "delete from supplier where id=?";
 
+    @Autowired
     public SupplierDao(DataSource dataSource) {
         this.dataSource = dataSource;
         this.jdbcTemplate = new JdbcTemplate(this.dataSource);
@@ -50,7 +55,6 @@ public class SupplierDao implements BaseCrudDao<Supplier> {
                     t.getTelepon(),
                     t.getId());
         }
-
     }
 
     @Override
