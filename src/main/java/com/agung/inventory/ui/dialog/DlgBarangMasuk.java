@@ -11,6 +11,7 @@ import com.agung.inventory.entity.*;
 import com.agung.inventory.ui.tablemodel.BarangMasukTableModel;
 import com.agung.inventory.ui.tablemodel.SupplierComboModel;
 import com.agung.inventory.util.DateUtil;
+import com.agung.inventory.util.TableUtil;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -57,6 +58,7 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
 
     private void refreshTable() {
         tblBarangMasuk.setModel(new BarangMasukTableModel(barangMasukDetails));
+        TableUtil.initColumn(tblBarangMasuk);
     }
 
     public void showDialog() {

@@ -6,9 +6,9 @@
 package com.agung.inventory.ui.dialog;
 
 import com.agung.inventory.config.AppContainer;
-import com.agung.inventory.di.Injector;
 import com.agung.inventory.entity.Supplier;
 import com.agung.inventory.ui.tablemodel.SupplierTableModel;
+import com.agung.inventory.util.TableUtil;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
@@ -49,6 +49,7 @@ public class DlgSupplier extends javax.swing.JDialog {
         } else {
             tblSupplier.setModel(new SupplierTableModel(new ArrayList<>()));
         }
+        TableUtil.initColumn(tblSupplier);
     }
 
     private void loadFormToDomain() {

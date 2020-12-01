@@ -8,6 +8,7 @@ package com.agung.inventory.ui.dialog;
 import com.agung.inventory.config.AppContainer;
 import com.agung.inventory.entity.Barang;
 import com.agung.inventory.ui.tablemodel.BarangTableModel;
+import com.agung.inventory.util.TableUtil;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
@@ -39,6 +40,7 @@ public class LookupBarangDialog extends javax.swing.JDialog {
         } else {
             tblBarang.setModel(new BarangTableModel(new ArrayList<>()));
         }
+        TableUtil.initColumn(tblBarang);
     }
     
     private void refreshTable(){

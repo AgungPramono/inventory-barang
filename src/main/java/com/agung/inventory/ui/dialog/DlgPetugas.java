@@ -9,6 +9,7 @@ import com.agung.inventory.config.AppContainer;
 import com.agung.inventory.entity.Petugas;
 import com.agung.inventory.ui.tablemodel.PetugasTableModel;
 import com.agung.inventory.util.PasswordHelper;
+import com.agung.inventory.util.TableUtil;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
@@ -48,6 +49,7 @@ public class DlgPetugas extends javax.swing.JDialog {
         } else {
             tblPetugas.setModel(new PetugasTableModel(new ArrayList<>()));
         }
+        TableUtil.initColumn(tblPetugas);
     }
 
     private void loadFormToModel() {

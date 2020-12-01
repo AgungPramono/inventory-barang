@@ -6,10 +6,9 @@
 package com.agung.inventory.ui.dialog;
 
 import com.agung.inventory.config.AppContainer;
-import com.agung.inventory.di.Injector;
 import com.agung.inventory.entity.Pelanggan;
 import com.agung.inventory.ui.tablemodel.PelangganTableModel;
-
+import com.agung.inventory.util.TableUtil;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +50,7 @@ public class DlgPelanggan extends javax.swing.JDialog {
         } else {
             tblPelanggan.setModel(new PelangganTableModel(new ArrayList<>()));
         }
+        TableUtil.initColumn(tblPelanggan);
     }
 
     private void loadFormToDomain() {

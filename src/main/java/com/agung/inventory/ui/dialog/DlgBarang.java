@@ -10,6 +10,7 @@ import com.agung.inventory.entity.Barang;
 import com.agung.inventory.entity.Kategori;
 import com.agung.inventory.ui.tablemodel.BarangTableModel;
 import com.agung.inventory.ui.tablemodel.KategoriComboModel;
+import com.agung.inventory.util.TableUtil;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -66,6 +67,7 @@ public class DlgBarang extends javax.swing.JDialog {
         } else {
             tblBarang.setModel(new BarangTableModel(new ArrayList<>()));
         }
+        TableUtil.initColumn(tblBarang);
     }
 
     private void loadModelToForm() {

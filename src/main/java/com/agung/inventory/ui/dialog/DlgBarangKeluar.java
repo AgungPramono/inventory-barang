@@ -15,6 +15,7 @@ import com.agung.inventory.entity.Petugas;
 import com.agung.inventory.ui.tablemodel.BarangKeluarTableModel;
 import com.agung.inventory.ui.tablemodel.PelangganComboModel;
 import com.agung.inventory.util.DateUtil;
+import com.agung.inventory.util.TableUtil;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -75,6 +76,7 @@ public class DlgBarangKeluar extends javax.swing.JDialog {
 
     private void refreshTable() {
         jTable1.setModel(new BarangKeluarTableModel(barangKeluarDetails));
+        TableUtil.initColumn(jTable1);
     }
 
     private void loadFormToDomain() {

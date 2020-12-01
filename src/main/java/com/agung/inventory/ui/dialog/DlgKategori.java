@@ -1,9 +1,9 @@
 package com.agung.inventory.ui.dialog;
 
 import com.agung.inventory.config.AppContainer;
-import com.agung.inventory.di.Injector;
 import com.agung.inventory.entity.Kategori;
 import com.agung.inventory.ui.tablemodel.KategoriTableModel;
+import com.agung.inventory.util.TableUtil;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +55,7 @@ public class DlgKategori extends javax.swing.JDialog {
         } else {
             tblKategori.setModel(new KategoriTableModel(new ArrayList<>()));
         }
+        TableUtil.initColumn(tblKategori);
     }
 
     private void loadFormToModel() {
