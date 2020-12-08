@@ -7,7 +7,7 @@ package com.agung.inventory.ui.dialog;
 
 import com.agung.inventory.Main;
 import com.agung.inventory.config.AppContainer;
-import com.agung.inventory.service.ReportConstant;
+import com.agung.inventory.constan.ReportConstant;
 import com.agung.inventory.util.DateUtil;
 import java.time.LocalDateTime;
 

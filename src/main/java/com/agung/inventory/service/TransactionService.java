@@ -5,6 +5,7 @@
  */
 package com.agung.inventory.service;
 
+import com.agung.inventory.constan.StokTidakCukupException;
 import com.agung.inventory.dao.*;
 import com.agung.inventory.entity.*;
 import java.math.BigDecimal;
