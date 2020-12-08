@@ -16,13 +16,19 @@ import net.sf.jasperreports.view.JRViewer;
  */
 public class DlgViewLaporan extends javax.swing.JDialog {
 
-    /**
-     * Creates new form DlgViewLaporan
-     */
+    private static DlgViewLaporan singleton;
+    
     public DlgViewLaporan() {
         super(Main.getMainFrame(), true);
         initComponents();
         setLocationRelativeTo(null);
+    }
+    
+    public static synchronized DlgViewLaporan getSingleton(){
+        if (singleton == null) {
+            singleton = new DlgViewLaporan();
+        }
+        return singleton;
     }
     
     public void showDialog(JasperPrint jasperPrint,String title){

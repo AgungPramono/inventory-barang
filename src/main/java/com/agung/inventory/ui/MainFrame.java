@@ -56,7 +56,7 @@ public class MainFrame extends javax.swing.JFrame {
                 loadDataToTable();
             }
         });
-        timer.setDelay(3000);
+        timer.setDelay(8000);
         timer.start();
     }
 
@@ -355,7 +355,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-       DlgBarangMasuk.getInstance().showDialog();
+//       DlgBarangMasuk.getInstance().showDialog();
+        DlgListBarangMasuk.getSingleton().showDialog();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -383,7 +384,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBarangKeluarActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-       DlgBarangKeluar.getInstance().showDialog();
+       DlgListBarangKeluar.getSingleton().showDialog();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed

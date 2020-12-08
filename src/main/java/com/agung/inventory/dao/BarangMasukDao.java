@@ -24,11 +24,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
 
-    private final String SQL_INSERT = "insert into barang_masuk (tanggal,id_petugas,id_supplier) values (?,?,?)";
+    private final String SQL_INSERT = "insert into barang_masuk (tanggal,no_transaksi,id_petugas,id_supplier) values (?,?,?,?)";
     private final String SQL_DELETE_DETAIL = "delete from barang_masuk_detail where id=?";
     private final String SQL_CARI_BARAN_MASUK = "";
     private final String SQL_HAPUS_HEADER = "delete from barang_masuk where id=?";
-    private final String FIND_ALL_TRANSACTION = "select b.kode,b.nama as nama_barang,bm.tanggal,p.nama as nama_petugas,"
+    
+    private final String FIND_ALL_TRANSACTION = "select b.kode,b.nama as nama_barang,bm.id,bm.tanggal,bm.no_transaksi,p.nama as nama_petugas,"
             + "s.nama as nama_supplier,bmd.qty "
             + "from barang_masuk bm "
             + "join barang_masuk_detail bmd "
@@ -38,7 +39,14 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
             + "join petugas p "
             + "on p.id = bm.id_petugas "
             + "join supplier s "
-            + "on s.id = bm.id_supplier";
+            + "on s.id = bm.id_supplier group by bm.tanggal";
+    
+    private final String FIND_ALL_TRANSACTION_MASTER = "select bm.id,bm.tanggal,bm.no_transaksi,p.nama as nama_petugas,s.nama as nama_supplier "
+            + "from barang_masuk bm "
+            + "join petugas p "
+            + "on p.id = bm.id_petugas "
+            + "join supplier s "
+            + "on s.id = bm.id_supplier ";
 
     private final DataSource dataSource;
     private SimpleJdbcInsert simpleJdbcInsert;
@@ -49,7 +57,7 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
         this.jdbcTemplate = new JdbcTemplate(this.dataSource);
         this.simpleJdbcInsert = new SimpleJdbcInsert(this.dataSource)
                 .withTableName("barang_masuk")
-                .usingColumns("tanggal", "id_petugas", "id_supplier")
+                .usingColumns("tanggal", "id_petugas", "id_supplier", "no_transaksi")
                 .usingGeneratedKeyColumns("id");
     }
 
@@ -58,7 +66,7 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
         this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
                 .withTableName("barang_masuk")
-                .usingColumns("tanggal", "id_petugas", "id_supplier")
+                .usingColumns("tanggal", "id_petugas", "id_supplier", "no_transaksi")
                 .usingGeneratedKeyColumns("id");
     }
 
@@ -67,6 +75,7 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
         if (t.getId() == null) {
             Map<String, Object> params = new HashMap<>();
             params.put("tanggal", t.getTanggalMasuk());
+            params.put("no_transaksi", t.getKode());
             params.put("id_petugas", t.getPetugas().getId());
             params.put("id_supplier", t.getSupplier().getId());
             int retId = simpleJdbcInsert.executeAndReturnKey(params).intValue();
@@ -81,12 +90,42 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
 
     @Override
     public void deleteById(BarangMasuk t) {
-
+            
     }
 
     @Override
     public List<BarangMasuk> cariSemua() {
-       return jdbcTemplate.query(FIND_ALL_TRANSACTION, new BarangMasukRowMapper());
+        return jdbcTemplate.query(FIND_ALL_TRANSACTION, new BarangMasukRowMapper());
+    }
+
+    public List<BarangMasuk> cariSemuaBarangMasuksMaster() {
+        StringBuilder sql = new StringBuilder(FIND_ALL_TRANSACTION_MASTER);
+        sql.append("order by bm.tanggal desc");
+        return jdbcTemplate.query(sql.toString(), new BarangMasukRowMapper());
+    }
+
+    public List<BarangMasuk> cariByParameter(String kolom, String value) {
+        StringBuilder sql = new StringBuilder(FIND_ALL_TRANSACTION_MASTER);
+
+        switch (kolom) {
+            case "tanggal":
+                sql.append("where bm.tanggal=").append(value);
+                break;
+            case "kode":
+                sql.append("where bm.no_transaksi=").append(value);
+                break;
+            case "supplier":
+                sql.append("where s.nama like '%").append(value).append("%'");
+                break;
+            case "petugas":
+                sql.append("where p.nama like '%").append(value).append("%'");
+                break;
+            default:
+                break;
+        }
+        sql.append(" order by bm.tanggal desc");
+        
+        return jdbcTemplate.query(sql.toString(), new BarangMasukRowMapper());
     }
 
     @Override

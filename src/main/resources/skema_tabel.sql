@@ -46,6 +46,7 @@ create table pelanggan(
 
 create table barang_masuk(
      id INTEGER NOT NULL AUTO_INCREMENT,
+     no_transaksi  VARCHAR(255) NOT NULL,
      tanggal TIMESTAMP NOT NULL,
      id_supplier INTEGER(10) NOT NULL,
      id_petugas INTEGER(10) not null,
@@ -66,6 +67,7 @@ create table barang_masuk_detail(
 
 create table barang_keluar(
      id INTEGER NOT NULL AUTO_INCREMENT,
+     no_transaksi  VARCHAR(255) NOT NULL,
      tanggal TIMESTAMP NOT NULL,
      id_petugas INTEGER(10) NOT NULL,
      id_pelanggan INTEGER(10) not null,

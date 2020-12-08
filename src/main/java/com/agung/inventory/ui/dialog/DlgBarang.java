@@ -9,7 +9,7 @@ import com.agung.inventory.config.AppContainer;
 import com.agung.inventory.entity.Barang;
 import com.agung.inventory.entity.Kategori;
 import com.agung.inventory.ui.tablemodel.BarangTableModel;
-import com.agung.inventory.ui.tablemodel.KategoriComboModel;
+import com.agung.inventory.ui.combo.model.KategoriComboModel;
 import com.agung.inventory.util.TableUtil;
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -236,9 +236,9 @@ public class DlgBarang extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, jLabel2, jLabel3, jLabel4, jLabel5);
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4, jLabel5});
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, btnBatal, btnSimpan);
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBatal, btnSimpan});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,11 +274,11 @@ public class DlgBarang extends javax.swing.JDialog {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, txtKode);
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, txtKode});
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, cmbKategori, txtNama, txtStock);
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cmbKategori, txtNama, txtStock});
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, btnBatal, btnSimpan);
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnBatal, btnSimpan});
 
         tblBarang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -291,6 +291,7 @@ public class DlgBarang extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblBarang.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane2.setViewportView(tblBarang);
 
         btnTambah.setText("Tambah");
@@ -334,7 +335,7 @@ public class DlgBarang extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, btnEdit, btnHapus, btnTambah);
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnEdit, btnHapus, btnTambah});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,7 +354,7 @@ public class DlgBarang extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, btnEdit, btnHapus, btnTambah);
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnEdit, btnHapus, btnTambah});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

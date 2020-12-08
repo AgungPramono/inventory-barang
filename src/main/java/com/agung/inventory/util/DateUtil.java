@@ -8,6 +8,7 @@ package com.agung.inventory.util;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -26,4 +27,8 @@ public class DateUtil {
         return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
     
+    
+    public static DateTimeFormatter formatDate(LocalDateTime date){
+        return DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss");
+    }
 }

@@ -9,8 +9,9 @@ import com.agung.inventory.config.AppContainer;
 import com.agung.inventory.config.SecurityConfig;
 import com.agung.inventory.entity.*;
 import com.agung.inventory.ui.tablemodel.BarangMasukTableModel;
-import com.agung.inventory.ui.tablemodel.SupplierComboModel;
+import com.agung.inventory.ui.combo.model.SupplierComboModel;
 import com.agung.inventory.util.DateUtil;
+import com.agung.inventory.util.NumberUtil;
 import com.agung.inventory.util.TableUtil;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -43,6 +44,7 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
         LocalDateTime dateNow = LocalDateTime.now();
         loadSupplierCombo();
         jdate.setDate(DateUtil.toDate(dateNow));
+        txtKodeTransaksi.setText(NumberUtil.generateTransactionCode());
 
         tblBarangMasuk.getSelectionModel().addListSelectionListener(new TableSelection());
         txtPetugas.setText(SecurityConfig.getActivePetugas().getNama());
@@ -67,14 +69,15 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
     }
 
     private void loadSupplierCombo() {
-        jComboBox1.setModel(new SupplierComboModel(AppContainer.getSupplierDao().cariSemua()));
+        cmbSupplier.setModel(new SupplierComboModel(AppContainer.getSupplierDao().cariSemua()));
     }
 
     private void loadFormToDomain() {
         barangMasuk.setBarangMasukDetails(barangMasukDetails);
         barangMasuk.setTanggalMasuk(LocalDateTime.now());
+        barangMasuk.setKode(txtKodeTransaksi.getText());
         barangMasuk.setPetugas(SecurityConfig.getActivePetugas());
-        barangMasuk.setSupplier((Supplier) jComboBox1.getSelectedItem());
+        barangMasuk.setSupplier((Supplier) cmbSupplier.getSelectedItem());
     }
 
     private void addBarangMasukDetail(Barang barang) {
@@ -94,11 +97,12 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
         barangMasukDetails = new ArrayList<>();
         barangMasuk = null;
         txtNamaBarang.setText("");
+        txtKodeTransaksi.setText(NumberUtil.generateTransactionCode());
         refreshTable();
     }
     
     private Boolean isFormValid(){
-        return jComboBox1.getSelectedItem() != null
+        return cmbSupplier.getSelectedItem() != null
                 && !barangMasukDetails.isEmpty();
     }
     
@@ -131,7 +135,7 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtPetugas = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbSupplier = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         txtNamaBarang = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -142,6 +146,8 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
         jButton4 = new javax.swing.JButton();
         jdate = new com.toedter.calendar.JDateChooser();
         jButton5 = new javax.swing.JButton();
+        txtKodeTransaksi = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -178,7 +184,12 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
 
         txtPetugas.setEnabled(false);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
+        cmbSupplier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
+        cmbSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cmbSupplierMouseClicked(evt);
+            }
+        });
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
@@ -194,6 +205,7 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
 
             }
         ));
+        tblBarangMasuk.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tblBarangMasuk.setRowHeight(40);
         jScrollPane1.setViewportView(tblBarangMasuk);
 
@@ -248,7 +260,7 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
                     .addComponent(txtNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAddBarang))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnHapusSemua, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -270,12 +282,16 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
         jdate.setDateFormatString("dd MMMM yyyy HH:ss");
         jdate.setEnabled(false);
 
-        jButton5.setText("Batal");
+        jButton5.setText("Tutup");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
+
+        txtKodeTransaksi.setEnabled(false);
+
+        jLabel5.setText("Kode Transaksi");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -284,49 +300,61 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cmbSupplier, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 355, Short.MAX_VALUE)
+                        .addComponent(txtKodeTransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jdate, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jdate, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9))))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jComboBox1, txtPetugas});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmbSupplier, txtPetugas});
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel5});
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton4, jButton5});
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(txtPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(txtKodeTransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4))
                     .addComponent(jdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cmbSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -336,7 +364,7 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
                 .addGap(14, 14, 14))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jComboBox1, jLabel2, jLabel3, jLabel4, jdate, txtPetugas});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cmbSupplier, jLabel2, jLabel3, jLabel4, jdate, txtPetugas});
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton4, jButton5});
 
@@ -436,6 +464,10 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
        this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void cmbSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbSupplierMouseClicked
+       
+    }//GEN-LAST:event_cmbSupplierMouseClicked
+
     private class TableSelection implements ListSelectionListener {
 
         @Override
@@ -455,13 +487,14 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
     private javax.swing.JButton btnAddBarang;
     private javax.swing.JButton btnHapusDipilih;
     private javax.swing.JButton btnHapusSemua;
+    private javax.swing.JComboBox<String> cmbSupplier;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -469,6 +502,7 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JDateChooser jdate;
     private javax.swing.JTable tblBarangMasuk;
+    private javax.swing.JTextField txtKodeTransaksi;
     private javax.swing.JTextField txtNamaBarang;
     private javax.swing.JTextField txtPetugas;
     // End of variables declaration//GEN-END:variables

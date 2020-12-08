@@ -158,6 +158,7 @@ public class DlgPetugas extends javax.swing.JDialog {
                 "id", "Nama", "Username", "Status"
             }
         ));
+        tblPetugas.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane1.setViewportView(tblPetugas);
 
         jLabel3.setText("Nama");
@@ -225,9 +226,9 @@ public class DlgPetugas extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, jLabel3, jLabel4, jLabel5, jLabel6);
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel3, jLabel4, jLabel5, jLabel6});
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, btnBatal, btnSimpan);
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBatal, btnSimpan});
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,11 +260,11 @@ public class DlgPetugas extends javax.swing.JDialog {
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, jLabel3, jLabel4, jLabel5);
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel3, jLabel4, jLabel5});
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, btnBatal, btnSimpan);
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnBatal, btnSimpan});
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, cmbStatus, jLabel7, txtNama, txtPassword, txtRePassword, txtUsername);
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cmbStatus, jLabel7, txtNama, txtPassword, txtRePassword, txtUsername});
 
         btnTambah.setText("Tambah");
         btnTambah.addActionListener(new java.awt.event.ActionListener() {
@@ -299,8 +300,7 @@ public class DlgPetugas extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnUbah, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0))
+                        .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -308,7 +308,7 @@ public class DlgPetugas extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, btnHapus, btnTambah, btnUbah);
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnHapus, btnTambah, btnUbah});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,7 +327,7 @@ public class DlgPetugas extends javax.swing.JDialog {
                 .addGap(6, 6, 6))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, btnHapus, btnTambah, btnUbah);
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnHapus, btnTambah, btnUbah});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -40,7 +40,7 @@ public class PetugasDao implements BaseCrudDao<Petugas> {
     private static final String SQL_SELECT_ALL = "select * from petugas";
     private static final String SQL_UPDATE_PETUGAS = "update petugas set nama=?,username=?,password=?,active=? where id=?";
     private static final String SQL_FIND_BY_ID = "select * from petugas where id=?";
-    private static final String SQL_FIND_BY_USERNAME = "select * from petugas where username=?";
+    private static final String SQL_FIND_BY_USERNAME = "select * from petugas where username=? and active=true";
 
 
     public PetugasDao(DataSource dataSource) {
@@ -72,7 +72,6 @@ public class PetugasDao implements BaseCrudDao<Petugas> {
 
     @Override
     public void deleteById(Petugas t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -82,7 +81,6 @@ public class PetugasDao implements BaseCrudDao<Petugas> {
     
      @Override
     public void setDataSource(Connection dataSource) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public Petugas cariByUsername(String userName) {

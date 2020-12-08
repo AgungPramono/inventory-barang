@@ -7,10 +7,9 @@ package com.agung.inventory.ui.dialog;
 
 import com.agung.inventory.Main;
 import com.agung.inventory.config.AppContainer;
-import java.time.Instant;
+import com.agung.inventory.service.ReportConstant;
+import com.agung.inventory.util.DateUtil;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 
 /**
  *
@@ -24,6 +23,7 @@ public class DlgLaporan extends javax.swing.JDialog {
         super(Main.getMainFrame(), true);
         initComponents();
         setLocationRelativeTo(null);
+        setTitle("Cetak Laporan");
         setMode(false);
     }
 
@@ -67,24 +67,26 @@ public class DlgLaporan extends javax.swing.JDialog {
     }
 
     private void cetakLaporanStokBarang() {
-        new DlgViewLaporan().showDialog(AppContainer.getReportService().printLaporanStok(),"Laporan Barang");
-        
+        DlgViewLaporan.getSingleton()
+                .showDialog(AppContainer.getReportService().printLaporanStok(), "Laporan Barang");
+
     }
 
     private void cetakLaporanBarangMasuk() {
-        LocalDateTime mulai = convertDate(jDateChooser1.getDate());
-        LocalDateTime sampai = convertDate(jDateChooser2.getDate());
-        new DlgViewLaporan()
-                .showDialog(AppContainer.getReportService().printLaporanBarangMasuk(mulai, sampai),"Laporan Barang Masuk");
+        LocalDateTime mulai = DateUtil.toLocalDateTime(jDateChooser1.getDate());
+        LocalDateTime sampai = DateUtil.toLocalDateTime(jDateChooser2.getDate());
+        DlgViewLaporan.getSingleton()
+                .showDialog(AppContainer.getReportService()
+                        .generateLaporanTransaksi(mulai, sampai, ReportConstant.LAPORAN_BARANG_MASUK), "Laporan Barang Masuk");
     }
 
     private void cetakLaporanBarangKeluar() {
+        LocalDateTime mulai = DateUtil.toLocalDateTime(jDateChooser1.getDate());
+        LocalDateTime sampai = DateUtil.toLocalDateTime(jDateChooser2.getDate());
+        DlgViewLaporan.getSingleton()
+                .showDialog(AppContainer.getReportService()
+                        .generateLaporanTransaksi(mulai, sampai, ReportConstant.LAPORAN_BARANG_KELUAR), "Laporan Barang Keluar");
 
-    }
-    
-    private LocalDateTime convertDate(Date date){
-        Instant instant = date.toInstant();
-        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
     }
 
     /**
@@ -124,7 +126,7 @@ public class DlgLaporan extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,6 +149,10 @@ public class DlgLaporan extends javax.swing.JDialog {
 
         jLabel3.setText("Periode");
 
+        jDateChooser1.setDateFormatString("dd MMM yyyy");
+
+        jDateChooser2.setDateFormatString("dd MMM yyyy");
+
         jButton1.setText("Tampilkan Laporan");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,24 +168,27 @@ public class DlgLaporan extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel3});
+
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jDateChooser1, jDateChooser2});
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,10 +205,10 @@ public class DlgLaporan extends javax.swing.JDialog {
                     .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jDateChooser1, jLabel3, jLabel5});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jDateChooser1, jDateChooser2, jLabel3, jLabel5});
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -207,11 +216,9 @@ public class DlgLaporan extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,9 +233,7 @@ public class DlgLaporan extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,7 +248,7 @@ public class DlgLaporan extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-       
+
         String pilih = (String) jComboBox1.getSelectedItem();
         switch (pilih) {
             case "Stok Barang":
@@ -273,5 +278,4 @@ public class DlgLaporan extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 
-    
 }

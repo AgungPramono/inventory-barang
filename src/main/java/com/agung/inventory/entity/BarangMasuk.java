@@ -5,11 +5,10 @@
  */
 package com.agung.inventory.entity;
 
-import lombok.Data;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Data;
 
 /**
  *
@@ -20,6 +19,7 @@ import java.util.List;
 public class BarangMasuk {
     
     private Integer id;
+    private String kode;
     private LocalDateTime tanggalMasuk;
     private Petugas petugas;
     private Supplier supplier;

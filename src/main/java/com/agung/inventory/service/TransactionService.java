@@ -83,4 +83,20 @@ public class TransactionService {
     public List<BarangMasuk> findAllBarangMasuk(){
         return barangMasukDao.cariSemua();
     }
+    
+    public List<BarangMasuk> findBarangMasukMaster(){
+        return barangMasukDao.cariSemuaBarangMasuksMaster();
+    }
+    
+    public List<BarangMasuk> findBarangMasukByParam(String kolom, String value){
+        return barangMasukDao.cariByParameter(kolom, value);
+    }
+    
+    public List<BarangKeluar> findBarangKeluar(){
+        return barangKeluarDao.cariSemua();
+    }
+    
+     public List<BarangKeluar> findBarangKeluarByParam(String kolom, String value){
+        return barangKeluarDao.cariByParameter(kolom, value);
+    }
 }

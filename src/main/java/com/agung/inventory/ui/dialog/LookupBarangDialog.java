@@ -94,6 +94,7 @@ public class LookupBarangDialog extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblBarang.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane1.setViewportView(tblBarang);
 
         btnPilih.setText("Pilih");

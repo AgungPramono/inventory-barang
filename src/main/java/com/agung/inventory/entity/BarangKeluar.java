@@ -18,6 +18,7 @@ import lombok.Data;
 @Data
 public class BarangKeluar {
     private Integer id;
+    private String kode;
     private LocalDateTime tanggalMasuk;
     private Petugas petugas;
     private Pelanggan pelanggan;

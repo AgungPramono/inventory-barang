@@ -20,7 +20,7 @@ public class MainSpringApp {
         AppContainer.initContainer();
         List<BarangMasuk> alList = AppContainer.getTransactionService().findAllBarangMasuk();
         for (BarangMasuk barangMasuk : alList) {
-            System.out.println("id"+barangMasuk.getPetugas().getNama());
+            System.out.println("id "+barangMasuk.getId()+" : "+barangMasuk.getPetugas().getNama());
             for(BarangMasukDetail bmd:barangMasuk.getBarangMasukDetails()){
                 System.out.println("Nama Barang"+bmd.getBarang().getNamaBarang());
                 System.out.println("Id Header"+bmd.getBarangMasuk().getId());

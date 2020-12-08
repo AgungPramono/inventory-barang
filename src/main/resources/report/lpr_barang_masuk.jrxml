@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.15.0.final using JasperReports Library version 6.15.0-dd49bfb94918336b8321d5507193f0169ead4e95  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="laporan_barang_masuk" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="10" uuid="98656d1a-40ea-4366-939e-81ae7389a347">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="mysql_inventory"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="title" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="tanggalMulai" class="java.time.LocalDateTime"/>
+	<parameter name="tanggalSampai" class="java.time.LocalDateTime"/>
+	<queryString>
+		<![CDATA[select b.kode,b.nama as nama_barang,bm.id as kode_master,bm.no_transaksi,bm.tanggal,p.nama as nama_petugas,s.nama as nama_supplier,bmd.qty from barang_masuk bm 
+join barang_masuk_detail bmd on bm.id = bmd.id_header join barang b on bmd.id_barang = b.id join petugas p on p.id = bm.id_petugas 
+join supplier s on s.id = bm.id_supplier order by bm.tanggal desc]]>
+	</queryString>
+	<field name="kode" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="kode"/>
+		<property name="com.jaspersoft.studio.field.label" value="kode"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="barang"/>
+	</field>
+	<field name="nama_barang" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nama"/>
+		<property name="com.jaspersoft.studio.field.label" value="nama_barang"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="barang"/>
+	</field>
+	<field name="kode_master" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="kode_master"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="barang_masuk"/>
+	</field>
+	<field name="no_transaksi" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="no_transaksi"/>
+		<property name="com.jaspersoft.studio.field.label" value="no_transaksi"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="barang_masuk"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tanggal" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="tanggal"/>
+		<property name="com.jaspersoft.studio.field.label" value="tanggal"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="barang_masuk"/>
+	</field>
+	<field name="nama_petugas" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nama"/>
+		<property name="com.jaspersoft.studio.field.label" value="nama_petugas"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="petugas"/>
+	</field>
+	<field name="nama_supplier" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nama"/>
+		<property name="com.jaspersoft.studio.field.label" value="nama_supplier"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="supplier"/>
+	</field>
+	<field name="qty" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="qty"/>
+		<property name="com.jaspersoft.studio.field.label" value="qty"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="barang_masuk_detail"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{tanggal}]]></groupExpression>
+		<groupHeader>
+			<band height="104">
+				<staticText>
+					<reportElement x="400" y="59" width="40" height="20" uuid="f2b71634-2846-4e23-8527-6bf3e4800e6e"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Petugas]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="450" y="59" width="100" height="19" uuid="aae8dd0e-af4d-410d-af35-f21b900b2d25"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{nama_petugas}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="10" y="40" width="70" height="20" uuid="036470a0-d955-4115-b702-4493eb2297db"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Tanggal]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="400" y="40" width="40" height="20" uuid="509e2ba3-dd4d-443b-8e5a-92b4ffe482ca"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Supplier]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="450" y="40" width="100" height="19" uuid="dbe2ce15-5b46-4794-a805-f6ae3e6851af"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{nama_supplier}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="10" y="84" width="80" height="20" uuid="b25c572c-7503-46e8-b1c4-fc2df1d1bb45">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<text><![CDATA[Kode]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="90" y="84" width="330" height="20" uuid="dc52beb4-8b60-47f2-8b4e-1dd86647ea36">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<text><![CDATA[Nama]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="420" y="84" width="130" height="20" uuid="db3fd8da-998b-4729-8739-c2bc7015a4a1">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<text><![CDATA[Jumlah]]></text>
+				</staticText>
+				<textField pattern="dd MMM yyyy HH:mm:ss">
+					<reportElement x="90" y="41" width="160" height="18" uuid="211b3bd8-544e-494b-ac60-3c50b19934ff"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{tanggal}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="10" y="30" width="540" height="1" uuid="21bfbb42-c913-4836-80ec-21b1756e0e1d"/>
+				</line>
+				<staticText>
+					<reportElement x="10" y="59" width="70" height="19" uuid="5cc467d7-6cbe-44ac-b1eb-34c2c62fa059"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[No.Transaksi]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="90" y="60" width="100" height="19" uuid="3ec37edf-bcf0-4e48-bc3b-d7c616e262c4"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{no_transaksi}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="80" y="40" width="10" height="20" uuid="0fc2c9a9-6031-4f9c-8b23-8d0b7330611e"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="80" y="60" width="10" height="18" uuid="a3a93816-b10e-45a1-884b-ce2132c8782b"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="440" y="40" width="10" height="20" uuid="8041eef3-f8a9-4404-88df-8912a8fda450"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="440" y="60" width="10" height="19" uuid="81963fc0-f139-444d-bb6e-dd501638f024"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="10" width="540" height="30" uuid="1ea035fc-a2d1-4c86-a042-3186ee79a9f6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="130" y="40" width="50" height="30" uuid="175bdbf8-21b1-4983-9540-6bb11342bbbd">
+					<printWhenExpression><![CDATA[($P{tanggalMulai} == null || $P{tanggalSampai} == null)? false : true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Periode :]]></text>
+			</staticText>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement x="180" y="40" width="110" height="30" uuid="4e602b39-dfd2-4417-9fd2-e52ed5b0f08e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[ java.time.format.DateTimeFormatter.ofPattern("dd MMMM yyyy").format($P{tanggalMulai})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="40" width="20" height="30" uuid="62d01024-0f7f-4483-bfff-78d586c327e4">
+					<printWhenExpression><![CDATA[($P{tanggalMulai} == null || $P{tanggalSampai} == null)? false : true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[s/d]]></text>
+			</staticText>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement x="310" y="40" width="110" height="30" uuid="a2ab37f5-593a-49ff-a67b-593b993eefb2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[ java.time.format.DateTimeFormatter.ofPattern("dd MMMM yyyy").format($P{tanggalSampai})]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="0" width="80" height="30" uuid="6423b236-67f5-4ef5-987a-48739a15f627">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9409b0de-e918-4b41-9767-8c5dd1c61732"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="0" width="130" height="30" uuid="0e17e0da-87d9-4524-8183-aafbe8f55f5c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ab6fe86f-b778-4144-80c0-18a9caa85ad4"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qty}.longValue()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="0" width="330" height="30" uuid="d4442907-9da8-470d-87f8-e69e62b1e49c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4ad2d734-6385-41c6-b014-701e95e0b802"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_barang}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
