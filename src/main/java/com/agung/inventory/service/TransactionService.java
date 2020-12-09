@@ -8,11 +8,12 @@ package com.agung.inventory.service;
 import com.agung.inventory.constan.StokTidakCukupException;
 import com.agung.inventory.dao.*;
 import com.agung.inventory.entity.*;
-import java.math.BigDecimal;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 /**
  *
@@ -93,11 +94,11 @@ public class TransactionService {
         return barangMasukDao.cariByParameter(kolom, value);
     }
     
-    public List<BarangKeluar> findBarangKeluar(){
+    public List<BarangKeluar> findAllBarangKeluar(){
         return barangKeluarDao.cariSemua();
     }
     
-     public List<BarangKeluar> findBarangKeluarByParam(String kolom, String value){
+     public List<BarangKeluar> findAllBarangKeluarByParam(String kolom, String value){
         return barangKeluarDao.cariByParameter(kolom, value);
     }
 }

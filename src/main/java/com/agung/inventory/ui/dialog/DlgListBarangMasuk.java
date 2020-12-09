@@ -15,14 +15,17 @@ import com.agung.inventory.ui.combo.model.SupplierComboModel;
 import com.agung.inventory.ui.tablemodel.BarangMasukTableModelMaster;
 import com.agung.inventory.util.DateUtil;
 import com.agung.inventory.util.TableUtil;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.util.StringUtils;
+
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import org.springframework.util.StringUtils;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -41,6 +44,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
     }
 
     private void initForm() {
+        setTitle("Barang Masuk");
         LocalDateTime dateNow = LocalDateTime.now();
         setLocationRelativeTo(null);
         tblBarangMasuk.getSelectionModel().addListSelectionListener(new TableSelection());
@@ -48,6 +52,9 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
         loadComboSupplier();
         loadComboPetugas();
         addComboMouseListener();
+        chEnableDate1.setSelected(false);
+        dateChooser.setEnabled(false);
+        dateChooser.setDate(null);
     }
 
     private void loadComboSupplier() {
@@ -85,7 +92,12 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
     }
 
     private void refresh() {
-        if (txtKode.getText().trim().length() > 0) {
+        if(dateChooser.getDate() != null && dateChooser.getDateEditor().getUiComponent().isEnabled()){
+            String tanggal = new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate());
+            listBarangMasuk = AppContainer.getTransactionService().findBarangMasukByParam("tanggal", tanggal);
+        }
+        
+        if (StringUtils.isEmpty(txtKode.getText())) {
             listBarangMasuk = AppContainer.getTransactionService().findBarangMasukByParam("kode", txtKode.getText());
         }
 
@@ -100,6 +112,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
         }
 
         if (StringUtils.isEmpty(txtKode.getText())
+                && dateChooser.getDate() == null
                 && cmbSupplier.getSelectedItem() == null
                 && cmbPetugas.getSelectedItem() == null) {
             listBarangMasuk = AppContainer.getTransactionService().findBarangMasukMaster();
@@ -163,6 +176,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
         jButton4 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
+        chEnableDate1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -203,7 +217,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102));
@@ -259,6 +273,12 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel5.setText("LIST TRANSAKSI MASUK");
 
+        chEnableDate1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                chEnableDate1ItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -270,16 +290,17 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(dateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                            .addComponent(txtKode))
-                        .addGap(342, 342, 342)
-                        .addComponent(jLabel4)
+                        .addComponent(chEnableDate1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(dateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
+                    .addComponent(txtKode)
+                    .addComponent(cmbSupplier, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(342, 342, 342)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
@@ -333,7 +354,8 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabel1)
+                            .addComponent(chEnableDate1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtKode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -344,10 +366,10 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
                             .addComponent(cmbSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cmbSupplier, dateChooser, jLabel1, jLabel2, jLabel3});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {chEnableDate1, cmbSupplier, dateChooser, jLabel1, jLabel2, jLabel3});
 
         jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cmbPetugas, jLabel4});
 
@@ -436,6 +458,16 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tblBarangMasukMouseClicked
 
+    private void chEnableDate1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chEnableDate1ItemStateChanged
+        if (chEnableDate1.isSelected()) {
+            dateChooser.setDate(new Date());
+            dateChooser.setEnabled(true);
+        }else{
+            dateChooser.setDate(null);
+            dateChooser.setEnabled(false);
+        }
+    }//GEN-LAST:event_chEnableDate1ItemStateChanged
+
     private void printReport(Integer id) {
         DlgViewLaporan.getSingleton()
                 .showDialog(AppContainer.getReportService().generateLaporanMasukById(id), null);
@@ -458,6 +490,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox chEnableDate1;
     private javax.swing.JComboBox<String> cmbPetugas;
     private javax.swing.JComboBox<String> cmbSupplier;
     private com.toedter.calendar.JDateChooser dateChooser;

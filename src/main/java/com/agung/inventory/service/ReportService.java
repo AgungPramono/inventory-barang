@@ -5,12 +5,21 @@
  */
 package com.agung.inventory.service;
 
-import com.agung.inventory.constan.SqlConstan;
 import com.agung.inventory.constan.ReportConstant;
+import com.agung.inventory.constan.SqlConstan;
 import com.agung.inventory.dto.LaporanBarangDto;
 import com.agung.inventory.dto.LaporanBarangMasukDto;
 import com.agung.inventory.entity.Barang;
 import com.agung.inventory.entity.BarangMasuk;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -20,14 +29,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sql.DataSource;
-import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.design.JRDesignQuery;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  *
@@ -87,8 +88,8 @@ public class ReportService {
             param.put("tanggalMulai", tanggalMulai);
             param.put("tanggalSampai", tanggalSampai);
 
-            query.append("where bm.tanggal >='").append(start).append("' ");
-            query.append("and bm.tanggal <='").append(end).append("' ");
+            query.append("where date(bm.tanggal) >='").append(start).append("' ");
+            query.append("and date(bm.tanggal) <='").append(end).append("' ");
             query.append("order by bm.tanggal desc");
 
             jrQuery.setText(query.toString());

@@ -87,7 +87,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="373" max="-2" attributes="0"/>
-                      <EmptySpace pref="8" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -165,19 +165,19 @@
                               <Component id="jLabel3" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cmbSupplier" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="dateChooser" pref="270" max="32767" attributes="0"/>
-                                      <Component id="txtKode" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="342" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="chEnableDate1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="cmbPetugas" min="-2" pref="221" max="-2" attributes="0"/>
+                                  <Component id="dateChooser" pref="270" max="32767" attributes="0"/>
                               </Group>
+                              <Component id="txtKode" max="32767" attributes="0"/>
+                              <Component id="cmbSupplier" max="32767" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="342" max="-2" attributes="0"/>
+                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="cmbPetugas" min="-2" pref="221" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
@@ -238,6 +238,7 @@
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="dateChooser" linkSize="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel1" linkSize="2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="chEnableDate1" linkSize="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -253,7 +254,7 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="12" max="32767" attributes="0"/>
+                          <EmptySpace pref="14" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -356,6 +357,11 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JSeparator" name="jSeparator2">
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="chEnableDate1">
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="chEnableDate1ItemStateChanged"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

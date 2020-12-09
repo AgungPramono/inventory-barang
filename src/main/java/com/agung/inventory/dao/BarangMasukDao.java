@@ -6,16 +6,17 @@
 package com.agung.inventory.dao;
 
 import com.agung.inventory.entity.BarangMasuk;
-import java.sql.Connection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -109,7 +110,7 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
 
         switch (kolom) {
             case "tanggal":
-                sql.append("where bm.tanggal=").append(value);
+                sql.append("where date(bm.tanggal) ='").append(value).append("'");
                 break;
             case "kode":
                 sql.append("where bm.no_transaksi=").append(value);

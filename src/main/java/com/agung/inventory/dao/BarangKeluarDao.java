@@ -6,14 +6,15 @@
 package com.agung.inventory.dao;
 
 import com.agung.inventory.entity.BarangKeluar;
-import java.util.List;
-import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+
+import javax.sql.DataSource;
+import java.util.List;
 
 /**
  *
@@ -63,7 +64,7 @@ public class BarangKeluarDao {
 
         switch (kolom) {
             case "tanggal":
-                sql.append("where bm.tanggal=").append(value);
+                sql.append("where date(bm.tanggal) ='").append(value).append("'");
                 break;
             case "kode":
                 sql.append("where bm.no_transaksi=").append(value);
