@@ -8,10 +8,12 @@ package com.agung.inventory.ui.dialog;
 import com.agung.inventory.Main;
 import com.agung.inventory.config.AppContainer;
 import com.agung.inventory.entity.BarangMasuk;
+import com.agung.inventory.entity.BarangMasukDetail;
 import com.agung.inventory.entity.Petugas;
 import com.agung.inventory.entity.Supplier;
 import com.agung.inventory.ui.combo.model.PetugasComboModel;
 import com.agung.inventory.ui.combo.model.SupplierComboModel;
+import com.agung.inventory.ui.tablemodel.BarangMasukDetailTableModel;
 import com.agung.inventory.ui.tablemodel.BarangMasukTableModelMaster;
 import com.agung.inventory.util.DateUtil;
 import com.agung.inventory.util.TableUtil;
@@ -36,6 +38,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
     private static DlgListBarangMasuk singleton;
     private List<BarangMasuk> listBarangMasuk;
     private BarangMasuk barangMasuk;
+    private BarangMasukDetailTableModel barangMasukDetailTableModel = new BarangMasukDetailTableModel();
 
     public DlgListBarangMasuk() {
         super(Main.getMainFrame(), true);
@@ -97,7 +100,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
             listBarangMasuk = AppContainer.getTransactionService().findBarangMasukByParam("tanggal", tanggal);
         }
         
-        if (StringUtils.isEmpty(txtKode.getText())) {
+        if (!StringUtils.isEmpty(txtKode.getText())) {
             listBarangMasuk = AppContainer.getTransactionService().findBarangMasukByParam("kode", txtKode.getText());
         }
 
@@ -111,7 +114,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
             listBarangMasuk = AppContainer.getTransactionService().findBarangMasukByParam("petugas", p.getNama());
         }
 
-        if (StringUtils.isEmpty(txtKode.getText())
+        if (org.apache.commons.lang.StringUtils.isEmpty(txtKode.getText())
                 && dateChooser.getDate() == null
                 && cmbSupplier.getSelectedItem() == null
                 && cmbPetugas.getSelectedItem() == null) {
@@ -119,6 +122,17 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
         }
 
         initTable(listBarangMasuk);
+    }
+
+    private void loadDetail(Integer idMaster){
+        List<BarangMasukDetail> listDetail = AppContainer.getTransactionService().findAllBarangMasukDetailByIdMaster(idMaster);
+        if (!listDetail.isEmpty()){
+            barangMasukDetailTableModel.setData(listDetail);
+            tlbDetail.setModel(barangMasukDetailTableModel);
+        }else{
+            barangMasukDetailTableModel.setData(new ArrayList<>());
+            tlbDetail.setModel(barangMasukDetailTableModel);
+        }
     }
 
     private void addComboMouseListener() {
@@ -159,6 +173,8 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblBarangMasuk = new org.jdesktop.swingx.JXTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tlbDetail = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -203,20 +219,37 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(tblBarangMasuk);
 
+        tlbDetail.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tlbDetail);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1020, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -366,7 +399,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
                             .addComponent(cmbSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {chEnableDate1, cmbSupplier, dateChooser, jLabel1, jLabel2, jLabel3});
@@ -388,7 +421,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 269, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -483,6 +516,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
 
             if (tblBarangMasuk.getSelectedRow() >= 0) {
                 barangMasuk = listBarangMasuk.get(tblBarangMasuk.getSelectedRow());
+                loadDetail(barangMasuk.getId());
             }
         }
 
@@ -508,10 +542,12 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private org.jdesktop.swingx.JXTable tblBarangMasuk;
+    private javax.swing.JTable tlbDetail;
     private javax.swing.JTextField txtKode;
     // End of variables declaration//GEN-END:variables
 }

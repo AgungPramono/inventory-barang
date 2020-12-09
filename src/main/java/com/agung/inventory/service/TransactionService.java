@@ -101,4 +101,8 @@ public class TransactionService {
      public List<BarangKeluar> findAllBarangKeluarByParam(String kolom, String value){
         return barangKeluarDao.cariByParameter(kolom, value);
     }
+
+    public List<BarangMasukDetail> findAllBarangMasukDetailByIdMaster(Integer id){
+        return barangMasukDetailDao.cariDetailByIdMaster(id);
+    }
 }

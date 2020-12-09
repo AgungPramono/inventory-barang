@@ -49,6 +49,10 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
             + "join supplier s "
             + "on s.id = bm.id_supplier ";
 
+    private static final String FIND_ALL_DETAIL = "select d.id,b.*,d.qty from barang_masuk_detail d " +
+            "join barang b on b.id = d.id_barang " +
+            "where d.id_header=?";
+
     private final DataSource dataSource;
     private SimpleJdbcInsert simpleJdbcInsert;
     private JdbcTemplate jdbcTemplate;
@@ -113,7 +117,7 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
                 sql.append("where date(bm.tanggal) ='").append(value).append("'");
                 break;
             case "kode":
-                sql.append("where bm.no_transaksi=").append(value);
+                sql.append("where bm.no_transaksi='").append(value).append("'");
                 break;
             case "supplier":
                 sql.append("where s.nama like '%").append(value).append("%'");

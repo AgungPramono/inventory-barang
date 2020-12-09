@@ -10,14 +10,14 @@ import com.agung.inventory.config.SecurityConfig;
 import com.agung.inventory.entity.Barang;
 import com.agung.inventory.service.MasterService;
 import com.agung.inventory.ui.dialog.*;
-import com.agung.inventory.ui.tablemodel.BarangMasukDetailTableModel;
 import com.agung.inventory.ui.tablemodel.BarangTableModel;
 import com.agung.inventory.util.TableUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import javax.swing.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -28,11 +28,9 @@ public class MainFrame extends javax.swing.JFrame {
     @Autowired
     private MasterService masterService;
 
-    private final BarangMasukDetailTableModel barangMasukDetailTableModel;
     public MainFrame() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        barangMasukDetailTableModel = new BarangMasukDetailTableModel();
         loadDataToTable();
         autoRefreshData();
     }

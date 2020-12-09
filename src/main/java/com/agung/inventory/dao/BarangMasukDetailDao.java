@@ -6,22 +6,22 @@
 package com.agung.inventory.dao;
 
 import com.agung.inventory.entity.Barang;
-import com.agung.inventory.entity.BarangMasuk;
 import com.agung.inventory.entity.BarangMasukDetail;
 import com.agung.inventory.entity.Kategori;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -39,20 +39,17 @@ public class BarangMasukDetailDao implements BaseCrudDao<BarangMasukDetail> {
     private final String SQL_INSERT_DETAIL = "INSERT INTO BARANG_MASUK_DETAIL (ID_HEADER,ID_BARANG,QTY) VALUES (:header,?,?)";
     private final String SQL_CARI_BARANG_MASUK = ""
             + "select "
-            + "bm.tanggal as tanggal_masuk,"
             + "b.qty as stock_akhir,"
             + "b.nama,"
             + "k.nama as kategori,"
-            + "bmd.qty as stock_masuk "
+            + "bm.qty as stock_masuk "
             + "from "
-            + "barang_masuk bm "
+            + "barang_masuk_detail bm "
             + "join "
-            + "barang_masuk_detail bmd on bm.id = bmd.id_header "
-            + "join "
-            + "barang b on bmd.id_barang = b.id "
+            + "barang b on bm.id_barang = b.id "
             + "join "
             + "kategori k on k.id = b.id_kategori "
-            + "order by bm.tanggal desc";
+            + "where bm.id_header=? ";
 
     @Autowired
     public BarangMasukDetailDao(DataSource datasource) {
@@ -90,6 +87,10 @@ public class BarangMasukDetailDao implements BaseCrudDao<BarangMasukDetail> {
         return jdbcTemplate.query(SQL_CARI_BARANG_MASUK, new BarangMasukDetailMapper());
     }
 
+    public List<BarangMasukDetail> cariDetailByIdMaster(Integer idMaster){
+        return jdbcTemplate.query(SQL_CARI_BARANG_MASUK, new Object[]{idMaster},new BarangMasukDetailMapper());
+    }
+
     @Override
     public void setDataSource(Connection dataSource) {
     }
@@ -101,9 +102,6 @@ public class BarangMasukDetailDao implements BaseCrudDao<BarangMasukDetail> {
 
         @Override
         public BarangMasukDetail mapRow(ResultSet rs, int i) throws SQLException {
-            BarangMasuk bm = new BarangMasuk();
-            bm.setTanggalMasuk(rs.getTimestamp("tanggal_masuk").toLocalDateTime());
-
             Kategori kategori = new Kategori();
             kategori.setNama(rs.getString("kategori"));
 
@@ -115,7 +113,6 @@ public class BarangMasukDetailDao implements BaseCrudDao<BarangMasukDetail> {
             BarangMasukDetail bmd = new BarangMasukDetail();
             bmd.setQty(rs.getBigDecimal("stock_masuk"));
             bmd.setBarang(barang);
-            bmd.setBarangMasuk(bm);
             
             return bmd;
         }
