@@ -9,6 +9,7 @@ import com.agung.inventory.config.AppContainer;
 import com.agung.inventory.entity.Barang;
 import com.agung.inventory.ui.tablemodel.BarangTableModel;
 import com.agung.inventory.util.TableUtil;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
@@ -32,9 +33,9 @@ public class LookupBarangDialog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         tblBarang.getSelectionModel().addListSelectionListener(new TableSelection());
     }
-    
+
     private void loadDataToTable(List<Barang> listBarangs) {
-        
+
         if (listBarangs != null) {
             tblBarang.setModel(new BarangTableModel(listBarangs));
         } else {
@@ -42,15 +43,33 @@ public class LookupBarangDialog extends javax.swing.JDialog {
         }
         TableUtil.initColumn(tblBarang);
     }
-    
-    private void refreshTable(){
+
+    private void refreshTable() {
         listBarangs = AppContainer.getBarangDao().cariSemua();
         loadDataToTable(listBarangs);
     }
-    
-    public Barang showDialog(){
+
+    public Barang showDialog() {
         setVisible(true);
         return barang;
+    }
+
+    private void search() {
+        if (txtCari.getText().trim().length() > 3) {
+            listBarangs = AppContainer.getBarangDao().cariBarangByName(txtCari.getText());
+            loadDataToTable(listBarangs);
+        } else if (txtCari.getText().equals("")) {
+            listBarangs = AppContainer.getBarangDao().cariSemua();
+            loadDataToTable(listBarangs);
+        }
+    }
+
+    private void selectRow() {
+        if (tblBarang.getSelectedRow() >= 0 && barang != null) {
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Tidak ada data yang dipilih !!");
+        }
     }
 
     /**
@@ -64,20 +83,21 @@ public class LookupBarangDialog extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         txtCari = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBarang = new javax.swing.JTable();
         btnPilih = new javax.swing.JButton();
         btnBatal = new javax.swing.JButton();
+        btnCari = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
-        jLabel1.setText("Cari");
-
         txtCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCariKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCariKeyReleased(evt);
             }
@@ -95,6 +115,11 @@ public class LookupBarangDialog extends javax.swing.JDialog {
             }
         ));
         tblBarang.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tblBarang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblBarangMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblBarang);
 
         btnPilih.setText("Pilih");
@@ -111,6 +136,13 @@ public class LookupBarangDialog extends javax.swing.JDialog {
             }
         });
 
+        btnCari.setText("Cari");
+        btnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -118,11 +150,12 @@ public class LookupBarangDialog extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 706, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCari))
+                        .addComponent(btnCari, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnBatal, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -136,11 +169,11 @@ public class LookupBarangDialog extends javax.swing.JDialog {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(14, 14, 14)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                    .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCari, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -149,7 +182,7 @@ public class LookupBarangDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, txtCari});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCari, txtCari});
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnBatal, btnPilih});
 
@@ -185,28 +218,34 @@ public class LookupBarangDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
-       dispose();
+        dispose();
     }//GEN-LAST:event_btnBatalActionPerformed
 
     private void btnPilihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPilihActionPerformed
-        if (tblBarang.getSelectedRow()>=0 && barang != null) {
-            this.dispose();
-        }else{
-            JOptionPane.showMessageDialog(this, "Tidak ada data yang dipilih !!");
-        }
+        selectRow();
     }//GEN-LAST:event_btnPilihActionPerformed
 
     private void txtCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCariKeyReleased
-        if(txtCari.getText().trim().length() > 3){
-            listBarangs = AppContainer.getBarangDao().cariBarangByName(txtCari.getText());
-            loadDataToTable(listBarangs);
-        }else if (txtCari.getText().equals("")){
-            listBarangs = AppContainer.getBarangDao().cariSemua();
-            loadDataToTable(listBarangs);
-        }
+        search();
     }//GEN-LAST:event_txtCariKeyReleased
 
-     private class TableSelection implements ListSelectionListener {
+    private void txtCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCariKeyPressed
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            search();
+        }
+    }//GEN-LAST:event_txtCariKeyPressed
+
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+        search();
+    }//GEN-LAST:event_btnCariActionPerformed
+
+    private void tblBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBarangMouseClicked
+        if (evt.getClickCount() == 2) {
+            selectRow();
+        }
+    }//GEN-LAST:event_tblBarangMouseClicked
+
+    private class TableSelection implements ListSelectionListener {
 
         @Override
         public void valueChanged(ListSelectionEvent e) {
@@ -222,8 +261,8 @@ public class LookupBarangDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBatal;
+    private javax.swing.JButton btnCari;
     private javax.swing.JButton btnPilih;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

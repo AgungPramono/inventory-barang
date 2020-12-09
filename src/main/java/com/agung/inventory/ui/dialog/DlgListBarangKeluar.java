@@ -15,14 +15,15 @@ import com.agung.inventory.ui.combo.model.PetugasComboModel;
 import com.agung.inventory.ui.tablemodel.BarangKeluarTableModelMaster;
 import com.agung.inventory.util.DateUtil;
 import com.agung.inventory.util.TableUtil;
+import org.springframework.util.StringUtils;
+
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import org.springframework.util.StringUtils;
 
 /**
  *
@@ -85,6 +86,11 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
     }
 
     private void refresh() {
+
+        if(jDateChooser1.getDate() != null){
+            listBarangKeluars = AppContainer.getTransactionService().findBarangKeluarByParam("tanggal", jDateChooser1.getDateFormatString());
+        }
+
         if (txtKode.getText().trim().length() > 0) {
             listBarangKeluars = AppContainer.getTransactionService().findBarangKeluarByParam("kode", txtKode.getText());
         }
