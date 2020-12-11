@@ -5,14 +5,16 @@
  */
 package com.agung.inventory.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author agung
  */
 
-@Data
+@Getter
+@Setter
 public class LaporanBarangDto {
     
     private String kode;

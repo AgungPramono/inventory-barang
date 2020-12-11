@@ -15,10 +15,6 @@ import com.agung.inventory.ui.combo.model.PetugasComboModel;
 import com.agung.inventory.ui.tablemodel.BarangKeluarTableModelMaster;
 import com.agung.inventory.util.DateUtil;
 import com.agung.inventory.util.TableUtil;
-import org.springframework.util.StringUtils;
-
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
@@ -26,6 +22,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import org.springframework.util.StringUtils;
 
 /**
  *
@@ -98,7 +97,7 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
             listBarangKeluars = AppContainer.getTransactionService().findAllBarangKeluarByParam("tanggal", tanggal);
         }
 
-        if (StringUtils.isEmpty(txtKode.getText())) {
+        if (!StringUtils.isEmpty(txtKode.getText())) {
             listBarangKeluars = AppContainer.getTransactionService().findAllBarangKeluarByParam("kode", txtKode.getText());
         }
 
@@ -114,6 +113,7 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
 
         if (StringUtils.isEmpty(txtKode.getText())
                 && dateChooser.getDate() == null
+                && !dateChooser.isEnabled()
                 && cmbCustomer.getSelectedItem() == null
                 && cmbPetugas.getSelectedItem() == null) {
             listBarangKeluars = AppContainer.getTransactionService().findAllBarangKeluar();

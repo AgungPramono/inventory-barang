@@ -32,8 +32,8 @@ public class DlgViewLaporan extends javax.swing.JDialog {
     }
     
     public void showDialog(JasperPrint jasperPrint,String title){
-        viewReport(jasperPrint);
         this.setTitle(title);
+        viewReport(jasperPrint);
         this.setVisible(true);
     }
     

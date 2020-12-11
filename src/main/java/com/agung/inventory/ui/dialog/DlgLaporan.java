@@ -52,27 +52,27 @@ public class DlgLaporan extends javax.swing.JDialog {
         String pilih = (String) jComboBox1.getSelectedItem();
         switch (pilih) {
             case "Stok Barang":
-                cetakLaporanStokBarang();
+                generateItemReportStock();
                 setMode(false);
                 return;
             case "Barang Masuk":
-                cetakLaporanBarangMasuk();
+                generateInTransactionReport();
                 setMode(true);
                 return;
             case "Barang Keluar":
-                cetakLaporanBarangKeluar();
+                generateOutTransactionReport();
                 setMode(true);
         }
 
     }
 
-    private void cetakLaporanStokBarang() {
+    private void generateItemReportStock() {
         DlgViewLaporan.getSingleton()
                 .showDialog(AppContainer.getReportService().printLaporanStok(), "Laporan Barang");
 
     }
 
-    private void cetakLaporanBarangMasuk() {
+    private void generateInTransactionReport() {
         LocalDateTime mulai = DateUtil.toLocalDateTime(jDateChooser1.getDate());
         LocalDateTime sampai = DateUtil.toLocalDateTime(jDateChooser2.getDate());
         DlgViewLaporan.getSingleton()
@@ -80,7 +80,7 @@ public class DlgLaporan extends javax.swing.JDialog {
                         .generateLaporanTransaksi(mulai, sampai, ReportConstant.LAPORAN_BARANG_MASUK), "Laporan Barang Masuk");
     }
 
-    private void cetakLaporanBarangKeluar() {
+    private void generateOutTransactionReport() {
         LocalDateTime mulai = DateUtil.toLocalDateTime(jDateChooser1.getDate());
         LocalDateTime sampai = DateUtil.toLocalDateTime(jDateChooser2.getDate());
         DlgViewLaporan.getSingleton()
