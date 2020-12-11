@@ -93,8 +93,8 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
     private void refresh() {
 
         if(dateChooser.getDate() != null && dateChooser.getDateEditor().getUiComponent().isEnabled()){
-            String tanggal = new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate());
-            listBarangKeluars = AppContext.getTransactionService().findAllBarangKeluarByParam("tanggal", tanggal);
+            String date = new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate());
+            listBarangKeluars = AppContext.getTransactionService().findAllBarangKeluarByParam("tanggal", date);
         }
 
         if (!StringUtils.isEmpty(txtKode.getText())) {
@@ -168,7 +168,6 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         cmbCustomer = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        cmbPetugas = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -176,6 +175,7 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         chEnableDate = new javax.swing.JCheckBox();
+        cmbPetugas = new com.agung.inventory.ui.CustomComboUI();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -216,7 +216,7 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102));
@@ -245,8 +245,6 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        cmbPetugas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
 
         jButton2.setText("Buat Transaksi");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -278,6 +276,8 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
             }
         });
 
+        cmbPetugas.setEnableRightClick(java.lang.Boolean.FALSE);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -295,14 +295,14 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel4))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtKode, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
@@ -348,7 +348,7 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
                     .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
+                .addGap(4, 4, 4)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
@@ -369,12 +369,10 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
                             .addComponent(cmbCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {chEnableDate, cmbCustomer, dateChooser, jLabel1, jLabel2, jLabel3});
-
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cmbPetugas, jLabel4});
 
         jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton2, jButton3, jButton4});
 
@@ -499,7 +497,7 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox chEnableDate;
     private javax.swing.JComboBox<String> cmbCustomer;
-    private javax.swing.JComboBox<String> cmbPetugas;
+    private com.agung.inventory.ui.CustomComboUI cmbPetugas;
     private com.toedter.calendar.JDateChooser dateChooser;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
