@@ -358,7 +358,7 @@
                     <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="chEnableDateItemStateChanged"/>
                   </Events>
                 </Component>
-                <Component class="com.agung.inventory.ui.CustomComboUI" name="cmbPetugas">
+                <Component class="com.agung.inventory.ui.component.CustomComboUI" name="cmbPetugas">
                   <Properties>
                     <Property name="enableRightClick" type="java.lang.Boolean" value="false"/>
                   </Properties>

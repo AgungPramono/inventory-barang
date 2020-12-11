@@ -175,7 +175,7 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         chEnableDate = new javax.swing.JCheckBox();
-        cmbPetugas = new com.agung.inventory.ui.CustomComboUI();
+        cmbPetugas = new com.agung.inventory.ui.component.CustomComboUI();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -497,7 +497,7 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox chEnableDate;
     private javax.swing.JComboBox<String> cmbCustomer;
-    private com.agung.inventory.ui.CustomComboUI cmbPetugas;
+    private com.agung.inventory.ui.component.CustomComboUI cmbPetugas;
     private com.toedter.calendar.JDateChooser dateChooser;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
