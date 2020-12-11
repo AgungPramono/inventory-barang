@@ -5,7 +5,7 @@
  */
 package com.agung.inventory;
 
-import com.agung.inventory.config.AppContainer;
+import com.agung.inventory.config.AppContext;
 import com.agung.inventory.entity.BarangMasuk;
 import com.agung.inventory.entity.BarangMasukDetail;
 import java.util.List;
@@ -17,8 +17,8 @@ import java.util.List;
 public class MainSpringApp {
     
     public static void main(String[]args){
-        AppContainer.initContainer();
-        List<BarangMasuk> alList = AppContainer.getTransactionService().findAllBarangMasuk();
+        AppContext.initContainer();
+        List<BarangMasuk> alList = AppContext.getTransactionService().findAllBarangMasuk();
         for (BarangMasuk barangMasuk : alList) {
             System.out.println("id "+barangMasuk.getId()+" : "+barangMasuk.getPetugas().getNama());
             for(BarangMasukDetail bmd:barangMasuk.getBarangMasukDetails()){

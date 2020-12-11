@@ -5,7 +5,7 @@
  */
 package com.agung.inventory.ui.dialog;
 
-import com.agung.inventory.config.AppContainer;
+import com.agung.inventory.config.AppContext;
 import com.agung.inventory.entity.Pelanggan;
 import com.agung.inventory.ui.tablemodel.PelangganTableModel;
 import com.agung.inventory.util.TableUtil;
@@ -44,7 +44,7 @@ public class DlgPelanggan extends javax.swing.JDialog {
     }
 
     private void loadDataToTable() {
-        listPelanggans = AppContainer.getPelangganDao().cariSemua();
+        listPelanggans = AppContext.getPelangganDao().cariSemua();
         if (listPelanggans != null) {
             tblPelanggan.setModel(new PelangganTableModel(listPelanggans));
         } else {
@@ -340,7 +340,7 @@ public class DlgPelanggan extends javax.swing.JDialog {
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         loadFormToDomain();
         try {
-            AppContainer.getPelangganDao().simpan(pelanggan);
+            AppContext.getPelangganDao().simpan(pelanggan);
             clearForm();
             enableForm(false);
             loadDataToTable();
@@ -367,7 +367,7 @@ public class DlgPelanggan extends javax.swing.JDialog {
         if (tblPelanggan.getSelectedRow() >= 0 && pelanggan != null) {
             int retval = JOptionPane.showConfirmDialog(this, "Yakin Hapus?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
             if (retval == JOptionPane.YES_OPTION) {
-                AppContainer.getPelangganDao().deleteById(pelanggan);
+                AppContext.getPelangganDao().deleteById(pelanggan);
                 JOptionPane.showMessageDialog(this, "Berhasil Hapus", null, JOptionPane.INFORMATION_MESSAGE);
                 loadDataToTable();
             }

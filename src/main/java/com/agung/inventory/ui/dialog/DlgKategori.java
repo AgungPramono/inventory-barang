@@ -1,6 +1,6 @@
 package com.agung.inventory.ui.dialog;
 
-import com.agung.inventory.config.AppContainer;
+import com.agung.inventory.config.AppContext;
 import com.agung.inventory.entity.Kategori;
 import com.agung.inventory.ui.tablemodel.KategoriTableModel;
 import com.agung.inventory.util.TableUtil;
@@ -49,7 +49,7 @@ public class DlgKategori extends javax.swing.JDialog {
     }
 
     private void loadDataToTable() {
-        listKategori = AppContainer.getKategoriDao().cariSemua();
+        listKategori = AppContext.getKategoriDao().cariSemua();
         if (listKategori != null) {
             tblKategori.setModel(new KategoriTableModel(listKategori));
         } else {
@@ -325,7 +325,7 @@ public class DlgKategori extends javax.swing.JDialog {
             int retval = JOptionPane.showConfirmDialog(this, "Yakin Hapus?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (retval == JOptionPane.YES_OPTION) {
                 try {
-                   AppContainer.getKategoriDao().deleteById(kategori);
+                   AppContext.getKategoriDao().deleteById(kategori);
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(this, "Gagal Hapus", "Gagal", JOptionPane.ERROR_MESSAGE);
                     Logger.getLogger(DlgKategori.class.getName()).log(Level.SEVERE, null, ex);
@@ -338,7 +338,7 @@ public class DlgKategori extends javax.swing.JDialog {
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         try {
             loadFormToModel();
-            AppContainer.getKategoriDao().simpan(kategori);
+            AppContext.getKategoriDao().simpan(kategori);
             loadDataToTable();
             clearForm();
             enableForm(false);

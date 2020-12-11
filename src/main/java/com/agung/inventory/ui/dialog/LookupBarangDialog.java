@@ -5,7 +5,7 @@
  */
 package com.agung.inventory.ui.dialog;
 
-import com.agung.inventory.config.AppContainer;
+import com.agung.inventory.config.AppContext;
 import com.agung.inventory.entity.Barang;
 import com.agung.inventory.ui.tablemodel.BarangTableModel;
 import com.agung.inventory.util.TableUtil;
@@ -45,7 +45,7 @@ public class LookupBarangDialog extends javax.swing.JDialog {
     }
 
     private void refreshTable() {
-        listBarangs = AppContainer.getBarangDao().cariSemua();
+        listBarangs = AppContext.getBarangDao().cariSemua();
         loadDataToTable(listBarangs);
     }
 
@@ -56,10 +56,10 @@ public class LookupBarangDialog extends javax.swing.JDialog {
 
     private void search() {
         if (txtCari.getText().trim().length() > 3) {
-            listBarangs = AppContainer.getBarangDao().cariBarangByName(txtCari.getText());
+            listBarangs = AppContext.getBarangDao().cariBarangByName(txtCari.getText());
             loadDataToTable(listBarangs);
         } else if (txtCari.getText().equals("")) {
-            listBarangs = AppContainer.getBarangDao().cariSemua();
+            listBarangs = AppContext.getBarangDao().cariSemua();
             loadDataToTable(listBarangs);
         }
     }

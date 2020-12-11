@@ -6,7 +6,7 @@
 package com.agung.inventory.ui.dialog;
 
 import com.agung.inventory.Main;
-import com.agung.inventory.config.AppContainer;
+import com.agung.inventory.config.AppContext;
 import com.agung.inventory.entity.BarangKeluar;
 import com.agung.inventory.entity.Pelanggan;
 import com.agung.inventory.entity.Petugas;
@@ -57,11 +57,11 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
     }
 
     private void loadComboSupplier() {
-        cmbCustomer.setModel(new CustomerComboModel(AppContainer.getPelangganDao().cariSemua()));
+        cmbCustomer.setModel(new CustomerComboModel(AppContext.getPelangganDao().cariSemua()));
     }
 
     private void loadComboPetugas() {
-        cmbPetugas.setModel(new PetugasComboModel(AppContainer.getPetugasDao().cariSemua()));
+        cmbPetugas.setModel(new PetugasComboModel(AppContext.getPetugasDao().cariSemua()));
     }
 
     public static synchronized DlgListBarangKeluar getSingleton() {
@@ -77,7 +77,7 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
     }
 
     private void initDataTable() {
-        listBarangKeluars = AppContainer.getTransactionService().findAllBarangKeluar();
+        listBarangKeluars = AppContext.getTransactionService().findAllBarangKeluar();
         initTable(listBarangKeluars);
     }
 
@@ -94,29 +94,28 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
 
         if(dateChooser.getDate() != null && dateChooser.getDateEditor().getUiComponent().isEnabled()){
             String tanggal = new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate());
-            listBarangKeluars = AppContainer.getTransactionService().findAllBarangKeluarByParam("tanggal", tanggal);
+            listBarangKeluars = AppContext.getTransactionService().findAllBarangKeluarByParam("tanggal", tanggal);
         }
 
         if (!StringUtils.isEmpty(txtKode.getText())) {
-            listBarangKeluars = AppContainer.getTransactionService().findAllBarangKeluarByParam("kode", txtKode.getText());
+            listBarangKeluars = AppContext.getTransactionService().findAllBarangKeluarByParam("kode", txtKode.getText());
         }
 
         if (cmbCustomer.getSelectedItem() != null) {
             Pelanggan p = (Pelanggan) cmbCustomer.getSelectedItem();
-            listBarangKeluars = AppContainer.getTransactionService().findAllBarangKeluarByParam("pelanggan", p.getNama());
+            listBarangKeluars = AppContext.getTransactionService().findAllBarangKeluarByParam("pelanggan", p.getNama());
         }
 
         if (cmbPetugas.getSelectedItem() != null) {
             Petugas p = (Petugas) cmbPetugas.getSelectedItem();
-            listBarangKeluars = AppContainer.getTransactionService().findAllBarangKeluarByParam("petugas", p.getNama());
+            listBarangKeluars = AppContext.getTransactionService().findAllBarangKeluarByParam("petugas", p.getNama());
         }
 
         if (StringUtils.isEmpty(txtKode.getText())
-                && dateChooser.getDate() == null
                 && !dateChooser.isEnabled()
                 && cmbCustomer.getSelectedItem() == null
                 && cmbPetugas.getSelectedItem() == null) {
-            listBarangKeluars = AppContainer.getTransactionService().findAllBarangKeluar();
+            listBarangKeluars = AppContext.getTransactionService().findAllBarangKeluar();
         }
 
         initTable(listBarangKeluars);
@@ -478,7 +477,7 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
 
     private void printReport(Integer id) {
         DlgViewLaporan.getSingleton()
-                .showDialog(AppContainer.getReportService().generateLaporanKeluarById(id), null);
+                .showDialog(AppContext.getReportService().generateLaporanKeluarById(id), null);
     }
 
     private class TableSelection implements ListSelectionListener {

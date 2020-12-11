@@ -16,7 +16,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  *
  * @author agung
  */
-public class AppContainer {
+public class AppContext {
 
     private static TransactionService transactionService;
     private static ReportService reportService;

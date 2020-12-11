@@ -6,7 +6,7 @@
 package com.agung.inventory.ui.dialog;
 
 import com.agung.inventory.Main;
-import com.agung.inventory.config.AppContainer;
+import com.agung.inventory.config.AppContext;
 import com.agung.inventory.constan.ReportConstant;
 import com.agung.inventory.util.DateUtil;
 import java.time.LocalDateTime;
@@ -68,7 +68,7 @@ public class DlgLaporan extends javax.swing.JDialog {
 
     private void generateItemReportStock() {
         DlgViewLaporan.getSingleton()
-                .showDialog(AppContainer.getReportService().printLaporanStok(), "Laporan Barang");
+                .showDialog(AppContext.getReportService().printLaporanStok(), "Laporan Barang");
 
     }
 
@@ -76,7 +76,7 @@ public class DlgLaporan extends javax.swing.JDialog {
         LocalDateTime mulai = DateUtil.toLocalDateTime(jDateChooser1.getDate());
         LocalDateTime sampai = DateUtil.toLocalDateTime(jDateChooser2.getDate());
         DlgViewLaporan.getSingleton()
-                .showDialog(AppContainer.getReportService()
+                .showDialog(AppContext.getReportService()
                         .generateLaporanTransaksi(mulai, sampai, ReportConstant.LAPORAN_BARANG_MASUK), "Laporan Barang Masuk");
     }
 
@@ -84,7 +84,7 @@ public class DlgLaporan extends javax.swing.JDialog {
         LocalDateTime mulai = DateUtil.toLocalDateTime(jDateChooser1.getDate());
         LocalDateTime sampai = DateUtil.toLocalDateTime(jDateChooser2.getDate());
         DlgViewLaporan.getSingleton()
-                .showDialog(AppContainer.getReportService()
+                .showDialog(AppContext.getReportService()
                         .generateLaporanTransaksi(mulai, sampai, ReportConstant.LAPORAN_BARANG_KELUAR), "Laporan Barang Keluar");
 
     }

@@ -5,7 +5,7 @@
  */
 package com.agung.inventory.ui.dialog;
 
-import com.agung.inventory.config.AppContainer;
+import com.agung.inventory.config.AppContext;
 import com.agung.inventory.entity.BarangMasukDetail;
 import com.agung.inventory.entity.Petugas;
 import com.agung.inventory.ui.tablemodel.PetugasTableModel;
@@ -45,7 +45,7 @@ public class DlgPetugas extends javax.swing.JDialog {
     }
 
     private void loadDataToTable() {
-        listPetugas = AppContainer.getPetugasDao().cariSemua();
+        listPetugas = AppContext.getPetugasDao().cariSemua();
         if (listPetugas != null) {
             tblPetugas.setModel(new PetugasTableModel(listPetugas));
         } else {
@@ -358,7 +358,7 @@ public class DlgPetugas extends javax.swing.JDialog {
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         if (tblPetugas.getSelectedRow()>=0 && petugas != null){
-            AppContainer.getPetugasDao().deleteById(petugas);
+            AppContext.getPetugasDao().deleteById(petugas);
         }
     }//GEN-LAST:event_btnHapusActionPerformed
 
@@ -372,7 +372,7 @@ public class DlgPetugas extends javax.swing.JDialog {
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         loadFormToModel();
-        AppContainer.getPetugasDao().simpan(petugas);
+        AppContext.getPetugasDao().simpan(petugas);
         loadDataToTable();
         clearForm();
         enableForm(false);

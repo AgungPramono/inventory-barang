@@ -15,7 +15,7 @@ package com.agung.inventory.ui;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import com.agung.inventory.Main;
-import com.agung.inventory.config.AppContainer;
+import com.agung.inventory.config.AppContext;
 import com.agung.inventory.config.SecurityConfig;
 import com.agung.inventory.entity.Petugas;
 import com.agung.inventory.util.PasswordHelper;
@@ -58,7 +58,7 @@ public class LoginDialog extends javax.swing.JDialog {
         String userName = txtUsername.getText();
         String password = String.valueOf(txtPassword.getPassword());
 
-        Petugas petugas = AppContainer.getPetugasDao().cariByUsername(userName);
+        Petugas petugas = AppContext.getPetugasDao().cariByUsername(userName);
 
         if (petugas != null && password.equalsIgnoreCase(
                 PasswordHelper.getPlainTextFromEncryptedText(petugas.getPassword()))) {

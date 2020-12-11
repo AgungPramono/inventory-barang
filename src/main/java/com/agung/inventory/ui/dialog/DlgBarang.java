@@ -5,7 +5,7 @@
  */
 package com.agung.inventory.ui.dialog;
 
-import com.agung.inventory.config.AppContainer;
+import com.agung.inventory.config.AppContext;
 import com.agung.inventory.entity.Barang;
 import com.agung.inventory.entity.Kategori;
 import com.agung.inventory.ui.tablemodel.BarangTableModel;
@@ -49,7 +49,7 @@ public class DlgBarang extends javax.swing.JDialog {
 
     private void loadKategoriToCombo() {
         //            cmbKategori.removeAllItems();
-        listKategori = AppContainer.getKategoriDao().cariSemua();
+        listKategori = AppContext.getKategoriDao().cariSemua();
         cmbKategori.setModel(new KategoriComboModel(listKategori));
     }
 
@@ -61,7 +61,7 @@ public class DlgBarang extends javax.swing.JDialog {
     }
 
     private void loadDataToTable() {
-        listBarangs = AppContainer.getMasterService().findAllBarang();
+        listBarangs = AppContext.getMasterService().findAllBarang();
         if (listBarangs != null) {
             tblBarang.setModel(new BarangTableModel(listBarangs));
         } else {
@@ -91,7 +91,7 @@ public class DlgBarang extends javax.swing.JDialog {
 
     private void deleteProduct() throws SQLException {
         if (tblBarang.getSelectedRow() >= 0 && barang != null) {
-            AppContainer.getMasterService().delete(barang);
+            AppContext.getMasterService().delete(barang);
         }
     }
 
@@ -377,7 +377,7 @@ public class DlgBarang extends javax.swing.JDialog {
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         try {
             loadFormToModel();
-            AppContainer.getBarangDao().simpan(barang);
+            AppContext.getBarangDao().simpan(barang);
             loadDataToTable();
             clearForm();
             enableForm(false);

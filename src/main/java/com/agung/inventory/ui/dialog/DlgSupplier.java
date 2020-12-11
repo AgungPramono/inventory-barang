@@ -5,7 +5,7 @@
  */
 package com.agung.inventory.ui.dialog;
 
-import com.agung.inventory.config.AppContainer;
+import com.agung.inventory.config.AppContext;
 import com.agung.inventory.entity.Supplier;
 import com.agung.inventory.ui.tablemodel.SupplierTableModel;
 import com.agung.inventory.util.TableUtil;
@@ -43,7 +43,7 @@ public class DlgSupplier extends javax.swing.JDialog {
     }
 
     private void loadDataToTable() {
-        listSuppliers = AppContainer.getSupplierDao().cariSemua();
+        listSuppliers = AppContext.getSupplierDao().cariSemua();
         if (listSuppliers != null) {
             tblSupplier.setModel(new SupplierTableModel(listSuppliers));
         } else {
@@ -346,7 +346,7 @@ public class DlgSupplier extends javax.swing.JDialog {
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         loadFormToDomain();
-        AppContainer.getSupplierDao().simpan(supplier);
+        AppContext.getSupplierDao().simpan(supplier);
         loadDataToTable();
         clearForm();
         enableForm(false);
@@ -361,7 +361,7 @@ public class DlgSupplier extends javax.swing.JDialog {
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         if (tblSupplier.getSelectedRow() >= 0 && supplier != null) {
-            AppContainer.getSupplierDao().deleteById(supplier);
+            AppContext.getSupplierDao().deleteById(supplier);
             JOptionPane.showMessageDialog(this, "Berhasil Hapus", null, JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnHapusActionPerformed

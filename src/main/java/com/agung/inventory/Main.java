@@ -5,7 +5,7 @@
  */
 package com.agung.inventory;
 
-import com.agung.inventory.config.AppContainer;
+import com.agung.inventory.config.AppContext;
 import com.agung.inventory.config.SecurityConfig;
 import com.agung.inventory.ui.MainFrame;
 import com.jgoodies.looks.Options;
@@ -41,7 +41,7 @@ public class Main {
             public void run() {
                 try {
                     SystemInfo();
-                    AppContainer.initContainer();
+                    AppContext.initContainer();
                     PlasticLookAndFeel laf = new PlasticXPLookAndFeel();
                     PlasticLookAndFeel.setCurrentTheme(new ExperienceRoyale());
                     Options.setPopupDropShadowEnabled(true);

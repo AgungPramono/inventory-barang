@@ -5,7 +5,7 @@
  */
 package com.agung.inventory.ui.dialog;
 
-import com.agung.inventory.config.AppContainer;
+import com.agung.inventory.config.AppContext;
 import com.agung.inventory.config.SecurityConfig;
 import com.agung.inventory.entity.Barang;
 import com.agung.inventory.entity.BarangKeluar;
@@ -73,7 +73,7 @@ public class DlgBarangKeluar extends javax.swing.JDialog {
     }
 
     private void loadPelangganCombo() {
-         comboPelanggan.setModel(new PelangganComboModel(AppContainer.getPelangganDao().cariSemua()));
+         comboPelanggan.setModel(new PelangganComboModel(AppContext.getPelangganDao().cariSemua()));
     }
 
     private void refreshTable() {
@@ -421,7 +421,7 @@ public class DlgBarangKeluar extends javax.swing.JDialog {
         }
         loadFormToDomain();
         try {
-            AppContainer.getTransactionService().simpanBarangKeluar(barangKeluar);
+            AppContext.getTransactionService().simpanBarangKeluar(barangKeluar);
             clearForm();
             JOptionPane.showMessageDialog(this, "Data Berhasil disimpan!",
                     "Sukses", JOptionPane.INFORMATION_MESSAGE);
