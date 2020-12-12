@@ -31,8 +31,6 @@ public class KategoriDao implements BaseCrudDao<Kategori> {
     public void setDataSource(Connection dataSource) {
     }
 
-
-
     @Override
     public void simpan(Kategori t)throws SQLException{
         sessionFactory.getCurrentSession()

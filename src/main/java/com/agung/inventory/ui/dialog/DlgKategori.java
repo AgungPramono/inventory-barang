@@ -86,7 +86,7 @@ public class DlgKategori extends javax.swing.JDialog {
     private void simpan(){
         try {
             loadFormToModel();
-            AppContext.getMasterService().simpan(kategori);
+            AppContext.getMasterService().saveCategory(kategori);
             loadDataToTable();
             clearForm();
             enableForm(false);

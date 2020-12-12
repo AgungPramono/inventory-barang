@@ -9,13 +9,13 @@ import com.agung.inventory.config.AppContext;
 import com.agung.inventory.entity.Pelanggan;
 import com.agung.inventory.ui.tablemodel.PelangganTableModel;
 import com.agung.inventory.util.TableUtil;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -44,7 +44,7 @@ public class DlgPelanggan extends javax.swing.JDialog {
     }
 
     private void loadDataToTable() {
-        listPelanggans = AppContext.getPelangganDao().cariSemua();
+        listPelanggans = AppContext.getMasterService().findAllCustomer();
         if (listPelanggans != null) {
             tblPelanggan.setModel(new PelangganTableModel(listPelanggans));
         } else {
@@ -83,6 +83,39 @@ public class DlgPelanggan extends javax.swing.JDialog {
        txtNama.setEnabled(enable);
        txtAlamat.setEnabled(enable);
        txtTelepon.setEnabled(enable);
+       txtKode.requestFocus();
+    }
+
+    private void save(){
+        loadFormToDomain();
+        try {
+            AppContext.getMasterService().saveCustomer(pelanggan);
+            clearForm();
+            enableForm(false);
+            loadDataToTable();
+            JOptionPane.showMessageDialog(this, "Berhasil Simpan", null, JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException throwables) {
+            JOptionPane.showMessageDialog(this, "Gagal Hapus", null, JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void delete(){
+        if (tblPelanggan.getSelectedRow() >= 0 && pelanggan != null) {
+            int retval = JOptionPane.showConfirmDialog(this, "Yakin Hapus?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
+            if (retval == JOptionPane.YES_OPTION) {
+                AppContext.getMasterService().deleteCustomerById(pelanggan);
+                JOptionPane.showMessageDialog(this, "Berhasil Hapus", null, JOptionPane.INFORMATION_MESSAGE);
+                loadDataToTable();
+            }
+
+        }
+    }
+
+    private void edit(){
+        if (tblPelanggan.getSelectedRow() >= 0 && pelanggan != null) {
+            loadDomainToForm();
+            enableForm(true);
+        }
     }
 
     /**
@@ -338,16 +371,7 @@ public class DlgPelanggan extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBatalActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        loadFormToDomain();
-        try {
-            AppContext.getPelangganDao().simpan(pelanggan);
-            clearForm();
-            enableForm(false);
-            loadDataToTable();
-            JOptionPane.showMessageDialog(this, "Berhasil Simpan", null, JOptionPane.INFORMATION_MESSAGE);
-        } catch (SQLException throwables) {
-            JOptionPane.showMessageDialog(this, "Gagal Hapus", null, JOptionPane.ERROR_MESSAGE);
-        }
+       save();
 
     }//GEN-LAST:event_btnSimpanActionPerformed
 
@@ -357,22 +381,11 @@ public class DlgPelanggan extends javax.swing.JDialog {
     }//GEN-LAST:event_btnTambahActionPerformed
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
-        if (tblPelanggan.getSelectedRow() >= 0 && pelanggan != null) {
-            loadDomainToForm();
-            enableForm(true);
-        }
+        edit();
     }//GEN-LAST:event_btnUbahActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        if (tblPelanggan.getSelectedRow() >= 0 && pelanggan != null) {
-            int retval = JOptionPane.showConfirmDialog(this, "Yakin Hapus?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
-            if (retval == JOptionPane.YES_OPTION) {
-                AppContext.getPelangganDao().deleteById(pelanggan);
-                JOptionPane.showMessageDialog(this, "Berhasil Hapus", null, JOptionPane.INFORMATION_MESSAGE);
-                loadDataToTable();
-            }
-            
-        }
+       delete();
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private class TableSelection implements ListSelectionListener{

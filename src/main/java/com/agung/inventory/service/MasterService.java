@@ -1,11 +1,7 @@
 package com.agung.inventory.service;
 
-import com.agung.inventory.dao.BarangDao;
-import com.agung.inventory.dao.KategoriDao;
-import com.agung.inventory.dao.PetugasDao;
-import com.agung.inventory.entity.Barang;
-import com.agung.inventory.entity.Kategori;
-import com.agung.inventory.entity.Petugas;
+import com.agung.inventory.dao.*;
+import com.agung.inventory.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +21,12 @@ public class MasterService {
 
     @Autowired
     private KategoriDao kategoriDao;
+
+    @Autowired
+    private SupplierDao supplierDao;
+
+    @Autowired
+    private PelangganDao pelangganDao;
 
     public void saveBarang(Barang barang) throws SQLException {
         barangDao.simpan(barang);
@@ -49,7 +51,7 @@ public class MasterService {
         kategoriDao.deleteById(kategori);
     }
 
-    public void simpan(Kategori kategori) throws SQLException {
+    public void saveCategory(Kategori kategori) throws SQLException {
         kategoriDao.simpan(kategori);
     }
 
@@ -67,5 +69,29 @@ public class MasterService {
 
     public void saveEmployee(Petugas petugas) {
         petugasDao.simpan(petugas);
+    }
+
+    public List<Supplier> findAllSupplier() {
+        return supplierDao.cariSemua();
+    }
+
+    public void saveSupplier(Supplier supplier) {
+        supplierDao.simpan(supplier);
+    }
+
+    public void deleteSupplierById(Supplier supplier) {
+        supplierDao.deleteById(supplier);
+    }
+
+    public List<Pelanggan> findAllCustomer() {
+        return pelangganDao.cariSemua();
+    }
+
+    public void saveCustomer(Pelanggan pelanggan) throws SQLException {
+        pelangganDao.simpan(pelanggan);
+    }
+
+    public void deleteCustomerById(Pelanggan pelanggan) {
+        pelangganDao.deleteById(pelanggan);
     }
 }

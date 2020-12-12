@@ -8,18 +8,27 @@ package com.agung.inventory.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  *
  * @author agung
  */
 @Getter
 @Setter
-public class Pelanggan {
-    
-    private Integer id;
+@Entity
+@Table(name = "pelanggan")
+public class Pelanggan extends BaseEntity {
+
+    @Column(name = "kode", nullable = false, unique = true)
     private String kode;
+    @Column(name = "nama", nullable = false)
     private String nama;
+    @Column(name = "telepon", nullable = false)
     private String telepon;
+    @Column(name = "alamat", nullable = false)
     private String alamat;
 
     @Override

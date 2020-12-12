@@ -6,16 +6,13 @@
 package com.agung.inventory.dao;
 
 import com.agung.inventory.entity.Supplier;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.util.List;
-import javax.sql.DataSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-import org.springframework.stereotype.Repository;
 
 /**
  *
@@ -24,52 +21,41 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class SupplierDao implements BaseCrudDao<Supplier> {
-    
-    private final DataSource dataSource;
-    private final JdbcTemplate jdbcTemplate;
-    private final SimpleJdbcInsert simpleJdbcInsert;
-    
-    private static final String SQL_UPDATE_SUPPLIER = "update supplier set kode=?,nama=?,alamat=?,telepon=? where id=?";
-    private static final String SQL_SELECT_ALL_SUPPLIER = "select * from supplier";
-    private static final String SQL_DELETE_SUPPLIER = "delete from supplier where id=?";
+
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Autowired
     public SupplierDao(DataSource dataSource) {
-        this.dataSource = dataSource;
-        this.jdbcTemplate = new JdbcTemplate(this.dataSource);
-        this.simpleJdbcInsert = new SimpleJdbcInsert(this.dataSource)
-                .withTableName("supplier")
-                .usingGeneratedKeyColumns("id");
+
     }
 
     @Override
-    public void simpan(Supplier t) {
-        if (t.getId() == null) {
-            SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(t);
-            simpleJdbcInsert.execute(parameterSource);
-        } else {
-            jdbcTemplate.update(SQL_UPDATE_SUPPLIER,
-                    t.getKode(),
-                    t.getNama(),
-                    t.getAlamat(),
-                    t.getTelepon(),
-                    t.getId());
-        }
+    public void simpan(Supplier supplier) {
+        sessionFactory.getCurrentSession()
+                .saveOrUpdate(supplier);
     }
 
     @Override
     public Supplier cariById(Supplier t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (Supplier) sessionFactory.getCurrentSession()
+                .createQuery("select s from Supplier s where s.id= :id")
+                .setParameter("id", t.getId())
+                .uniqueResult();
     }
 
+
     @Override
-    public void deleteById(Supplier t) {
-        jdbcTemplate.update(SQL_DELETE_SUPPLIER, t.getId());
+    public void deleteById(Supplier supplier) {
+        sessionFactory.getCurrentSession()
+                .delete(supplier);
     }
 
     @Override
     public List<Supplier> cariSemua() {
-        return jdbcTemplate.query(SQL_SELECT_ALL_SUPPLIER, new BeanPropertyRowMapper(Supplier.class));
+        return sessionFactory.getCurrentSession()
+        .createQuery("from Supplier s")
+        .list();
     }
     
      
