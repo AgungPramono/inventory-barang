@@ -117,6 +117,26 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
         }
         return retval;
     }
+    
+    private void addBarang(){
+        Barang barang = new LookupBarangDialog().showDialog();
+        if (barang != null) {
+            txtNamaBarang.setText(barang.getKodeBarang() + "|" + barang.getNamaBarang());
+            boolean isBarangExist = false;
+            for (BarangMasukDetail bmd : barangMasukDetails) {
+                if (bmd.getBarang().getId().equals(barang.getId())) {
+                    bmd.setQty(bmd.getQty().add(BigDecimal.ONE));
+                    isBarangExist = true;
+                    break;
+                }
+            }
+            if (isBarangExist) {
+                refreshTable();
+            } else {
+                addBarangMasukDetail(barang);
+            }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -395,23 +415,7 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBarangActionPerformed
-        Barang barang = new LookupBarangDialog().showDialog();
-        if (barang != null) {
-            txtNamaBarang.setText(barang.getKodeBarang() + "|" + barang.getNamaBarang());
-            boolean isBarangExist = false;
-            for (BarangMasukDetail bmd : barangMasukDetails) {
-                if (bmd.getBarang().getId().equals(barang.getId())) {
-                    bmd.setQty(bmd.getQty().add(BigDecimal.ONE));
-                    isBarangExist = true;
-                    break;
-                }
-            }
-            if (isBarangExist) {
-                refreshTable();
-            } else {
-                addBarangMasukDetail(barang);
-            }
-        }
+        addBarang();
     }//GEN-LAST:event_btnAddBarangActionPerformed
 
     private void btnHapusSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusSemuaActionPerformed

@@ -25,25 +25,13 @@ public class BarangMasukRowMapper implements RowMapper<BarangMasuk>{
         bm.setKode(rs.getString("no_transaksi"));
         bm.setTanggalMasuk(rs.getTimestamp("tanggal").toLocalDateTime());
         
-//        Barang barang = new Barang();
-//        barang.setKodeBarang(rs.getString("kode"));
-//        barang.setNamaBarang(rs.getString("nama_barang"));
-////       
-//        
         Petugas p = new Petugas();
         p.setNama(rs.getString("nama_petugas"));
         bm.setPetugas(p);
-//        
+        
         Supplier s = new Supplier();
         s.setNama(rs.getString("nama_supplier"));
         bm.setSupplier(s);
-        
-//        BarangMasukDetail bmd = new BarangMasukDetail();
-//        bmd.setBarang(barang);
-//        bmd.setQty(rs.getBigDecimal("qty"));
-//        bmd.setBarangMasuk(bm);
-//        
-//        bm.getBarangMasukDetails().add(bmd);
         
         return bm;
     }
