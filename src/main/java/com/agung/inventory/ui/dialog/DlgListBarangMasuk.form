@@ -203,7 +203,7 @@
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cmbPetugas" min="-2" pref="221" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
@@ -253,11 +253,11 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel4" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cmbPetugas" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel4" linkSize="7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbPetugas" linkSize="7" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
@@ -267,13 +267,13 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="txtKode" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtKode" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel2" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel3" linkSize="2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cmbSupplier" linkSize="2" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel3" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cmbSupplier" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -315,18 +315,6 @@
                     <Property name="text" type="java.lang.String" value="Petugas"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="cmbSupplier">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="1">
-                        <StringItem index="0" value="-"/>
-                      </StringArray>
-                    </Property>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                  </AuxValues>
-                </Component>
                 <Component class="javax.swing.JButton" name="jButton1">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Refresh"/>
@@ -334,18 +322,6 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
                   </Events>
-                </Component>
-                <Component class="javax.swing.JComboBox" name="cmbPetugas">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="1">
-                        <StringItem index="0" value="-"/>
-                      </StringArray>
-                    </Property>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton2">
                   <Properties>
@@ -387,6 +363,10 @@
                   <Events>
                     <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="chEnableDate1ItemStateChanged"/>
                   </Events>
+                </Component>
+                <Component class="com.agung.inventory.ui.component.CustomComboUI" name="cmbPetugas">
+                </Component>
+                <Component class="com.agung.inventory.ui.component.CustomComboUI" name="cmbSupplier">
                 </Component>
               </SubComponents>
             </Container>

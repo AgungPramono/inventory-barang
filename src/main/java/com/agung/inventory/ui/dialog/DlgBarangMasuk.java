@@ -8,8 +8,8 @@ package com.agung.inventory.ui.dialog;
 import com.agung.inventory.config.AppContext;
 import com.agung.inventory.config.SecurityConfig;
 import com.agung.inventory.entity.*;
-import com.agung.inventory.ui.tablemodel.BarangMasukTableModel;
 import com.agung.inventory.ui.combo.model.SupplierComboModel;
+import com.agung.inventory.ui.tablemodel.BarangMasukTableModel;
 import com.agung.inventory.util.DateUtil;
 import com.agung.inventory.util.NumberUtil;
 import com.agung.inventory.util.TableUtil;
@@ -135,7 +135,6 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtPetugas = new javax.swing.JTextField();
-        cmbSupplier = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         txtNamaBarang = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -148,6 +147,7 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
         jButton5 = new javax.swing.JButton();
         txtKodeTransaksi = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        cmbSupplier = new com.agung.inventory.ui.component.CustomComboUI();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -183,13 +183,6 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
         jLabel4.setText("Tanggal");
 
         txtPetugas.setEnabled(false);
-
-        cmbSupplier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
-        cmbSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cmbSupplierMouseClicked(evt);
-            }
-        });
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
@@ -317,10 +310,10 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cmbSupplier, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addComponent(cmbSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtKodeTransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -331,11 +324,11 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
                         .addGap(9, 9, 9))))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmbSupplier, txtPetugas});
-
         jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel5});
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton4, jButton5});
+
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmbSupplier, txtPetugas});
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -464,10 +457,6 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
        this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void cmbSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbSupplierMouseClicked
-       
-    }//GEN-LAST:event_cmbSupplierMouseClicked
-
     private class TableSelection implements ListSelectionListener {
 
         @Override
@@ -487,7 +476,7 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
     private javax.swing.JButton btnAddBarang;
     private javax.swing.JButton btnHapusDipilih;
     private javax.swing.JButton btnHapusSemua;
-    private javax.swing.JComboBox<String> cmbSupplier;
+    private com.agung.inventory.ui.component.CustomComboUI cmbSupplier;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;

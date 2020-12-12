@@ -119,22 +119,15 @@
                                   <Component id="jLabel3" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="comboPelanggan" linkSize="2" max="32767" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="txtPetugas" linkSize="2" pref="242" max="32767" attributes="0"/>
-                                          <Component id="txtKode" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jdate" min="-2" pref="183" max="-2" attributes="0"/>
-                                  </Group>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtPetugas" linkSize="10" pref="242" max="32767" attributes="0"/>
+                                  <Component id="txtKode" max="32767" attributes="0"/>
+                                  <Component id="cmbPelanggan" linkSize="10" max="32767" attributes="0"/>
                               </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jdate" min="-2" pref="183" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -173,7 +166,7 @@
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="comboPelanggan" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbPelanggan" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="jPanel4" max="32767" attributes="0"/>
@@ -213,16 +206,6 @@
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="comboPelanggan">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
             </Component>
             <Container class="javax.swing.JPanel" name="jPanel4">
               <Properties>
@@ -361,6 +344,8 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="No. Transaksi"/>
               </Properties>
+            </Component>
+            <Component class="com.agung.inventory.ui.component.CustomComboUI" name="cmbPelanggan">
             </Component>
           </SubComponents>
         </Container>

@@ -182,9 +182,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
         txtKode = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        cmbSupplier = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        cmbPetugas = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -192,6 +190,8 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         chEnableDate1 = new javax.swing.JCheckBox();
+        cmbPetugas = new com.agung.inventory.ui.component.CustomComboUI();
+        cmbSupplier = new com.agung.inventory.ui.component.CustomComboUI();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -269,16 +269,12 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
 
         jLabel4.setText("Petugas");
 
-        cmbSupplier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
-
         jButton1.setText("Refresh");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        cmbPetugas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
 
         jButton2.setText("Buat Transaksi");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -327,12 +323,12 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
                     .addComponent(txtKode)
-                    .addComponent(cmbSupplier, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cmbSupplier, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(342, 342, 342)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmbPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -377,7 +373,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
                     .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
+                .addGap(2, 2, 2)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
@@ -392,7 +388,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
                             .addComponent(txtKode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(cmbSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -400,11 +396,11 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {chEnableDate1, cmbSupplier, dateChooser, jLabel1, jLabel2, jLabel3});
-
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cmbPetugas, jLabel4});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {chEnableDate1, cmbSupplier, dateChooser, jLabel1, jLabel2, jLabel3, txtKode});
 
         jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton2, jButton3, jButton4});
+
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cmbPetugas, jLabel4});
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -523,8 +519,8 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox chEnableDate1;
-    private javax.swing.JComboBox<String> cmbPetugas;
-    private javax.swing.JComboBox<String> cmbSupplier;
+    private com.agung.inventory.ui.component.CustomComboUI cmbPetugas;
+    private com.agung.inventory.ui.component.CustomComboUI cmbSupplier;
     private com.toedter.calendar.JDateChooser dateChooser;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
