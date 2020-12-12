@@ -15,8 +15,6 @@ import com.agung.inventory.ui.combo.model.PetugasComboModel;
 import com.agung.inventory.ui.tablemodel.BarangKeluarTableModelMaster;
 import com.agung.inventory.util.DateUtil;
 import com.agung.inventory.util.TableUtil;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -50,7 +48,6 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
         dateChooser.setDate(DateUtil.toDate(dateNow));
         loadComboSupplier();
         loadComboPetugas();
-        addComboMouseListener();
         chEnableDate.setSelected(false);
         dateChooser.setEnabled(false);
         dateChooser.setDate(new Date());
@@ -119,29 +116,6 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
         }
 
         initTable(listBarangKeluars);
-    }
-
-    private void addComboMouseListener() {
-        cmbCustomer.getComponent(0).addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON3) {
-                    cmbCustomer.setSelectedItem(null);
-                    cmbCustomer.repaint();
-                }
-            }
-        });
-
-        cmbPetugas.getComponent(0).addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON3) {
-                    cmbPetugas.setSelectedItem(null);
-                    cmbPetugas.repaint();
-                }
-            }
-
-        });
     }
 
     /**
