@@ -1,11 +1,9 @@
 package com.agung.inventory.service;
 
 import com.agung.inventory.dao.BarangDao;
-import com.agung.inventory.dao.BarangMasukDetailDao;
 import com.agung.inventory.dao.KategoriDao;
 import com.agung.inventory.dao.PetugasDao;
 import com.agung.inventory.entity.Barang;
-import com.agung.inventory.entity.BarangMasukDetail;
 import com.agung.inventory.entity.Kategori;
 import com.agung.inventory.entity.Petugas;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +18,6 @@ import java.util.List;
 public class MasterService {
 
     @Autowired
-    private BarangMasukDetailDao barangMasukDetailDao;
-
-    @Autowired
     private BarangDao barangDao;
 
     @Autowired
@@ -31,12 +26,8 @@ public class MasterService {
     @Autowired
     private KategoriDao kategoriDao;
 
-    public void save(Barang barang) throws SQLException {
+    public void saveBarang(Barang barang) throws SQLException {
         barangDao.simpan(barang);
-    }
-
-    public List<BarangMasukDetail> findAll(){
-        return barangMasukDetailDao.cariSemua();
     }
 
     public List<Barang> findAllBarang(){
@@ -50,17 +41,8 @@ public class MasterService {
         barangDao.deleteById(barang);
     }
 
-    public Petugas findPetugasByUsername(String username){
-        return petugasDao.cariByUsername(username);
-    }
-
-
-    public List<Kategori> cariSemua() {
+    public List<Kategori> findAllCategori() {
         return kategoriDao.cariSemua();
-    }
-
-    public void simpan(Barang barang) throws SQLException {
-        barangDao.simpan(barang);
     }
 
     public void deleteById(Kategori kategori) throws SQLException {
@@ -69,5 +51,21 @@ public class MasterService {
 
     public void simpan(Kategori kategori) throws SQLException {
         kategoriDao.simpan(kategori);
+    }
+
+    public Petugas findEmployeeByUsername(String username){
+        return petugasDao.cariByUsername(username);
+    }
+
+    public List<Petugas> findAllEmployee() {
+        return petugasDao.cariSemua();
+    }
+
+    public void deleteEmployee(Petugas petugas) {
+        petugasDao.deleteById(petugas);
+    }
+
+    public void saveEmployee(Petugas petugas) {
+        petugasDao.simpan(petugas);
     }
 }

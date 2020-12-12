@@ -59,7 +59,7 @@ public class LoginDialog extends javax.swing.JDialog {
         String userName = txtUsername.getText();
         String password = String.valueOf(txtPassword.getPassword());
 
-        Petugas petugas = AppContext.getMasterService().findPetugasByUsername(userName);
+        Petugas petugas = AppContext.getMasterService().findEmployeeByUsername(userName);
 
         if (petugas != null && password.equalsIgnoreCase(
                 PasswordHelper.getPlainTextFromEncryptedText(petugas.getPassword()))) {

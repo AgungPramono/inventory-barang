@@ -48,7 +48,7 @@ public class DlgBarang extends javax.swing.JDialog {
     }
 
     private void loadKategoriToCombo() {
-        listKategori = AppContext.getMasterService().cariSemua();
+        listKategori = AppContext.getMasterService().findAllCategori();
         cmbKategori.setModel(new KategoriComboModel(listKategori));
     }
 
@@ -123,7 +123,7 @@ public class DlgBarang extends javax.swing.JDialog {
     private void simpan(){
          try {
             loadFormToModel();
-            AppContext.getMasterService().simpan(barang);
+            AppContext.getMasterService().saveBarang(barang);
             loadDataToTable();
             clearForm();
             enableForm(false);

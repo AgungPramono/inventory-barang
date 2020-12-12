@@ -49,7 +49,7 @@ public class DlgKategori extends javax.swing.JDialog {
     }
 
     private void loadDataToTable() {
-        listKategori = AppContext.getMasterService().cariSemua();
+        listKategori = AppContext.getMasterService().findAllCategori();
         if (listKategori != null) {
             tblKategori.setModel(new KategoriTableModel(listKategori));
         } else {

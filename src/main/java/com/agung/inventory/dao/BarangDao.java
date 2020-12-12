@@ -33,17 +33,6 @@ public class BarangDao implements BaseCrudDao<Barang> {
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
 
-    private static final String SQL_SIMPAN = "insert into barang (id_kategori,kode,nama,qty,keterangan) "
-            + "values (?,?,?,?,?)";
-    private final String SQL_UPDATE = "update barang set id_kategori=?,kode=?,nama=?,qty=?,keterangan=? where id=? ";
-    private final String SQL_DELETE_BY_ID = "delete from barang where id=?";
-    private final String SQL_FIND_BY_ID = "select b.*,k.* from barang b inner join kategori k on b.id_kategori = k.id "
-            + "where b.id=?";
-    private final String SQL_FIND_BY_NAME = "select b.*,k.* from barang b inner join kategori k on b.id_kategori = k.id "
-            + "where b.nama like lower(?)";
-    private final String SQL_FIND_ALL = "select b.*,k.* from barang b inner join kategori k on b.id_kategori = k.id";
-    private final String SQL_UPDATE_QTY = "update barang set qty=? where id=?";
-
     @Autowired
     public void setDataSource(DataSource dataSource){
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -57,7 +46,10 @@ public class BarangDao implements BaseCrudDao<Barang> {
 
     @Override
     public Barang cariById(Barang barang) {
-        return jdbcTemplate.queryForObject(SQL_FIND_BY_ID, new Object[]{barang.getId()}, new BarangRowMapper());
+       return (Barang) sessionFactory.getCurrentSession()
+               .createQuery("select b from Barang b where b.id= :id")
+               .setParameter("id", barang.getId())
+               .uniqueResult();
     }
 
     @Override
@@ -66,7 +58,8 @@ public class BarangDao implements BaseCrudDao<Barang> {
     }
 
     public void updateQty(Barang b) throws SQLException {
-        jdbcTemplate.update(SQL_UPDATE_QTY, b.getQty(), b.getId());
+        sessionFactory.getCurrentSession()
+                .saveOrUpdate(b);
     }
 
     @Override
@@ -81,7 +74,9 @@ public class BarangDao implements BaseCrudDao<Barang> {
     }
 
     public List<Barang> cariBarangByName(String text) {
-        return jdbcTemplate.query(SQL_FIND_BY_NAME, new Object[]{"%"+text.toLowerCase()+"%"},new BarangRowMapper());
+        return sessionFactory.getCurrentSession()
+                .createQuery("select b from Barang b where b.nama= :nama")
+                .setParameter("nama", text).list();
     }
 
     private class BarangRowMapper implements RowMapper<Barang> {

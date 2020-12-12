@@ -45,7 +45,7 @@ public class DlgPetugas extends javax.swing.JDialog {
     }
 
     private void loadDataToTable() {
-        listPetugas = AppContext.getPetugasDao().cariSemua();
+        listPetugas = AppContext.getMasterService().findAllEmployee();
         if (listPetugas != null) {
             tblPetugas.setModel(new PetugasTableModel(listPetugas));
         } else {
@@ -358,7 +358,7 @@ public class DlgPetugas extends javax.swing.JDialog {
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         if (tblPetugas.getSelectedRow()>=0 && petugas != null){
-            AppContext.getPetugasDao().deleteById(petugas);
+            AppContext.getMasterService().deleteEmployee(petugas);
         }
     }//GEN-LAST:event_btnHapusActionPerformed
 
@@ -372,7 +372,7 @@ public class DlgPetugas extends javax.swing.JDialog {
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         loadFormToModel();
-        AppContext.getPetugasDao().simpan(petugas);
+        AppContext.getMasterService().saveEmployee(petugas);
         loadDataToTable();
         clearForm();
         enableForm(false);
