@@ -17,8 +17,6 @@ import com.agung.inventory.ui.tablemodel.BarangMasukDetailTableModel;
 import com.agung.inventory.ui.tablemodel.BarangMasukTableModelMaster;
 import com.agung.inventory.util.DateUtil;
 import com.agung.inventory.util.TableUtil;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -53,7 +51,6 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
         dateChooser.setDate(DateUtil.toDate(dateNow));
         loadComboSupplier();
         loadComboPetugas();
-        addComboMouseListener();
         chEnableDate1.setSelected(false);
         dateChooser.setEnabled(false);
         dateChooser.setDate(null);
@@ -132,30 +129,6 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
             barangMasukDetailTableModel.setData(new ArrayList<>());
             tlbDetail.setModel(barangMasukDetailTableModel);
         }
-    }
-
-    private void addComboMouseListener() {
-        cmbSupplier.getComponent(0).addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON3) {
-                    cmbSupplier.setSelectedItem(null);
-                    cmbSupplier.repaint();
-                }
-            }
-
-        });
-
-        cmbPetugas.getComponent(0).addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON3) {
-                    cmbPetugas.setSelectedItem(null);
-                    cmbPetugas.repaint();
-                }
-            }
-
-        });
     }
 
     /**
