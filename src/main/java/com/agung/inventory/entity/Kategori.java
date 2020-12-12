@@ -5,6 +5,9 @@
  */
 package com.agung.inventory.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,10 +17,14 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class Kategori {
+@Entity
+@Table(name = "kategori")
+public class Kategori extends BaseEntity{
     
-    private Integer id;
+    @Column(name = "kode", nullable = false)
     private String kode;
+    
+    @Column(name = "nama", nullable = false)
     private String nama;
 
     @Override

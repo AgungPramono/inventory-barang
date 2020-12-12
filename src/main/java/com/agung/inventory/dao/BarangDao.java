@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import javax.sql.DataSource;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -25,6 +26,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BarangDao implements BaseCrudDao<Barang> {
+    
+    @Autowired
+    private SessionFactory sessionFactory;
 
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
@@ -86,7 +90,9 @@ public class BarangDao implements BaseCrudDao<Barang> {
 
     @Override
     public List<Barang> cariSemua() {
-        return jdbcTemplate.query(SQL_FIND_ALL, new BarangRowMapper());
+        return sessionFactory.getCurrentSession()
+                .createQuery("from Barang b")
+                .list();
     }
 
     @Override

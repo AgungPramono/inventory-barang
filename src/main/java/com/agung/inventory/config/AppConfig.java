@@ -5,12 +5,21 @@
  */
 package com.agung.inventory.config;
 
-import com.agung.inventory.db.ConnectionHelper;
+import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import java.io.IOException;
+import java.util.Properties;
+import javax.sql.DataSource;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -18,20 +27,71 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author agung
  */
 @Configuration
+@PropertySource("classpath:/config/jdbc.poperties")
 @ComponentScan(basePackages = {"com.agung.inventory"})
 @EnableTransactionManagement
 public class AppConfig {
     
-    @Bean("dataSource")
-    public HikariDataSource dataSource(){
-        return ConnectionHelper.getDataSource();
-    }
+    @Value("${jdbc.driver}")
+    private String jdbcDriver;
+    @Value("${jdbc.url}")
+    private String jdbcUrl;
+    @Value("${jdbc.username}")
+    private String jdbcUsername;
+    @Value("${jdbc.password}")
+    private String jdbcPassword;
     
+    @Value("${hibernate.dialect}")
+    private String hibernateDialect;
+    @Value("${hibernate.hbm2ddl.auto}")
+    private String hibernateHbbml;
+    @Value("${hibernate.show_sql}")
+    private String hibernateShowSQL;
+    @Value("${hibernate.format_sql}")
+    private String hibernateFormatSQL;
+
     @Bean
-    public DataSourceTransactionManager transactionManager(){
-        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
-        transactionManager.setDataSource(dataSource());
+    public LocalSessionFactoryBean sessionFactory() throws IOException {
+        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory.setDataSource(dataSource());
+        sessionFactory.setPackagesToScan(new String[]{"com.agung.inventory.entity"});
+        sessionFactory.setHibernateProperties(initProperties());
+        return sessionFactory;
+    }
+
+    @Bean
+    public DataSource dataSource() {
+        HikariConfig datasourceConfig = new HikariConfig();
+        datasourceConfig.setDriverClassName(jdbcDriver);
+        datasourceConfig.setJdbcUrl(jdbcUrl);
+        datasourceConfig.setUsername(jdbcUsername);
+        datasourceConfig.setPassword(jdbcPassword);
+        datasourceConfig.getMetricRegistry();
+        datasourceConfig.setMaxLifetime(30000);
+        datasourceConfig.setMinimumIdle(10);
+        datasourceConfig.setMaximumPoolSize(80);
+        datasourceConfig.addDataSourceProperty( "cachePrepStmts" , "true" );
+        datasourceConfig.addDataSourceProperty( "prepStmtCacheSize" , "250" );
+        datasourceConfig.addDataSourceProperty( "prepStmtCacheSqlLimit" , "2048" );
+
+        return new HikariDataSource(datasourceConfig);
+    }
+
+    @Bean
+    @Autowired
+    public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+        transactionManager.setSessionFactory(sessionFactory);
         return transactionManager;
+    }
+
+    public Properties initProperties() {
+        Properties props = new Properties();
+        props.put("hibernate.dialect", hibernateDialect);
+        props.put("hibernate.hbm2ddl.auto", hibernateHbbml);
+        props.put("hibernate.show_sql", hibernateShowSQL);
+        props.put("hibernate.format_sql", hibernateFormatSQL);
+        return props;
     }
 
 }

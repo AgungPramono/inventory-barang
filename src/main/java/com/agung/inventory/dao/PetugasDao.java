@@ -9,6 +9,7 @@ import com.agung.inventory.entity.Petugas;
 import java.sql.Connection;
 import java.util.List;
 import javax.sql.DataSource;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -24,6 +25,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class PetugasDao implements BaseCrudDao<Petugas> {
+    
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
@@ -84,7 +88,10 @@ public class PetugasDao implements BaseCrudDao<Petugas> {
     }
 
     public Petugas cariByUsername(String userName) {
-        return (Petugas) jdbcTemplate.queryForObject(SQL_FIND_BY_USERNAME, new Object[]{userName}, new BeanPropertyRowMapper(Petugas.class));
+        return (Petugas) sessionFactory.getCurrentSession()
+                .createQuery("from Petugas p where p.username= :username")
+                .setParameter("username", userName)
+                .uniqueResult();
     }
 
 }
