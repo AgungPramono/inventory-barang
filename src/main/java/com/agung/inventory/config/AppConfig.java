@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author agung
  */
 @Configuration
-@PropertySource("classpath:/config/jdbc.poperties")
+@PropertySource("classpath:jdbc.properties")
 @ComponentScan(basePackages = {"com.agung.inventory"})
 @EnableTransactionManagement
 public class AppConfig {

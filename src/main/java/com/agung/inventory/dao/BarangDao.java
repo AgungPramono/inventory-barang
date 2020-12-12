@@ -7,24 +7,24 @@ package com.agung.inventory.dao;
 
 import com.agung.inventory.entity.Barang;
 import com.agung.inventory.entity.Kategori;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-import javax.sql.DataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
  * @author agung
  */
 
-@Component
+@Repository
 public class BarangDao implements BaseCrudDao<Barang> {
     
     @Autowired
@@ -51,27 +51,8 @@ public class BarangDao implements BaseCrudDao<Barang> {
 
     @Override
     public void simpan(Barang barang) throws SQLException {
-        if (barang.getId() == null) {
-            jdbcTemplate.update((Connection con) -> {
-                PreparedStatement ps = con.prepareStatement(SQL_SIMPAN);
-                ps.setInt(1, barang.getKategori().getId());
-                ps.setString(2, barang.getKodeBarang());
-                ps.setString(3, barang.getNamaBarang());
-                ps.setBigDecimal(4, barang.getQty());
-                ps.setString(5, barang.getKeterangan());
-                return ps;
-            });
-        } else {
-            jdbcTemplate.update((Connection con) -> {
-                PreparedStatement ps = con.prepareStatement(SQL_UPDATE);
-                ps.setInt(1, barang.getKategori().getId());
-                ps.setString(2, barang.getKodeBarang());
-                ps.setString(3, barang.getNamaBarang());
-                ps.setBigDecimal(4, barang.getQty());
-                ps.setString(5, barang.getKeterangan());
-                ps.setInt(6, barang.getId());
-                return ps;});
-        }
+        sessionFactory.getCurrentSession()
+                .saveOrUpdate(barang);
     }
 
     @Override
@@ -81,7 +62,7 @@ public class BarangDao implements BaseCrudDao<Barang> {
 
     @Override
     public void deleteById(Barang barang) {
-        jdbcTemplate.update(SQL_DELETE_BY_ID, barang.getId());
+        sessionFactory.getCurrentSession().delete(barang);
     }
 
     public void updateQty(Barang b) throws SQLException {

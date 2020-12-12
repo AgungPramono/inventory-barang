@@ -19,8 +19,9 @@ import com.agung.inventory.config.AppContext;
 import com.agung.inventory.config.SecurityConfig;
 import com.agung.inventory.entity.Petugas;
 import com.agung.inventory.util.PasswordHelper;
+
+import javax.swing.*;
 import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -58,7 +59,7 @@ public class LoginDialog extends javax.swing.JDialog {
         String userName = txtUsername.getText();
         String password = String.valueOf(txtPassword.getPassword());
 
-        Petugas petugas = AppContext.getPetugasDao().cariByUsername(userName);
+        Petugas petugas = AppContext.getMasterService().findPetugasByUsername(userName);
 
         if (petugas != null && password.equalsIgnoreCase(
                 PasswordHelper.getPlainTextFromEncryptedText(petugas.getPassword()))) {
@@ -255,6 +256,7 @@ public class LoginDialog extends javax.swing.JDialog {
                     txtUsername.requestFocus();
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 LOG.error(e.getMessage());
             }
         }

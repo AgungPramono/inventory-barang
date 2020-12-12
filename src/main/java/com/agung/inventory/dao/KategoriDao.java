@@ -6,20 +6,18 @@
 package com.agung.inventory.dao;
 
 import com.agung.inventory.entity.Kategori;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
+
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import javax.sql.DataSource;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-import org.springframework.stereotype.Repository;
 
 /**
  *
@@ -57,15 +55,8 @@ public class KategoriDao implements BaseCrudDao<Kategori> {
 
     @Override
     public void simpan(Kategori t)throws SQLException{
-        if (t.getId() == null) {
-            SqlParameterSource params = new BeanPropertySqlParameterSource(t);
-            simpleJdbcInsert.execute(params);
-        } else {
-            jdbcTemplate.update(SQL_UPDATE_KATEGORI,
-                    t.getKode(),
-                    t.getNama(),
-                    t.getId());
-        }
+        sessionFactory.getCurrentSession()
+                .saveOrUpdate(t);
     }
 
     @Override
@@ -75,13 +66,16 @@ public class KategoriDao implements BaseCrudDao<Kategori> {
 
     @Override
     public void deleteById(Kategori t) throws SQLException{
-        jdbcTemplate.update(SQL_DELETE_KATEGORI, t.getId());
+        sessionFactory.getCurrentSession()
+                .delete(t);
     }
 
 
     @Override
     public List<Kategori> cariSemua() {
-        return jdbcTemplate.query(SQL_SELECT_ALL_KATEGORI, new BeanPropertyRowMapper(Kategori.class));
+        return sessionFactory.getCurrentSession()
+                .createQuery("from Kategori k")
+                .list();
     }
 
     private class KategoriRowMapper implements RowMapper<Kategori> {

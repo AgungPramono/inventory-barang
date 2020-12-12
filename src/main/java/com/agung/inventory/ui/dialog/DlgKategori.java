@@ -4,15 +4,15 @@ import com.agung.inventory.config.AppContext;
 import com.agung.inventory.entity.Kategori;
 import com.agung.inventory.ui.tablemodel.KategoriTableModel;
 import com.agung.inventory.util.TableUtil;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -49,7 +49,7 @@ public class DlgKategori extends javax.swing.JDialog {
     }
 
     private void loadDataToTable() {
-        listKategori = AppContext.getKategoriDao().cariSemua();
+        listKategori = AppContext.getMasterService().cariSemua();
         if (listKategori != null) {
             tblKategori.setModel(new KategoriTableModel(listKategori));
         } else {
@@ -82,6 +82,42 @@ public class DlgKategori extends javax.swing.JDialog {
         kategori = null;
     }
 
+
+    private void simpan(){
+        try {
+            loadFormToModel();
+            AppContext.getMasterService().simpan(kategori);
+            loadDataToTable();
+            clearForm();
+            enableForm(false);
+            JOptionPane.showMessageDialog(this, "Berhasil Simpan", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Gagal Simpan", "Gagal", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(DlgKategori.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void hapus(){
+        if (tblKategori.getSelectedRow() >= 0 && kategori != null) {
+            int retval = JOptionPane.showConfirmDialog(this, "Yakin Hapus?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (retval == JOptionPane.YES_OPTION) {
+                try {
+                    AppContext.getMasterService().deleteById(kategori);
+                    loadDataToTable();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(this, "Gagal Hapus", "Gagal", JOptionPane.ERROR_MESSAGE);
+                    Logger.getLogger(DlgKategori.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    private void edit(){
+        if (tblKategori.getSelectedRow() >= 0 && kategori != null) {
+            loadModelToForm();
+            enableForm(true);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -314,39 +350,16 @@ public class DlgKategori extends javax.swing.JDialog {
     }//GEN-LAST:event_btnTambahActionPerformed
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
-        if (tblKategori.getSelectedRow() >= 0 && kategori != null) {
-            loadModelToForm();
-            enableForm(true);
-        }
+      edit();
     }//GEN-LAST:event_btnUbahActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        if (tblKategori.getSelectedRow() >= 0 && kategori != null) {
-            int retval = JOptionPane.showConfirmDialog(this, "Yakin Hapus?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
-            if (retval == JOptionPane.YES_OPTION) {
-                try {
-                   AppContext.getKategoriDao().deleteById(kategori);
-                } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(this, "Gagal Hapus", "Gagal", JOptionPane.ERROR_MESSAGE);
-                    Logger.getLogger(DlgKategori.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
+       hapus();
 
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        try {
-            loadFormToModel();
-            AppContext.getKategoriDao().simpan(kategori);
-            loadDataToTable();
-            clearForm();
-            enableForm(false);
-            JOptionPane.showMessageDialog(this, "Berhasil Simpan", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Gagal Simpan", "Gagal", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(DlgKategori.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        simpan();
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private class TableSelection implements ListSelectionListener {

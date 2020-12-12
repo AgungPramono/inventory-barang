@@ -86,3 +86,8 @@ create table barang_keluar_detail(
      constraint fk_out_barang_id foreign key (id_barang) references barang (id)
 );
 
+create table hibernate_sequence (
+        next_val bigint
+    );
+
+insert into hibernate_sequence values ( 1 );

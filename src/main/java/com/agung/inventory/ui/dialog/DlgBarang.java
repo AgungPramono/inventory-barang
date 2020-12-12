@@ -11,16 +11,16 @@ import com.agung.inventory.entity.Kategori;
 import com.agung.inventory.ui.combo.model.KategoriComboModel;
 import com.agung.inventory.ui.tablemodel.BarangTableModel;
 import com.agung.inventory.util.TableUtil;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -48,7 +48,7 @@ public class DlgBarang extends javax.swing.JDialog {
     }
 
     private void loadKategoriToCombo() {
-        listKategori = AppContext.getKategoriDao().cariSemua();
+        listKategori = AppContext.getMasterService().cariSemua();
         cmbKategori.setModel(new KategoriComboModel(listKategori));
     }
 
@@ -123,7 +123,7 @@ public class DlgBarang extends javax.swing.JDialog {
     private void simpan(){
          try {
             loadFormToModel();
-            AppContext.getBarangDao().simpan(barang);
+            AppContext.getMasterService().simpan(barang);
             loadDataToTable();
             clearForm();
             enableForm(false);

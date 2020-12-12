@@ -32,7 +32,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         loadDataToTable();
-        autoRefreshData();
+//        autoRefreshData();
     }
     
     public JLabel getTxtUser(){

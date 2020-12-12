@@ -18,7 +18,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author agung
  */
 public class Main {
@@ -50,8 +49,8 @@ public class Main {
                     SecurityConfig.initLogin();
                 } catch (Exception ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                    if (ex.getMessage().contains("Connection refused: connect")){
-                        JOptionPane.showMessageDialog(getMainFrame(),"Error","Gagal koneksi ke database ", JOptionPane.ERROR_MESSAGE);
+                    if (ex.getMessage().contains("Connection refused: connect")) {
+                        JOptionPane.showMessageDialog(getMainFrame(), "Error", "Gagal koneksi ke database ", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
