@@ -8,8 +8,8 @@ package com.agung.inventory.ui.dialog;
 import com.agung.inventory.config.AppContext;
 import com.agung.inventory.entity.Barang;
 import com.agung.inventory.entity.Kategori;
-import com.agung.inventory.ui.tablemodel.BarangTableModel;
 import com.agung.inventory.ui.combo.model.KategoriComboModel;
+import com.agung.inventory.ui.tablemodel.BarangTableModel;
 import com.agung.inventory.util.TableUtil;
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -48,7 +48,6 @@ public class DlgBarang extends javax.swing.JDialog {
     }
 
     private void loadKategoriToCombo() {
-        //            cmbKategori.removeAllItems();
         listKategori = AppContext.getKategoriDao().cariSemua();
         cmbKategori.setModel(new KategoriComboModel(listKategori));
     }
@@ -120,7 +119,44 @@ public class DlgBarang extends javax.swing.JDialog {
         this.setVisible(true);
         return barang;
     }
+    
+    private void simpan(){
+         try {
+            loadFormToModel();
+            AppContext.getBarangDao().simpan(barang);
+            loadDataToTable();
+            clearForm();
+            enableForm(false);
+            JOptionPane.showMessageDialog(this, "Berhasil Simpan", null, JOptionPane.INFORMATION_MESSAGE);
+            barang = null;
+        } catch (SQLException ex) {
+            Logger.getLogger(DlgBarang.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(this, "Gagal Simpan", null, JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void edit(){
+          if (tblBarang.getSelectedRow() >= 0 && barang != null) {
+            enableForm(true);
+            loadModelToForm();
+        }
+    }
 
+    private void hapus(){
+        if (tblBarang.getSelectedRow() >= 0 && barang != null) {
+            int retval = JOptionPane.showConfirmDialog(this, "Yakin Hapus?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
+            if (retval == JOptionPane.YES_OPTION) {
+                try {
+                    deleteProduct();
+                    JOptionPane.showMessageDialog(this, "Berhasil Hapus", null, JOptionPane.INFORMATION_MESSAGE);
+                    loadDataToTable();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+
+            }           
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -137,7 +173,6 @@ public class DlgBarang extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         txtNama = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        cmbKategori = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         txtStock = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -147,6 +182,7 @@ public class DlgBarang extends javax.swing.JDialog {
         btnBatal = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        cmbKategori = new com.agung.inventory.ui.component.CustomComboUI();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblBarang = new javax.swing.JTable();
         btnTambah = new javax.swing.JButton();
@@ -157,7 +193,6 @@ public class DlgBarang extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
         jLabel1.setText("Kode Barang");
@@ -205,12 +240,15 @@ public class DlgBarang extends javax.swing.JDialog {
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(12, 12, 12)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtKode)
-                                    .addComponent(txtNama)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(cmbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(12, 12, 12)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtKode)
+                                            .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cmbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,6 +277,8 @@ public class DlgBarang extends javax.swing.JDialog {
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4, jLabel5});
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBatal, btnSimpan});
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmbKategori, txtNama});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,9 +314,9 @@ public class DlgBarang extends javax.swing.JDialog {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, txtKode});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cmbKategori, jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, txtKode});
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cmbKategori, txtNama, txtStock});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtNama, txtStock});
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnBatal, btnSimpan});
 
@@ -375,18 +415,7 @@ public class DlgBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBatalActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        try {
-            loadFormToModel();
-            AppContext.getBarangDao().simpan(barang);
-            loadDataToTable();
-            clearForm();
-            enableForm(false);
-            JOptionPane.showMessageDialog(this, "Berhasil Simpan", null, JOptionPane.INFORMATION_MESSAGE);
-            barang = null;
-        } catch (SQLException ex) {
-            Logger.getLogger(DlgBarang.class.getName()).log(Level.SEVERE, null, ex);
-             JOptionPane.showMessageDialog(this, "Gagal Simpan", null, JOptionPane.ERROR_MESSAGE);
-        }
+        simpan();
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
@@ -394,28 +423,11 @@ public class DlgBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_btnTambahActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        if (tblBarang.getSelectedRow() >= 0 && barang != null) {
-            enableForm(true);
-            loadModelToForm();
-        }
-
+        edit();
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        if (tblBarang.getSelectedRow() >= 0 && barang != null) {
-            int retval = JOptionPane.showConfirmDialog(this, "Yakin Hapus?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
-            if (retval == JOptionPane.YES_OPTION) {
-                try {
-                    deleteProduct();
-                    JOptionPane.showMessageDialog(this, "Berhasil Hapus", null, JOptionPane.INFORMATION_MESSAGE);
-                    loadDataToTable();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-
-            }
-            
-        }
+        hapus();
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private class TableSelection implements ListSelectionListener {
@@ -438,7 +450,7 @@ public class DlgBarang extends javax.swing.JDialog {
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnTambah;
-    private javax.swing.JComboBox<String> cmbKategori;
+    private com.agung.inventory.ui.component.CustomComboUI cmbKategori;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

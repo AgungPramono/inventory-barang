@@ -12,11 +12,10 @@ import com.jgoodies.looks.Options;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import com.jgoodies.looks.plastic.theme.ExperienceRoyale;
+
+import javax.swing.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -49,8 +48,11 @@ public class Main {
                     mainFrame = new MainFrame();
                     SecurityConfig.setMainFrame(mainFrame);
                     SecurityConfig.initLogin();
-                } catch (UnsupportedLookAndFeelException ex) {
+                } catch (Exception ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    if (ex.getMessage().contains("Connection refused: connect")){
+                        JOptionPane.showMessageDialog(getMainFrame(),"Error","Gagal koneksi ke database ", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         });

@@ -15,6 +15,8 @@ import java.sql.SQLException;
 /**
  *
  * @author agung
+ * untuk container jika menggunakan metode
+ * access jdbc murni
  */
 public class Injector {
 

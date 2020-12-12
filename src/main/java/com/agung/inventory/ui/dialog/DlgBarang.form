@@ -87,9 +87,6 @@
       <SubComponents>
         <Container class="javax.swing.JPanel" name="jPanel2">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="cc" type="rgb"/>
-            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                 <EtchetBorder bevelType="0"/>
@@ -111,12 +108,17 @@
                                           <Component id="jLabel2" linkSize="4" alignment="1" max="32767" attributes="0"/>
                                           <Component id="jLabel1" alignment="1" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtKode" max="32767" attributes="0"/>
-                                          <Component id="txtNama" max="32767" attributes="0"/>
                                           <Group type="102" attributes="0">
-                                              <Component id="cmbKategori" min="-2" pref="208" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="txtKode" max="32767" attributes="0"/>
+                                                  <Component id="txtNama" linkSize="10" min="-2" pref="286" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="cmbKategori" linkSize="10" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -176,7 +178,7 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbKategori" linkSize="5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbKategori" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -217,11 +219,6 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nama Barang"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="cmbKategori">
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
@@ -275,6 +272,8 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator1">
+            </Component>
+            <Component class="com.agung.inventory.ui.component.CustomComboUI" name="cmbKategori">
             </Component>
           </SubComponents>
         </Container>
