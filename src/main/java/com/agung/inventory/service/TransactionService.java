@@ -10,6 +10,7 @@ import com.agung.inventory.dao.*;
 import com.agung.inventory.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -58,14 +59,12 @@ public class TransactionService {
 
     @Transactional(rollbackFor = {RuntimeException.class,
         StokTidakCukupException.class},
-            readOnly = false)
+            readOnly = false, isolation = Isolation.READ_COMMITTED )
     public void simpanBarangKeluar(BarangKeluar barangKeluar) throws Exception {
         if (barangKeluar != null) {
             barangKeluarDao.simpan(barangKeluar);
 
             for (BarangKeluarDetail detail : barangKeluar.getBarangKeluarDetails()) {
-                detail.setBarangKeluar(barangKeluar);
-                barangKeluarDetailDao.simpan(detail);
 
                 Barang b = barangDao.cariById(detail.getBarang());
 
@@ -76,7 +75,7 @@ public class TransactionService {
                     BigDecimal newQty = b.getQty().subtract(detail.getQty());
                     b.setQty(newQty);
                     b.setId(detail.getBarang().getId());
-                    barangDao.updateQty(b);
+                    barangDao.simpan(b);
                 }
             }
         }

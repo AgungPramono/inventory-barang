@@ -5,8 +5,10 @@
  */
 package com.agung.inventory.entity;
 
-import java.math.BigDecimal;
 import lombok.Data;
+
+import javax.persistence.*;
+import java.math.BigDecimal;
 
 /**
  *
@@ -14,9 +16,18 @@ import lombok.Data;
  */
 
 @Data
-public class BarangKeluarDetail {
-    private Integer id;
+@Entity
+@Table(name = "barang_keluar_detail")
+public class BarangKeluarDetail extends BaseEntity{
+
+    @ManyToOne
+    @JoinColumn(name = "id_header", nullable = false)
     private BarangKeluar barangKeluar;
+
+    @ManyToOne
+    @JoinColumn(name = "id_barang", nullable = false)
     private Barang barang;
+
+    @Column(name = "qty", nullable = false)
     private BigDecimal qty;
 }

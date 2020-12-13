@@ -7,11 +7,7 @@ package com.agung.inventory.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import java.io.IOException;
-import java.util.Properties;
-import javax.sql.DataSource;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,12 +18,16 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.sql.DataSource;
+import java.io.IOException;
+import java.util.Properties;
+
 /**
  *
  * @author agung
  */
 @Configuration
-@PropertySource("classpath:jdbc.properties")
+@PropertySource("classpath:/config/jdbc.properties")
 @ComponentScan(basePackages = {"com.agung.inventory"})
 @EnableTransactionManagement
 public class AppConfig {
@@ -78,7 +78,6 @@ public class AppConfig {
     }
 
     @Bean
-    @Autowired
     public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory);

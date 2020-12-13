@@ -59,7 +59,7 @@ public class LookupBarangDialog extends javax.swing.JDialog {
             listBarangs = AppContext.getMasterService().findItemByName(txtCari.getText());
             loadDataToTable(listBarangs);
         } else if (txtCari.getText().equals("")) {
-            listBarangs = AppContext.getBarangDao().cariSemua();
+            listBarangs = AppContext.getMasterService().findAllBarang();
             loadDataToTable(listBarangs);
         }
     }

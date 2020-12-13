@@ -7,26 +7,22 @@ package com.agung.inventory.ui.dialog;
 
 import com.agung.inventory.config.AppContext;
 import com.agung.inventory.config.SecurityConfig;
-import com.agung.inventory.entity.Barang;
-import com.agung.inventory.entity.BarangKeluar;
-import com.agung.inventory.entity.BarangKeluarDetail;
-import com.agung.inventory.entity.Pelanggan;
-import com.agung.inventory.entity.Petugas;
+import com.agung.inventory.entity.*;
 import com.agung.inventory.ui.combo.model.PelangganComboModel;
 import com.agung.inventory.ui.tablemodel.BarangKeluarTableModel;
 import com.agung.inventory.util.DateUtil;
 import com.agung.inventory.util.NumberUtil;
 import com.agung.inventory.util.TableUtil;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -73,7 +69,7 @@ public class DlgBarangKeluar extends javax.swing.JDialog {
     }
 
     private void loadPelangganCombo() {
-         cmbPelanggan.setModel(new PelangganComboModel(AppContext.getPelangganDao().cariSemua()));
+         cmbPelanggan.setModel(new PelangganComboModel(AppContext.getMasterService().findAllCustomer()));
     }
 
     private void refreshTable() {
@@ -90,6 +86,9 @@ public class DlgBarangKeluar extends javax.swing.JDialog {
         barangKeluar.setTanggalMasuk(DateUtil.toLocalDateTime(jdate.getDate()));
         barangKeluar.setPetugas(SecurityConfig.getActivePetugas());
         barangKeluar.setPelanggan((Pelanggan) cmbPelanggan.getSelectedItem());
+        for (BarangKeluarDetail detail:barangKeluarDetails) {
+            detail.setBarangKeluar(barangKeluar);
+        }
     }
 
     private void addBarangKeluarDetail(Barang barang) {
