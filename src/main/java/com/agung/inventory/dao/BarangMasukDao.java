@@ -98,7 +98,7 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
 
         switch (kolom) {
             case "tanggal":
-                sql.append("where bm.tanggalMasuk ='").append(value).append("'");
+                sql.append("where date(bm.tanggalMasuk) ='").append(value).append("'");
                 break;
             case "kode":
                 sql.append("where bm.kode='").append(value).append("'");

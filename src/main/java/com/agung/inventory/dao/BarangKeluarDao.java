@@ -51,7 +51,7 @@ public class BarangKeluarDao {
 
         switch (kolom) {
             case "tanggal":
-                sql.append("where bk.tanggal ='").append(value).append("'");
+                sql.append("where date(bk.tanggalMasuk) ='").append(value).append("'");
                 break;
             case "kode":
                 sql.append("where bk.kode='").append(value).append("'");

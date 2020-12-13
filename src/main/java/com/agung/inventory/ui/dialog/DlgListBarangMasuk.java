@@ -97,7 +97,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
             listBarangMasuk = AppContext.getTransactionService().findBarangMasukByParam("tanggal", tanggal);
         }
         
-        if (!StringUtils.hasText(txtKode.getText())) {
+        if (!StringUtils.isEmpty(txtKode.getText())) {
             listBarangMasuk = AppContext.getTransactionService().findBarangMasukByParam("kode", txtKode.getText());
         }
 
@@ -111,7 +111,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
             listBarangMasuk = AppContext.getTransactionService().findBarangMasukByParam("petugas", p.getNama());
         }
 
-        if (StringUtils.hasText(txtKode.getText())
+        if (StringUtils.isEmpty(txtKode.getText())
                 && dateChooser.getDate() == null
                 && cmbSupplier.getSelectedItem() == null
                 && cmbPetugas.getSelectedItem() == null) {
