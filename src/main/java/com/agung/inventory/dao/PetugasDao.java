@@ -25,13 +25,13 @@ public class PetugasDao implements BaseCrudDao<Petugas> {
     private SessionFactory sessionFactory;
 
     @Override
-    public void simpan(Petugas t) {
+    public void save(Petugas t) {
        sessionFactory.getCurrentSession()
                .saveOrUpdate(t);
     }
 
     @Override
-    public Petugas cariById(Petugas t) {
+    public Petugas findById(Petugas t) {
        return (Petugas) sessionFactory.getCurrentSession()
                .createQuery("select p from Petugas p where p.id= :id")
                .setParameter("id",t.getId())
@@ -45,7 +45,7 @@ public class PetugasDao implements BaseCrudDao<Petugas> {
     }
 
     @Override
-    public List<Petugas> cariSemua() {
+    public List<Petugas> findAll() {
        return sessionFactory.getCurrentSession()
                .createQuery("from Petugas p")
                .list();

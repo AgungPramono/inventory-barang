@@ -353,6 +353,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
 //       DlgBarangMasuk.getInstance().showDialog();
         DlgListBarangMasuk.getSingleton().showDialog();
+        loadDataToTable();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -373,14 +374,17 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnBarangMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangMasukActionPerformed
         DlgBarangMasuk.getInstance().showDialog();
+        loadDataToTable();
     }//GEN-LAST:event_btnBarangMasukActionPerformed
 
     private void btnBarangKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangKeluarActionPerformed
         DlgBarangKeluar.getInstance().showDialog();
+        loadDataToTable();
     }//GEN-LAST:event_btnBarangKeluarActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
        DlgListBarangKeluar.getSingleton().showDialog();
+       loadDataToTable();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed

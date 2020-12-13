@@ -29,12 +29,12 @@ public class BarangMasukDetailDao implements BaseCrudDao<BarangMasukDetail> {
     }
 
     @Override
-    public void simpan(BarangMasukDetail bmd) {
+    public void save(BarangMasukDetail bmd) {
 
     }
 
     @Override
-    public BarangMasukDetail cariById(BarangMasukDetail t) {
+    public BarangMasukDetail findById(BarangMasukDetail t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -44,7 +44,7 @@ public class BarangMasukDetailDao implements BaseCrudDao<BarangMasukDetail> {
     }
 
     @Override
-    public List<BarangMasukDetail> cariSemua() {
+    public List<BarangMasukDetail> findAll() {
         return sessionFactory.getCurrentSession()
                 .createQuery("select b from BarangMasukDetail b")
                 .list();

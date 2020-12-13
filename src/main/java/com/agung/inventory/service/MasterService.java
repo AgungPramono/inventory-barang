@@ -32,14 +32,14 @@ public class MasterService {
     private BarangDao itemDao;
 
     public void saveBarang(Barang barang) throws SQLException {
-        barangDao.simpan(barang);
+        barangDao.save(barang);
     }
 
     public List<Barang> findAllBarang(){
-        return barangDao.cariSemua();
+        return barangDao.findAll();
     }
     public Barang findById(Barang barang)throws SQLException{
-        return barangDao.cariById(barang);
+        return barangDao.findById(barang);
     }
 
     public void delete(Barang barang)throws SQLException{
@@ -47,7 +47,7 @@ public class MasterService {
     }
 
     public List<Kategori> findAllCategori() {
-        return kategoriDao.cariSemua();
+        return kategoriDao.findAll();
     }
 
     public void deleteById(Kategori kategori) throws SQLException {
@@ -55,7 +55,7 @@ public class MasterService {
     }
 
     public void saveCategory(Kategori kategori) throws SQLException {
-        kategoriDao.simpan(kategori);
+        kategoriDao.save(kategori);
     }
 
     public Petugas findEmployeeByUsername(String username){
@@ -63,7 +63,7 @@ public class MasterService {
     }
 
     public List<Petugas> findAllEmployee() {
-        return petugasDao.cariSemua();
+        return petugasDao.findAll();
     }
 
     public void deleteEmployee(Petugas petugas) {
@@ -71,15 +71,15 @@ public class MasterService {
     }
 
     public void saveEmployee(Petugas petugas) {
-        petugasDao.simpan(petugas);
+        petugasDao.save(petugas);
     }
 
     public List<Supplier> findAllSupplier() {
-        return supplierDao.cariSemua();
+        return supplierDao.findAll();
     }
 
     public void saveSupplier(Supplier supplier) {
-        supplierDao.simpan(supplier);
+        supplierDao.save(supplier);
     }
 
     public void deleteSupplierById(Supplier supplier) {
@@ -87,11 +87,11 @@ public class MasterService {
     }
 
     public List<Pelanggan> findAllCustomer() {
-        return pelangganDao.cariSemua();
+        return pelangganDao.findAll();
     }
 
     public void saveCustomer(Pelanggan pelanggan) throws SQLException {
-        pelangganDao.simpan(pelanggan);
+        pelangganDao.save(pelanggan);
     }
 
     public void deleteCustomerById(Pelanggan pelanggan) {

@@ -31,13 +31,13 @@ public class SupplierDao implements BaseCrudDao<Supplier> {
     }
 
     @Override
-    public void simpan(Supplier supplier) {
+    public void save(Supplier supplier) {
         sessionFactory.getCurrentSession()
                 .saveOrUpdate(supplier);
     }
 
     @Override
-    public Supplier cariById(Supplier t) {
+    public Supplier findById(Supplier t) {
         return (Supplier) sessionFactory.getCurrentSession()
                 .createQuery("select s from Supplier s where s.id= :id")
                 .setParameter("id", t.getId())
@@ -52,7 +52,7 @@ public class SupplierDao implements BaseCrudDao<Supplier> {
     }
 
     @Override
-    public List<Supplier> cariSemua() {
+    public List<Supplier> findAll() {
         return sessionFactory.getCurrentSession()
         .createQuery("from Supplier s")
         .list();

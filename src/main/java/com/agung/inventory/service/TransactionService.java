@@ -41,13 +41,13 @@ public class TransactionService {
 
     @Transactional(readOnly = false)
     public void simpanBarangMasuk(BarangMasuk barangMasuk) throws Exception {
-        barangMasukDao.simpan(barangMasuk);
+        barangMasukDao.save(barangMasuk);
 
         for (BarangMasukDetail detail : barangMasuk.getBarangMasukDetails()) {
 //            detail.setBarangMasuk(barangMasuk);
 //            barangMasukDetailDao.simpan(detail);
 
-            Barang b = barangDao.cariById(detail.getBarang());
+            Barang b = barangDao.findById(detail.getBarang());
             if (b != null) {
                 BigDecimal newQty = b.getQty().add(detail.getQty());
                 b.setQty(newQty);
@@ -66,7 +66,7 @@ public class TransactionService {
 
             for (BarangKeluarDetail detail : barangKeluar.getBarangKeluarDetails()) {
 
-                Barang b = barangDao.cariById(detail.getBarang());
+                Barang b = barangDao.findById(detail.getBarang());
 
                 if (b != null) {
                     if (detail.getQty().compareTo(b.getQty()) > 0) {
@@ -75,14 +75,14 @@ public class TransactionService {
                     BigDecimal newQty = b.getQty().subtract(detail.getQty());
                     b.setQty(newQty);
                     b.setId(detail.getBarang().getId());
-                    barangDao.simpan(b);
+                    barangDao.save(b);
                 }
             }
         }
     }
     
     public List<BarangMasuk> findAllBarangMasuk(){
-        return barangMasukDao.cariSemua();
+        return barangMasukDao.findAll();
     }
     
     public List<BarangMasuk> findBarangMasukMaster(){

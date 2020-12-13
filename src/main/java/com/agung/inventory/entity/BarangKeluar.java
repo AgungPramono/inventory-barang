@@ -13,14 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author agung
  */
 
 @Data
 @Entity
 @Table(name = "barang_keluar")
-public class BarangKeluar extends BaseEntity{
+public class BarangKeluar extends BaseEntity {
 
     @Column(name = "no_transaksi", nullable = false, unique = true)
     private String kode;
@@ -37,9 +36,10 @@ public class BarangKeluar extends BaseEntity{
 
     @OneToMany(mappedBy = "barangKeluar",
             cascade = CascadeType.ALL,
-            orphanRemoval = true
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
     )
-    private List<BarangKeluarDetail> barangKeluarDetails = 
+    private List<BarangKeluarDetail> barangKeluarDetails =
             new ArrayList<>();
-    
+
 }

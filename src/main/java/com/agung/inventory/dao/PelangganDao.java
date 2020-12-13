@@ -30,14 +30,14 @@ public class PelangganDao implements BaseCrudDao<Pelanggan> {
     }
 
     @Override
-    public void simpan(Pelanggan pelanggan)throws SQLException {
+    public void save(Pelanggan pelanggan)throws SQLException {
         sessionFactory.getCurrentSession()
                 .saveOrUpdate(pelanggan);
 
     }
 
     @Override
-    public Pelanggan cariById(Pelanggan t) {
+    public Pelanggan findById(Pelanggan t) {
         return (Pelanggan) sessionFactory.getCurrentSession()
                 .createQuery("select p from Pelanggan p where p.id= :id")
                 .setParameter("id", t.getId())
@@ -51,7 +51,7 @@ public class PelangganDao implements BaseCrudDao<Pelanggan> {
     }
 
     @Override
-    public List<Pelanggan> cariSemua() {
+    public List<Pelanggan> findAll() {
         return sessionFactory.getCurrentSession()
                 .createQuery("from Pelanggan p")
                 .list();
