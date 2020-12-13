@@ -116,8 +116,69 @@ public class DlgBarangKeluar extends javax.swing.JDialog {
         return cmbPelanggan.getSelectedItem() != null
                 && !barangKeluarDetails.isEmpty();
     }
-    
 
+    private void addItem(){
+        Barang barang = new LookupBarangDialog().showDialog();
+        if (barang != null) {
+            txtNamaBarang.setText(barang.getKodeBarang() + "|" + barang.getNamaBarang());
+            boolean isItemBarangKeluarDetail = false;
+            for (BarangKeluarDetail bmd : barangKeluarDetails) {
+                if (bmd.getBarang().getId().equals(barang.getId())) {
+                    bmd.setQty(bmd.getQty().add(BigDecimal.ONE));
+                    isItemBarangKeluarDetail = true;
+                    break;
+                }
+            }
+            if (isItemBarangKeluarDetail) {
+                refreshTable();
+            } else {
+                addBarangKeluarDetail(barang);
+            }
+        }
+    }
+
+    private void save(){
+        if (!isFormValid()) {
+            JOptionPane.showMessageDialog(this, "Gagal Simpan,Data Belum Lengkap",
+                    "Gagal", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        loadFormToDomain();
+        try {
+            AppContext.getTransactionService().simpanBarangKeluar(barangKeluar);
+            clearForm();
+            JOptionPane.showMessageDialog(this, "Data Berhasil disimpan!",
+                    "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Gagal Simpan \n"+e.getMessage(),
+                    "Gagal", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void removeAllDetail(){
+        if (barangKeluarDetails.size() > 0) {
+            barangKeluarDetails.clear();
+            refreshTable();
+        }
+    }
+
+    private void removeSelectedDetail(){
+        if (jTable1.getSelectedRow() >= 0 && barangKeluarDetail != null) {
+            if (barangKeluarDetail != null) {
+                barangKeluarDetails.remove(barangKeluarDetail);
+            }
+            refreshTable();
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Tidak ada data dipilih !!", "Terjadi Kesalahan !!", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void closeDialog(){
+        this.dispose();
+        clearForm();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -389,65 +450,23 @@ public class DlgBarangKeluar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBarangActionPerformed
-        Barang barang = new LookupBarangDialog().showDialog();
-        if (barang != null) {
-            txtNamaBarang.setText(barang.getKodeBarang() + "|" + barang.getNamaBarang());
-            boolean isItemBarangKeluarDetail = false;
-            for (BarangKeluarDetail bmd : barangKeluarDetails) {
-                if (bmd.getBarang().getId().equals(barang.getId())) {
-                    bmd.setQty(bmd.getQty().add(BigDecimal.ONE));
-                    isItemBarangKeluarDetail = true;
-                    break;
-                }
-            }
-            if (isItemBarangKeluarDetail) {
-                refreshTable();
-            } else {
-                addBarangKeluarDetail(barang);
-            }
-        }
+        addItem();
     }//GEN-LAST:event_btnAddBarangActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if (!isFormValid()) {
-            JOptionPane.showMessageDialog(this, "Gagal Simpan,Data Belum Lengkap",
-                    "Gagal", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        loadFormToDomain();
-        try {
-            AppContext.getTransactionService().simpanBarangKeluar(barangKeluar);
-            clearForm();
-            JOptionPane.showMessageDialog(this, "Data Berhasil disimpan!",
-                    "Sukses", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Gagal Simpan \n"+e.getMessage(),
-                    "Gagal", JOptionPane.ERROR_MESSAGE);
-        }
+        save();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (barangKeluarDetails.size() > 0) {
-            barangKeluarDetails.clear();
-            refreshTable();
-        }
+       removeAllDetail();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (jTable1.getSelectedRow() >= 0 && barangKeluarDetail != null) {
-            if (barangKeluarDetail != null) {
-                barangKeluarDetails.remove(barangKeluarDetail);
-            }
-            refreshTable();
-        } else {
-            JOptionPane.showMessageDialog(this,
-                    "Tidak ada data dipilih !!", "Terjadi Kesalahan !!", JOptionPane.ERROR_MESSAGE);
-        }
+        removeSelectedDetail();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        this.dispose();
+        closeDialog();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private class TableSelection implements ListSelectionListener {

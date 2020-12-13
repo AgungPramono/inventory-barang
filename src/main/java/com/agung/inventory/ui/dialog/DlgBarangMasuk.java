@@ -142,6 +142,45 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
         }
     }
 
+    private void removeAllDetail(){
+        if (barangMasukDetails.size() > 0) {
+            barangMasukDetails.clear();
+            refreshTable();
+        }
+    }
+
+    private void removeSelectedDetail(){
+        if (tblBarangMasuk.getSelectedRow() >= 0 && barangMasukDetail != null) {
+            if (barangMasukDetail != null) {
+                barangMasukDetails.remove(barangMasukDetail);
+            }
+            refreshTable();
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Tidak ada data dipilih !!", "Terjadi Kesalahan !!", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void save(){
+        if (!isFormValid()) {
+            JOptionPane.showMessageDialog(this, "Gagal Simpan,Data Belum Lengkap",
+                    "Gagal", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (barangMasuk == null) {
+            barangMasuk = new BarangMasuk();
+        }
+        loadFormToDomain();
+        try {
+            AppContext.getTransactionService().simpanBarangMasuk(barangMasuk);
+            clearForm();
+            JOptionPane.showMessageDialog(this, "Data Berhasil disimpan!",
+                    "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -423,46 +462,20 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAddBarangActionPerformed
 
     private void btnHapusSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusSemuaActionPerformed
-        if (barangMasukDetails.size() > 0) {
-            barangMasukDetails.clear();
-            refreshTable();
-        }
+        removeAllDetail();
     }//GEN-LAST:event_btnHapusSemuaActionPerformed
 
     private void btnHapusDipilihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusDipilihActionPerformed
-        if (tblBarangMasuk.getSelectedRow() >= 0 && barangMasukDetail != null) {
-            if (barangMasukDetail != null) {
-                barangMasukDetails.remove(barangMasukDetail);
-            }
-            refreshTable();
-        } else {
-            JOptionPane.showMessageDialog(this,
-                    "Tidak ada data dipilih !!", "Terjadi Kesalahan !!", JOptionPane.ERROR_MESSAGE);
-        }
+        removeSelectedDetail();
     }//GEN-LAST:event_btnHapusDipilihActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if (!isFormValid()) {
-            JOptionPane.showMessageDialog(this, "Gagal Simpan,Data Belum Lengkap",
-                        "Gagal", JOptionPane.ERROR_MESSAGE);
-            return;
-        } 
-        if (barangMasuk == null) {
-            barangMasuk = new BarangMasuk();
-        }
-        loadFormToDomain();
-        try {
-            AppContext.getTransactionService().simpanBarangMasuk(barangMasuk);
-            clearForm();
-            JOptionPane.showMessageDialog(this, "Data Berhasil disimpan!",
-                    "Sukses", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        save();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
        this.dispose();
+       clearForm();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private class TableSelection implements ListSelectionListener {
