@@ -17,14 +17,15 @@ import com.agung.inventory.ui.tablemodel.BarangMasukDetailTableModel;
 import com.agung.inventory.ui.tablemodel.BarangMasukTableModelMaster;
 import com.agung.inventory.util.DateUtil;
 import com.agung.inventory.util.TableUtil;
+import org.springframework.util.StringUtils;
+
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import org.springframework.util.StringUtils;
 
 /**
  *
@@ -57,11 +58,11 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
     }
 
     private void loadComboSupplier() {
-        cmbSupplier.setModel(new SupplierComboModel(AppContext.getSupplierDao().cariSemua()));
+        cmbSupplier.setModel(new SupplierComboModel(AppContext.getMasterService().findAllSupplier()));
     }
 
     private void loadComboPetugas() {
-        cmbPetugas.setModel(new PetugasComboModel(AppContext.getPetugasDao().cariSemua()));
+        cmbPetugas.setModel(new PetugasComboModel(AppContext.getMasterService().findAllEmployee()));
     }
 
     public static synchronized DlgListBarangMasuk getSingleton() {
@@ -96,7 +97,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
             listBarangMasuk = AppContext.getTransactionService().findBarangMasukByParam("tanggal", tanggal);
         }
         
-        if (!StringUtils.isEmpty(txtKode.getText())) {
+        if (!StringUtils.hasText(txtKode.getText())) {
             listBarangMasuk = AppContext.getTransactionService().findBarangMasukByParam("kode", txtKode.getText());
         }
 
@@ -110,7 +111,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
             listBarangMasuk = AppContext.getTransactionService().findBarangMasukByParam("petugas", p.getNama());
         }
 
-        if (StringUtils.isEmpty(txtKode.getText())
+        if (StringUtils.hasText(txtKode.getText())
                 && dateChooser.getDate() == null
                 && cmbSupplier.getSelectedItem() == null
                 && cmbPetugas.getSelectedItem() == null) {

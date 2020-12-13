@@ -6,16 +6,12 @@
 package com.agung.inventory.dao;
 
 import com.agung.inventory.entity.Barang;
-import com.agung.inventory.entity.Kategori;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -30,12 +26,8 @@ public class BarangDao implements BaseCrudDao<Barang> {
     @Autowired
     private SessionFactory sessionFactory;
 
-    private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
-
     @Autowired
     public void setDataSource(DataSource dataSource){
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override
@@ -77,29 +69,6 @@ public class BarangDao implements BaseCrudDao<Barang> {
         return sessionFactory.getCurrentSession()
                 .createQuery("select b from Barang b where b.nama like :nama")
                 .setParameter("nama", "%"+text+"%").list();
-    }
-
-    private class BarangRowMapper implements RowMapper<Barang> {
-
-        public BarangRowMapper() {
-        }
-
-        @Override
-        public Barang mapRow(ResultSet rs, int i) throws SQLException {
-            Barang b = new Barang();
-            b.setId(rs.getInt("id"));
-            b.setKodeBarang(rs.getString("kode"));
-            b.setNamaBarang(rs.getString("nama"));
-            b.setQty(rs.getBigDecimal("qty"));
-            b.setKeterangan(rs.getString("keterangan"));
-
-            Kategori k = new Kategori();
-            k.setId(rs.getInt("id"));
-            k.setKode(rs.getString("k.kode"));
-            k.setNama(rs.getString("k.nama"));
-            b.setKategori(k);
-            return b;
-        }
     }
 
 }

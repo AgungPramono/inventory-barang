@@ -8,9 +8,6 @@ package com.agung.inventory.dao;
 import com.agung.inventory.entity.BarangMasuk;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -55,26 +52,13 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
             "join barang b on b.id = d.id_barang " +
             "where d.id_header=?";
 
-    private final DataSource dataSource;
-    private SimpleJdbcInsert simpleJdbcInsert;
-    private JdbcTemplate jdbcTemplate;
-
     public BarangMasukDao(DataSource dataSource) {
-        this.dataSource = dataSource;
-        this.jdbcTemplate = new JdbcTemplate(this.dataSource);
-        this.simpleJdbcInsert = new SimpleJdbcInsert(this.dataSource)
-                .withTableName("barang_masuk")
-                .usingColumns("tanggal", "id_petugas", "id_supplier", "no_transaksi")
-                .usingGeneratedKeyColumns("id");
+
     }
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-        this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
-                .withTableName("barang_masuk")
-                .usingColumns("tanggal", "id_petugas", "id_supplier", "no_transaksi")
-                .usingGeneratedKeyColumns("id");
+
     }
 
     @Override
@@ -85,7 +69,10 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
 
     @Override
     public BarangMasuk cariById(BarangMasuk t) {
-        return (BarangMasuk) jdbcTemplate.queryForObject(SQL_CARI_BARAN_MASUK, new Object[]{t.getId()}, new BeanPropertyRowMapper(BarangMasuk.class));
+        return (BarangMasuk) sessionFactory.getCurrentSession()
+                .createQuery("select bm from BarangMasuk bm where bm.id= :id")
+                .setParameter("id",t.getId())
+                .uniqueResult();
     }
 
     @Override
@@ -95,37 +82,41 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
 
     @Override
     public List<BarangMasuk> cariSemua() {
-        return jdbcTemplate.query(FIND_ALL_TRANSACTION, new BarangMasukRowMapper());
+        return sessionFactory.getCurrentSession()
+                .createQuery("from BarangMasuk bm")
+                .list();
     }
 
     public List<BarangMasuk> cariSemuaBarangMasuksMaster() {
-        StringBuilder sql = new StringBuilder(FIND_ALL_TRANSACTION_MASTER);
-        sql.append("order by bm.tanggal desc");
-        return jdbcTemplate.query(sql.toString(), new BarangMasukRowMapper());
+       return sessionFactory.getCurrentSession()
+               .createQuery("select bm from BarangMasuk bm order by bm.tanggalMasuk desc")
+               .list();
     }
 
     public List<BarangMasuk> cariByParameter(String kolom, String value) {
-        StringBuilder sql = new StringBuilder(FIND_ALL_TRANSACTION_MASTER);
+        StringBuilder sql = new StringBuilder("select bm from BarangMasuk bm ");
 
         switch (kolom) {
             case "tanggal":
-                sql.append("where date(bm.tanggal) ='").append(value).append("'");
+                sql.append("where bm.tanggalMasuk ='").append(value).append("'");
                 break;
             case "kode":
-                sql.append("where bm.no_transaksi='").append(value).append("'");
+                sql.append("where bm.kode='").append(value).append("'");
                 break;
             case "supplier":
-                sql.append("where s.nama like '%").append(value).append("%'");
+                sql.append("where bm.supplier.nama like '%").append(value).append("%'");
                 break;
             case "petugas":
-                sql.append("where p.nama like '%").append(value).append("%'");
+                sql.append("where bm.petugas.nama like '%").append(value).append("%'");
                 break;
             default:
                 break;
         }
-        sql.append(" order by bm.tanggal desc");
+        sql.append(" order by bm.tanggalMasuk desc");
         
-        return jdbcTemplate.query(sql.toString(), new BarangMasukRowMapper());
+        return sessionFactory.getCurrentSession()
+                .createQuery(sql.toString())
+                .list();
     }
 
     @Override
