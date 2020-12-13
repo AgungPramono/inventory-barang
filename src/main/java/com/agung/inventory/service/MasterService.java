@@ -28,6 +28,9 @@ public class MasterService {
     @Autowired
     private PelangganDao pelangganDao;
 
+    @Autowired
+    private BarangDao itemDao;
+
     public void saveBarang(Barang barang) throws SQLException {
         barangDao.simpan(barang);
     }
@@ -93,5 +96,9 @@ public class MasterService {
 
     public void deleteCustomerById(Pelanggan pelanggan) {
         pelangganDao.deleteById(pelanggan);
+    }
+
+    public List<Barang> findItemByName(String text) {
+        return itemDao.cariBarangByName(text);
     }
 }

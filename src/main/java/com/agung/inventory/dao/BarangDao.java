@@ -75,8 +75,8 @@ public class BarangDao implements BaseCrudDao<Barang> {
 
     public List<Barang> cariBarangByName(String text) {
         return sessionFactory.getCurrentSession()
-                .createQuery("select b from Barang b where b.nama= :nama")
-                .setParameter("nama", text).list();
+                .createQuery("select b from Barang b where b.nama like :nama")
+                .setParameter("nama", "%"+text+"%").list();
     }
 
     private class BarangRowMapper implements RowMapper<Barang> {

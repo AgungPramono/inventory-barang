@@ -6,6 +6,7 @@
 package com.agung.inventory.dao;
 
 import com.agung.inventory.entity.BarangMasuk;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,9 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -24,6 +23,9 @@ import java.util.Map;
  */
 @Repository
 public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
+
+    @Autowired
+    private SessionFactory sessionFactory;
 
     private final String SQL_INSERT = "insert into barang_masuk (tanggal,no_transaksi,id_petugas,id_supplier) values (?,?,?,?)";
     private final String SQL_DELETE_DETAIL = "delete from barang_masuk_detail where id=?";
@@ -76,16 +78,9 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
     }
 
     @Override
-    public void simpan(BarangMasuk t) {
-        if (t.getId() == null) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("tanggal", t.getTanggalMasuk());
-            params.put("no_transaksi", t.getKode());
-            params.put("id_petugas", t.getPetugas().getId());
-            params.put("id_supplier", t.getSupplier().getId());
-            int retId = simpleJdbcInsert.executeAndReturnKey(params).intValue();
-            t.setId(retId);
-        }
+    public void simpan(BarangMasuk barangMasuk) {
+       sessionFactory.getCurrentSession()
+               .saveOrUpdate(barangMasuk);
     }
 
     @Override

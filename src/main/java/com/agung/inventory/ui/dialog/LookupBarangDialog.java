@@ -9,13 +9,13 @@ import com.agung.inventory.config.AppContext;
 import com.agung.inventory.entity.Barang;
 import com.agung.inventory.ui.tablemodel.BarangTableModel;
 import com.agung.inventory.util.TableUtil;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -45,7 +45,7 @@ public class LookupBarangDialog extends javax.swing.JDialog {
     }
 
     private void refreshTable() {
-        listBarangs = AppContext.getBarangDao().cariSemua();
+        listBarangs = AppContext.getMasterService().findAllBarang();
         loadDataToTable(listBarangs);
     }
 
@@ -56,7 +56,7 @@ public class LookupBarangDialog extends javax.swing.JDialog {
 
     private void search() {
         if (txtCari.getText().trim().length() > 3) {
-            listBarangs = AppContext.getBarangDao().cariBarangByName(txtCari.getText());
+            listBarangs = AppContext.getMasterService().findItemByName(txtCari.getText());
             loadDataToTable(listBarangs);
         } else if (txtCari.getText().equals("")) {
             listBarangs = AppContext.getBarangDao().cariSemua();

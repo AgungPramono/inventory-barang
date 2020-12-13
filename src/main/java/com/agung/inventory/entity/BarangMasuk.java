@@ -5,25 +5,41 @@
  */
 package com.agung.inventory.entity;
 
+import lombok.Data;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Data;
 
 /**
- *
  * @author agung
  */
 
 @Data
-public class BarangMasuk {
-    
-    private Integer id;
+@Entity
+@Table(name = "barang_masuk")
+public class BarangMasuk extends BaseEntity {
+
+    @Column(name = "no_transaksi", nullable = false, unique = true)
     private String kode;
+
+    @Column(name = "tanggal", columnDefinition = "TIMESTAMP")
     private LocalDateTime tanggalMasuk;
+
+    @ManyToOne
+    @JoinColumn(name = "id_petugas", nullable = false)
     private Petugas petugas;
+
+    @ManyToOne
+    @JoinColumn(name = "id_supplier", nullable = false)
     private Supplier supplier;
-    private List<BarangMasukDetail> barangMasukDetails = 
+
+    @OneToMany(mappedBy = "barangMasuk",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<BarangMasukDetail> barangMasukDetails =
             new ArrayList<>();
-    
+
 }

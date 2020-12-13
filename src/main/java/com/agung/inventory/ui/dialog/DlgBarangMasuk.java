@@ -13,13 +13,14 @@ import com.agung.inventory.ui.tablemodel.BarangMasukTableModel;
 import com.agung.inventory.util.DateUtil;
 import com.agung.inventory.util.NumberUtil;
 import com.agung.inventory.util.TableUtil;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -69,7 +70,7 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
     }
 
     private void loadSupplierCombo() {
-        cmbSupplier.setModel(new SupplierComboModel(AppContext.getSupplierDao().cariSemua()));
+        cmbSupplier.setModel(new SupplierComboModel(AppContext.getMasterService().findAllSupplier()));
     }
 
     private void loadFormToDomain() {
@@ -78,6 +79,9 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
         barangMasuk.setKode(txtKodeTransaksi.getText());
         barangMasuk.setPetugas(SecurityConfig.getActivePetugas());
         barangMasuk.setSupplier((Supplier) cmbSupplier.getSelectedItem());
+        for (BarangMasukDetail bmd:barangMasukDetails){
+            bmd.setBarangMasuk(barangMasuk);
+        }
     }
 
     private void addBarangMasukDetail(Barang barang) {

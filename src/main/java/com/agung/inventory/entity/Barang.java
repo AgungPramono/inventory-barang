@@ -5,20 +5,18 @@
  */
 package com.agung.inventory.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import lombok.Data;
 
 /**
  *
  * @author agung
  */
-
-@Data
+@Setter
+@Getter
 @Entity
 @Table(name = "barang")
 public class Barang extends BaseEntity{
@@ -36,5 +34,8 @@ public class Barang extends BaseEntity{
     
     @Column(name = "keterangan")
     private String keterangan;
+//
+//    @OneToMany(mappedBy = "barang",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    private List<BarangMasukDetail> barangMasukDetails;
     
 }
