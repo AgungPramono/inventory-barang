@@ -40,13 +40,13 @@ public class BarangKeluarDao {
                 .saveOrUpdate(barangKeluar);
     }
     
-    public List<BarangKeluar> cariSemua(){
+    public List cariSemua(){
         return sessionFactory.getCurrentSession()
                 .createQuery("from BarangKeluar b")
                 .list();
     }
     
-    public List<BarangKeluar> cariByParameter(String kolom, String value) {
+    public List cariByParameter(String kolom, String value) {
         StringBuilder sql = new StringBuilder("select bk from BarangKeluar bk ");
 
         switch (kolom) {

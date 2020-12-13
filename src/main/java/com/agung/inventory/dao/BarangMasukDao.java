@@ -24,43 +24,6 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
     @Autowired
     private SessionFactory sessionFactory;
 
-    private final String SQL_INSERT = "insert into barang_masuk (tanggal,no_transaksi,id_petugas,id_supplier) values (?,?,?,?)";
-    private final String SQL_DELETE_DETAIL = "delete from barang_masuk_detail where id=?";
-    private final String SQL_CARI_BARAN_MASUK = "";
-    private final String SQL_HAPUS_HEADER = "delete from barang_masuk where id=?";
-    
-    private final String FIND_ALL_TRANSACTION = "select b.kode,b.nama as nama_barang,bm.id,bm.tanggal,bm.no_transaksi,p.nama as nama_petugas,"
-            + "s.nama as nama_supplier,bmd.qty "
-            + "from barang_masuk bm "
-            + "join barang_masuk_detail bmd "
-            + "on bm.id = bmd.id_header "
-            + "join barang b "
-            + "on bmd.id_barang = b.id "
-            + "join petugas p "
-            + "on p.id = bm.id_petugas "
-            + "join supplier s "
-            + "on s.id = bm.id_supplier group by bm.tanggal";
-    
-    private final String FIND_ALL_TRANSACTION_MASTER = "select bm.id,bm.tanggal,bm.no_transaksi,p.nama as nama_petugas,s.nama as nama_supplier "
-            + "from barang_masuk bm "
-            + "join petugas p "
-            + "on p.id = bm.id_petugas "
-            + "join supplier s "
-            + "on s.id = bm.id_supplier ";
-
-    private static final String FIND_ALL_DETAIL = "select d.id,b.*,d.qty from barang_masuk_detail d " +
-            "join barang b on b.id = d.id_barang " +
-            "where d.id_header=?";
-
-    public BarangMasukDao(DataSource dataSource) {
-
-    }
-
-    @Autowired
-    public void setDataSource(DataSource dataSource) {
-
-    }
-
     @Override
     public void simpan(BarangMasuk barangMasuk) {
        sessionFactory.getCurrentSession()
