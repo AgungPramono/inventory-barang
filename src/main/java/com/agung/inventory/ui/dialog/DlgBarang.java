@@ -107,6 +107,7 @@ public class DlgBarang extends javax.swing.JDialog {
     }
 
     private void enableForm(Boolean enable) {
+        barang = null;
         txtKode.setEnabled(enable);
         txtNama.setEnabled(enable);
         txtStock.setEnabled(enable);

@@ -44,8 +44,6 @@ public class TransactionService {
         barangMasukDao.save(barangMasuk);
 
         for (BarangMasukDetail detail : barangMasuk.getBarangMasukDetails()) {
-//            detail.setBarangMasuk(barangMasuk);
-//            barangMasukDetailDao.simpan(detail);
 
             Barang b = barangDao.findById(detail.getBarang());
             if (b != null) {
