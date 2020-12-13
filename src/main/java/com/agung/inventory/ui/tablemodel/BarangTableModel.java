@@ -6,6 +6,8 @@
 package com.agung.inventory.ui.tablemodel;
 
 import com.agung.inventory.entity.Barang;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
@@ -15,8 +17,10 @@ import java.util.List;
  *
  * @author agung
  */
+@NoArgsConstructor
 public class BarangTableModel extends AbstractTableModel{
-    
+
+    @Setter
     private List<Barang> listBarang = new ArrayList<>();
     private final String[]headerTitle = {"id","kode","Nama","kategori","Stok","Keterangan"};
 

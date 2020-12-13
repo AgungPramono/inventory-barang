@@ -8,11 +8,9 @@ package com.agung.inventory.ui;
 import com.agung.inventory.config.AppContext;
 import com.agung.inventory.config.SecurityConfig;
 import com.agung.inventory.entity.Barang;
-import com.agung.inventory.service.MasterService;
 import com.agung.inventory.ui.dialog.*;
 import com.agung.inventory.ui.tablemodel.BarangTableModel;
 import com.agung.inventory.util.TableUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -25,14 +23,13 @@ import java.util.List;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    @Autowired
-    private MasterService masterService;
+    private BarangTableModel barangTableModel = new BarangTableModel();
 
     public MainFrame() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         loadDataToTable();
-//        autoRefreshData();
+        autoRefreshData();
     }
     
     public JLabel getTxtUser(){
@@ -42,7 +39,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void loadDataToTable(){
         List<Barang> listBarangMasukDetails = AppContext.getMasterService().findAllBarang();
         if (listBarangMasukDetails != null || !listBarangMasukDetails.isEmpty()) {
-            tblListTransaksi.setModel(new BarangTableModel(listBarangMasukDetails));
+            barangTableModel.setListBarang(listBarangMasukDetails);
+            tblListTransaksi.setModel(barangTableModel);
             TableUtil.initColumn(tblListTransaksi);
         }
     }
