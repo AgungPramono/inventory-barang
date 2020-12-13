@@ -35,7 +35,6 @@ public class BarangKeluar extends BaseEntity{
     @JoinColumn(name = "id_pelanggan", nullable = false)
     private Pelanggan pelanggan;
 
-
     @OneToMany(mappedBy = "barangKeluar",
             cascade = CascadeType.ALL,
             orphanRemoval = true

@@ -87,7 +87,7 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
                 .list();
     }
 
-    public List<BarangMasuk> cariSemuaBarangMasuksMaster() {
+    public List cariSemuaBarangMasuksMaster() {
        return sessionFactory.getCurrentSession()
                .createQuery("select bm from BarangMasuk bm order by bm.tanggalMasuk desc")
                .list();
@@ -114,9 +114,10 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
         }
         sql.append(" order by bm.tanggalMasuk desc");
         
-        return sessionFactory.getCurrentSession()
+        List result = sessionFactory.getCurrentSession()
                 .createQuery(sql.toString())
                 .list();
+        return result;
     }
 
     @Override
