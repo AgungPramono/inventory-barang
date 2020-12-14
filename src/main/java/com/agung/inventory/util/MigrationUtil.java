@@ -1,11 +1,6 @@
 package com.agung.inventory.util;
 
 import org.flywaydb.core.Flyway;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
 
 public class MigrationUtil {
 
