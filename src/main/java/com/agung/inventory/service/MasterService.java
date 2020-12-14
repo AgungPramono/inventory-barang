@@ -78,7 +78,7 @@ public class MasterService {
         return petugasDao.findAll();
     }
 
-    public void deleteEmployee(Petugas petugas) {
+    public void deleteEmployee(Petugas petugas) throws Exception {
         Petugas p = petugasDao.findById(petugas);
         if (p != null) {
             petugasDao.deleteById(p);

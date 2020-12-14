@@ -61,12 +61,16 @@ public class LoginDialog extends javax.swing.JDialog {
         Petugas petugas = AppContext.getMasterService().findEmployeeByUsername(userName);
 
         if (petugas != null && password.equalsIgnoreCase(
-                PasswordHelper.getPlainTextFromEncryptedText(petugas.getPassword()))) {
+                PasswordHelper.getPlainTextFromEncryptedText(petugas.getPassword())) && petugas.isActive()) {
 
             SecurityConfig.setActivePetugas(petugas);
 
             notLogin = false;
             this.dispose();
+        } else if (!petugas.isActive()) {
+            JOptionPane.showMessageDialog(Main.getMainFrame(), "Hak akses nonaktif, silahkan hubungi admin untuk mengaktifkan",
+                    "Login Failure !", JOptionPane.ERROR_MESSAGE);
+
         } else {
             JOptionPane.showMessageDialog(Main.getMainFrame(), "Password Or Username is not valid!",
                     "Login Failure !", JOptionPane.ERROR_MESSAGE);

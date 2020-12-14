@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -39,7 +40,7 @@ public class PetugasDao implements BaseCrudDao<Petugas> {
     }
 
     @Override
-    public void deleteById(Petugas t) {
+    public void deleteById(Petugas t) throws Exception {
         sessionFactory.getCurrentSession()
                 .delete(t);
     }
@@ -57,7 +58,7 @@ public class PetugasDao implements BaseCrudDao<Petugas> {
 
     public Petugas cariByUsername(String userName) {
         return (Petugas) sessionFactory.getCurrentSession()
-                .createQuery("from Petugas p where p.username= :username")
+                .createQuery("select p from Petugas p where p.username= :username")
                 .setParameter("username", userName)
                 .uniqueResult();
     }

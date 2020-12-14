@@ -22,7 +22,7 @@ public interface BaseCrudDao<T> {
     
     T findById(T t)throws SQLException;
     
-    void deleteById(T t)throws SQLException;
+    void deleteById(T t)throws Exception;
     
     List<T> findAll()throws SQLException;
 
