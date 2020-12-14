@@ -113,6 +113,7 @@ public class DlgBarang extends javax.swing.JDialog {
         txtStock.setEnabled(enable);
         txtKeterangan.setEnabled(enable);
         cmbKategori.setEnabled(enable);
+        txtKode.requestFocus();
     }
 
     public Barang showDialog() {

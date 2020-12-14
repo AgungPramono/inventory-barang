@@ -11,6 +11,7 @@ import com.agung.inventory.ui.MainFrame;
 import com.jgoodies.looks.Options;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
+import com.jgoodies.looks.plastic.theme.DarkStar;
 import com.jgoodies.looks.plastic.theme.ExperienceRoyale;
 
 import javax.swing.*;
@@ -41,7 +42,7 @@ public class Main {
                     SystemInfo();
                     AppContext.initContainer();
                     PlasticLookAndFeel laf = new PlasticXPLookAndFeel();
-                    PlasticLookAndFeel.setCurrentTheme(new ExperienceRoyale());
+                    PlasticLookAndFeel.setCurrentTheme(new DarkStar());
                     Options.setPopupDropShadowEnabled(true);
                     UIManager.setLookAndFeel(laf);
                     mainFrame = new MainFrame();

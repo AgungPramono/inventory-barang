@@ -74,6 +74,7 @@ public class DlgKategori extends javax.swing.JDialog {
     private void enableForm(boolean enable) {
         txtKode.setEnabled(enable);
         txtNama.setEnabled(enable);
+        txtKode.requestFocus();
     }
 
     private void clearForm() {
@@ -81,8 +82,7 @@ public class DlgKategori extends javax.swing.JDialog {
         txtNama.setText("");
         kategori = null;
     }
-
-
+    
     private void simpan(){
         try {
             loadFormToModel();
