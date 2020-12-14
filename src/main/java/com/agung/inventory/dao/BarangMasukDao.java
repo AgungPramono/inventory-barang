@@ -51,7 +51,7 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
 
     public List finAllTransactionMaster() {
        return sessionFactory.getCurrentSession()
-               .createQuery("select bm from BarangMasuk bm order by bm.tanggalMasuk desc")
+               .createQuery("select bm from BarangMasuk bm left join fetch bm.barangMasukDetails bdm order by bm.tanggalMasuk desc")
                .list();
     }
 

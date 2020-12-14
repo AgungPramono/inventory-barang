@@ -123,6 +123,10 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
 
     private void loadDetail(Integer idMaster){
         List<BarangMasukDetail> listDetail = AppContext.getTransactionService().findAllBarangMasukDetailByIdMaster(idMaster);
+        loadDetail(listDetail);
+    }
+
+    private void loadDetail(List<BarangMasukDetail> listDetail){
         if (!listDetail.isEmpty()){
             barangMasukDetailTableModel.setData(listDetail);
             tlbDetail.setModel(barangMasukDetailTableModel);
@@ -484,7 +488,8 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
 
             if (tblBarangMasuk.getSelectedRow() >= 0) {
                 barangMasuk = listBarangMasuk.get(tblBarangMasuk.getSelectedRow());
-                loadDetail(barangMasuk.getId());
+//                loadDetail(barangMasuk.getId());
+                loadDetail(barangMasuk.getBarangMasukDetails());
             }
         }
 
