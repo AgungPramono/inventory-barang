@@ -306,11 +306,11 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, jLabel1, jLabel2, jLabel3);
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton2, jButton3, jButton4});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, jButton2, jButton3, jButton4);
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmbCustomer, txtKode});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, cmbCustomer, txtKode);
 
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,9 +350,9 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {chEnableDate, cmbCustomer, dateChooser, jLabel1, jLabel2, jLabel3});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, chEnableDate, cmbCustomer, dateChooser, jLabel1, jLabel2, jLabel3);
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton2, jButton3, jButton4});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, jButton2, jButton3, jButton4);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

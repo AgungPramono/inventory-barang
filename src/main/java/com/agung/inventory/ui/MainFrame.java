@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    private BarangTableModel barangTableModel = new BarangTableModel();
+    private final BarangTableModel barangTableModel = new BarangTableModel();
 
     public MainFrame() {
         initComponents();
@@ -133,21 +133,21 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(153, 153, 153));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
-        btnBarangMasuk.setText("Transaksi Barang Masuk");
+        btnBarangMasuk.setText("Transaksi Masuk");
         btnBarangMasuk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBarangMasukActionPerformed(evt);
             }
         });
 
-        btnBarangKeluar.setText("Transaksi Barang Keluar");
+        btnBarangKeluar.setText("Transaksi Keluar");
         btnBarangKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBarangKeluarActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Laporan");
+        jButton1.setText("Cetak Laporan");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -179,7 +179,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[]{btnBarangKeluar, jButton1});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, btnBarangKeluar, jButton1);
 
         javax.swing.GroupLayout pnlDashboardLayout = new javax.swing.GroupLayout(pnlDashboard);
         pnlDashboard.setLayout(pnlDashboardLayout);
@@ -319,7 +319,6 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu4.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         jMenu4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu4ActionPerformed(evt);
             }
         });
         jMenuBar1.add(jMenu4);
@@ -386,10 +385,6 @@ public class MainFrame extends javax.swing.JFrame {
         DlgListBarangKeluar.getSingleton().showDialog();
         loadDataToTable();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
-
-    }//GEN-LAST:event_jMenu4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         DlgLaporan.getInstance().showDialog();

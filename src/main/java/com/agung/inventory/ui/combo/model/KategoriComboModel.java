@@ -6,10 +6,10 @@
 package com.agung.inventory.ui.combo.model;
 
 import com.agung.inventory.entity.Kategori;
+
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.AbstractListModel;
-import javax.swing.ComboBoxModel;
 
 /**
  *

@@ -75,11 +75,8 @@ public class LoginDialog extends javax.swing.JDialog {
     }
 
     private Boolean validasiForm() {
-        if (String.valueOf(txtPassword.getPassword()).trim().length() > 0
-                && txtUsername.getText().trim().length() > 0) {
-            return true;
-        }
-        return false;
+        return String.valueOf(txtPassword.getPassword()).trim().length() > 0
+                && txtUsername.getText().trim().length() > 0;
     }
 
     /**
@@ -173,11 +170,11 @@ public class LoginDialog extends javax.swing.JDialog {
                         .addContainerGap())))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, jLabel2, jLabel3);
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBatal, btnLogin});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, btnBatal, btnLogin);
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtPassword, txtUsername});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, txtPassword, txtUsername);
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,9 +199,9 @@ public class LoginDialog extends javax.swing.JDialog {
                 .addGap(0, 22, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel2, jLabel3, txtPassword, txtUsername});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, jLabel2, jLabel3, txtPassword, txtUsername);
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnBatal, btnLogin});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, btnBatal, btnLogin);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

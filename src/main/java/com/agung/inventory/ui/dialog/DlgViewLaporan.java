@@ -6,9 +6,10 @@
 package com.agung.inventory.ui.dialog;
 
 import com.agung.inventory.Main;
-import java.awt.BorderLayout;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JRViewer;
+
+import java.awt.*;
 
 /**
  *

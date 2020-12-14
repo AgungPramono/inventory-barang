@@ -9,6 +9,7 @@ import com.agung.inventory.Main;
 import com.agung.inventory.config.AppContext;
 import com.agung.inventory.constan.ReportConstant;
 import com.agung.inventory.util.DateUtil;
+
 import java.time.LocalDateTime;
 
 /**
@@ -186,9 +187,9 @@ public class DlgLaporan extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel3});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, jLabel1, jLabel3);
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jDateChooser1, jDateChooser2});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, jDateChooser1, jDateChooser2);
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,7 +209,7 @@ public class DlgLaporan extends javax.swing.JDialog {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jDateChooser1, jDateChooser2, jLabel3, jLabel5});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, jDateChooser1, jDateChooser2, jLabel3, jLabel5);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

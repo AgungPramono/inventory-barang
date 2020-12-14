@@ -6,9 +6,10 @@
 package com.agung.inventory.ui.tablemodel;
 
 import com.agung.inventory.entity.BarangMasuk;
+
+import javax.swing.table.AbstractTableModel;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import javax.swing.table.AbstractTableModel;
 
 /**
  *

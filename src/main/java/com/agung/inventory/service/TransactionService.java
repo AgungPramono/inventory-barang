@@ -6,7 +6,10 @@
 package com.agung.inventory.service;
 
 import com.agung.inventory.constan.StokTidakCukupException;
-import com.agung.inventory.dao.*;
+import com.agung.inventory.dao.BarangDao;
+import com.agung.inventory.dao.BarangKeluarDao;
+import com.agung.inventory.dao.BarangMasukDao;
+import com.agung.inventory.dao.BarangMasukDetailDao;
 import com.agung.inventory.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

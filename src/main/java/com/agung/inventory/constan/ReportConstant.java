@@ -11,11 +11,11 @@ package com.agung.inventory.constan;
  */
 public interface ReportConstant {
     
-    public static final String LAPORAN_BARANG_MASUK = "laporan_barang_masuk";
-    public static final String LAPORAN_BARANG_KELUAR = "laporan_barang_keluar";
-    public static String PATH_RPT_BARANG_MASUK = "/report/lpr_barang_masuk.jrxml";
-    public static String PATH_RPT_BARANG_KELUAR = "/report/lpr_barang_keluar.jrxml";
-    public static String PATH_RPT_STOK_BARANG = "/report/laporan_stok_barang.jrxml";
+    String LAPORAN_BARANG_MASUK = "laporan_barang_masuk";
+    String LAPORAN_BARANG_KELUAR = "laporan_barang_keluar";
+    String PATH_RPT_BARANG_MASUK = "/report/lpr_barang_masuk.jrxml";
+    String PATH_RPT_BARANG_KELUAR = "/report/lpr_barang_keluar.jrxml";
+    String PATH_RPT_STOK_BARANG = "/report/laporan_stok_barang.jrxml";
     
     
 }

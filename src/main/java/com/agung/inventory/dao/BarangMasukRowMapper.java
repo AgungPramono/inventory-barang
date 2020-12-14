@@ -8,9 +8,10 @@ package com.agung.inventory.dao;
 import com.agung.inventory.entity.BarangMasuk;
 import com.agung.inventory.entity.Petugas;
 import com.agung.inventory.entity.Supplier;
+import org.springframework.jdbc.core.RowMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.springframework.jdbc.core.RowMapper;
 
 /**
  *

@@ -6,9 +6,10 @@
 package com.agung.inventory.ui.tablemodel;
 
 import com.agung.inventory.entity.Pelanggan;
+
+import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.table.AbstractTableModel;
 
 /**
  *

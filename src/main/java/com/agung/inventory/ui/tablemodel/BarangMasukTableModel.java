@@ -6,9 +6,10 @@
 package com.agung.inventory.ui.tablemodel;
 
 import com.agung.inventory.entity.BarangMasukDetail;
+
+import javax.swing.table.AbstractTableModel;
 import java.math.BigDecimal;
 import java.util.List;
-import javax.swing.table.AbstractTableModel;
 
 /**
  *

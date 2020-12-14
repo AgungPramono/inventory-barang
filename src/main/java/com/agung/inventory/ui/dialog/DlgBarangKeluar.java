@@ -306,7 +306,7 @@ public class DlgBarangKeluar extends javax.swing.JDialog {
                         .addContainerGap(348, Short.MAX_VALUE))))
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton2, jButton3});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, jButton2, jButton3);
 
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,9 +324,9 @@ public class DlgBarangKeluar extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton2, jButton3});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, jButton2, jButton3);
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAddBarang, txtNamaBarang});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, btnAddBarang, txtNamaBarang);
 
         jButton4.setText("Simpan");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -379,11 +379,11 @@ public class DlgBarangKeluar extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel5});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, jLabel2, jLabel3, jLabel5);
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton4, jButton5});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, jButton4, jButton5);
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmbPelanggan, txtPetugas});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, cmbPelanggan, txtPetugas);
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,9 +412,9 @@ public class DlgBarangKeluar extends javax.swing.JDialog {
                 .addGap(16, 16, 16))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cmbPelanggan, jLabel2, jLabel3, jLabel4, jdate, txtPetugas});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, cmbPelanggan, jLabel2, jLabel3, jLabel4, jdate, txtPetugas);
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton4, jButton5});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, jButton4, jButton5);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

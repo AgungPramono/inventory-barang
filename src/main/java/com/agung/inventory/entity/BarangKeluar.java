@@ -5,7 +5,8 @@
  */
 package com.agung.inventory.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,7 +17,8 @@ import java.util.List;
  * @author agung
  */
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "barang_keluar")
 public class BarangKeluar extends BaseEntity {

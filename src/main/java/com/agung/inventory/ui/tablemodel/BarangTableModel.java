@@ -7,7 +7,6 @@ package com.agung.inventory.ui.tablemodel;
 
 import com.agung.inventory.entity.Barang;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
@@ -20,12 +19,16 @@ import java.util.List;
 @NoArgsConstructor
 public class BarangTableModel extends AbstractTableModel{
 
-    @Setter
     private List<Barang> listBarang = new ArrayList<>();
     private final String[]headerTitle = {"id","kode","Nama","kategori","Stok","Keterangan"};
 
     public BarangTableModel(List<Barang> barangs) {
         this.listBarang = barangs;
+    }
+
+    public void setListBarang(List<Barang> listBarang) {
+        this.listBarang = listBarang;
+        fireTableDataChanged();
     }
 
     @Override

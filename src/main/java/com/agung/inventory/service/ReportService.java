@@ -47,7 +47,7 @@ public class ReportService {
     private DataSource dataSource;
 
     private JasperDesign jasperDesign;
-    private JRDesignQuery jrQuery = new JRDesignQuery();
+    private final JRDesignQuery jrQuery = new JRDesignQuery();
 
     public JasperPrint printLaporanStok() {
         try {

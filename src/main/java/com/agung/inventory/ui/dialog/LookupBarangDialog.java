@@ -164,7 +164,7 @@ public class LookupBarangDialog extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBatal, btnPilih});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, btnBatal, btnPilih);
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,9 +182,9 @@ public class LookupBarangDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCari, txtCari});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, btnCari, txtCari);
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnBatal, btnPilih});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, btnBatal, btnPilih);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

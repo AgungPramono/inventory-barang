@@ -5,10 +5,10 @@
  */
 package com.agung.inventory.util;
 
-import java.util.Enumeration;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
+import java.util.Enumeration;
 
 /**
  *

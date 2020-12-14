@@ -324,9 +324,9 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAddBarang, txtNamaBarang});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, btnAddBarang, txtNamaBarang);
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnHapusDipilih, btnHapusSemua});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, btnHapusDipilih, btnHapusSemua);
 
         jButton4.setText("Simpan");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -387,11 +387,11 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
                         .addGap(9, 9, 9))))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel5});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, jLabel2, jLabel3, jLabel5);
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton4, jButton5});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, jButton4, jButton5);
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmbSupplier, txtPetugas});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, cmbSupplier, txtPetugas);
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -420,9 +420,9 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
                 .addGap(14, 14, 14))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cmbSupplier, jLabel2, jLabel3, jLabel4, jdate, txtPetugas});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, cmbSupplier, jLabel2, jLabel3, jLabel4, jdate, txtPetugas);
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton4, jButton5});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, jButton4, jButton5);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

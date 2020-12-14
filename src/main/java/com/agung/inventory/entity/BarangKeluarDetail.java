@@ -5,7 +5,8 @@
  */
 package com.agung.inventory.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,7 +16,8 @@ import java.math.BigDecimal;
  * @author agung
  */
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "barang_keluar_detail")
 public class BarangKeluarDetail extends BaseEntity{

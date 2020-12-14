@@ -36,7 +36,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
     private static DlgListBarangMasuk singleton;
     private List<BarangMasuk> listBarangMasuk;
     private BarangMasuk barangMasuk;
-    private BarangMasukDetailTableModel barangMasukDetailTableModel = new BarangMasukDetailTableModel();
+    private final BarangMasukDetailTableModel barangMasukDetailTableModel = new BarangMasukDetailTableModel();
 
     public DlgListBarangMasuk() {
         super(Main.getMainFrame(), true);
@@ -329,9 +329,9 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, jLabel1, jLabel2, jLabel3);
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton2, jButton3, jButton4});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, jButton2, jButton3, jButton4);
 
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,11 +370,11 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {chEnableDate1, cmbSupplier, dateChooser, jLabel1, jLabel2, jLabel3, txtKode});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, chEnableDate1, cmbSupplier, dateChooser, jLabel1, jLabel2, jLabel3, txtKode);
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton2, jButton3, jButton4});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, jButton2, jButton3, jButton4);
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cmbPetugas, jLabel4});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, cmbPetugas, jLabel4);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
