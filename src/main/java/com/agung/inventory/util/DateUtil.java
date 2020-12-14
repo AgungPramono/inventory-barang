@@ -32,7 +32,7 @@ public class DateUtil {
         return DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss");
     }
 
-    private static Date getDate(String date){
+    public static Date getDate(String date){
         return Date.from(LocalDate.parse(date).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
     }
 }
