@@ -44,7 +44,6 @@ public class TransactionService {
         barangMasukDao.save(barangMasuk);
 
         for (BarangMasukDetail detail : barangMasuk.getBarangMasukDetails()) {
-
             Barang b = itemDao.findById(detail.getBarang());
             if (b != null) {
                 BigDecimal newQty = b.getQty().add(detail.getQty());

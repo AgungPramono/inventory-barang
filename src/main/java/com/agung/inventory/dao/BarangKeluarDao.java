@@ -30,12 +30,12 @@ public class BarangKeluarDao {
     
     public List findAll(){
         return sessionFactory.getCurrentSession()
-                .createQuery("from BarangKeluar b")
+                .createQuery("select b from BarangKeluar b left join fetch b.barangKeluarDetails bk")
                 .list();
     }
     
     public List findByParameter(String kolom, String value) {
-        StringBuilder sql = new StringBuilder("select bk from BarangKeluar bk ");
+        StringBuilder sql = new StringBuilder("select bk from BarangKeluar bk left join fetch bk.barangKeluarDetails bd ");
 
         switch (kolom) {
             case "tanggal":
