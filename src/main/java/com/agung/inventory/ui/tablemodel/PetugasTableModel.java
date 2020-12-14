@@ -18,7 +18,7 @@ import java.util.List;
 public class PetugasTableModel extends AbstractTableModel{
     
     private List<Petugas> listPetugases = new ArrayList<>();
-    private final String[]headerTitle = {"id","nama","Username"};
+    private final String[]headerTitle = {"Nama","Username"};
 
     public PetugasTableModel(List<Petugas> listPetugases) {
         this.listPetugases = listPetugases;
@@ -44,9 +44,8 @@ public class PetugasTableModel extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         Petugas petugas = listPetugases.get(rowIndex);
         switch(columnIndex){
-            case 0:return petugas.getId();
-            case 1:return petugas.getNama();
-            case 2:return petugas.getUsername();
+            case 0:return petugas.getNama();
+            case 1:return petugas.getUsername();
             default:return "";
         }
 

@@ -18,7 +18,7 @@ import java.util.List;
 public class SupplierTableModel extends AbstractTableModel{
     
     private List<Supplier> listSuppliers = new ArrayList<>();
-    private final String[]headerTitle = {"id","kode","Nama Supplier","Alamat","Telepon"};
+    private final String[]headerTitle = {"kode","Nama Supplier","Alamat","Telepon"};
 
     public SupplierTableModel(List<Supplier> suppliers) {
         this.listSuppliers = suppliers;
@@ -44,11 +44,10 @@ public class SupplierTableModel extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         Supplier s = listSuppliers.get(rowIndex);
         switch(columnIndex){
-            case 0:return s.getId();
-            case 1:return s.getKode();
-            case 2:return s.getNama();
-            case 3:return s.getAlamat();
-            case 4:return s.getTelepon();
+            case 0:return s.getKode();
+            case 1:return s.getNama();
+            case 2:return s.getAlamat();
+            case 3:return s.getTelepon();
             default:return "";
         }
 

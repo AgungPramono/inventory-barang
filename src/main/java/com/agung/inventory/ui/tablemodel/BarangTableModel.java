@@ -20,7 +20,7 @@ import java.util.List;
 public class BarangTableModel extends AbstractTableModel{
 
     private List<Barang> listBarang = new ArrayList<>();
-    private final String[]headerTitle = {"id","kode","Nama","kategori","Stok","Keterangan"};
+    private final String[]headerTitle = {"kode","Nama","kategori","Stok","Keterangan"};
 
     public BarangTableModel(List<Barang> barangs) {
         this.listBarang = barangs;
@@ -50,12 +50,11 @@ public class BarangTableModel extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         Barang barang = listBarang.get(rowIndex);
         switch(columnIndex){
-            case 0:return barang.getId();
-            case 1:return barang.getKodeBarang();
-            case 2:return barang.getNamaBarang();
-            case 3:return barang.getKategori();
-            case 4:return barang.getQty().longValue();
-            case 5:return barang.getKeterangan();
+            case 0:return barang.getKodeBarang();
+            case 1:return barang.getNamaBarang();
+            case 2:return barang.getKategori();
+            case 3:return barang.getQty().longValue();
+            case 4:return barang.getKeterangan();
             default:return "";
         }
 

@@ -18,7 +18,7 @@ import java.util.List;
 public class KategoriTableModel extends AbstractTableModel{
     
     private List<Kategori> listKategori = new ArrayList<>();
-    private final String[]headerTitle = {"id","kode","Nama Kategori"};
+    private final String[]headerTitle = {"kode","Nama Kategori"};
 
     public KategoriTableModel(List<Kategori> kategoris) {
         this.listKategori = kategoris;
@@ -44,9 +44,8 @@ public class KategoriTableModel extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         Kategori kategori = listKategori.get(rowIndex);
         switch(columnIndex){
-            case 0:return kategori.getId();
-            case 1:return kategori.getKode();
-            case 2:return kategori.getNama();
+            case 0:return kategori.getKode();
+            case 1:return kategori.getNama();
             default:return "";
         }
 

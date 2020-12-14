@@ -82,8 +82,8 @@ public class DlgKategori extends javax.swing.JDialog {
         txtNama.setText("");
         kategori = null;
     }
-    
-    private void simpan(){
+
+    private void save(){
         try {
             loadFormToModel();
             AppContext.getMasterService().saveCategory(kategori);
@@ -97,7 +97,7 @@ public class DlgKategori extends javax.swing.JDialog {
         }
     }
 
-    private void hapus(){
+    private void delete(){
         if (tblKategori.getSelectedRow() >= 0 && kategori != null) {
             int retval = JOptionPane.showConfirmDialog(this, "Yakin Hapus?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (retval == JOptionPane.YES_OPTION) {
@@ -117,6 +117,12 @@ public class DlgKategori extends javax.swing.JDialog {
             loadModelToForm();
             enableForm(true);
         }
+    }
+
+    private void closeDialog(){
+        this.dispose();
+        clearForm();
+        enableForm(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -342,7 +348,7 @@ public class DlgKategori extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
-        dispose();
+       closeDialog();
     }//GEN-LAST:event_btnBatalActionPerformed
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
@@ -354,12 +360,11 @@ public class DlgKategori extends javax.swing.JDialog {
     }//GEN-LAST:event_btnUbahActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-       hapus();
-
+       delete();
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        simpan();
+        save();
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private class TableSelection implements ListSelectionListener {
