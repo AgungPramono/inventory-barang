@@ -19,9 +19,10 @@ public class MainSpringApp {
     
     public static void main(String[]args){
         AppContext.initContainer();
-        List<BarangMasuk> alList = AppContext.getTransactionService().findAllBarangMasuk();
+        List<BarangMasuk> alList = AppContext.getTransactionService().findBarangMasukMaster();
         for (BarangMasuk barangMasuk : alList) {
             System.out.println("id "+barangMasuk.getId()+" : "+barangMasuk.getPetugas().getNama());
+            System.out.println("jumlah detail: "+ barangMasuk.getBarangMasukDetails().size());
             for(BarangMasukDetail bmd:barangMasuk.getBarangMasukDetails()){
                 System.out.println("Nama Barang"+bmd.getBarang().getNamaBarang());
                 System.out.println("Id Header"+bmd.getBarangMasuk().getId());
