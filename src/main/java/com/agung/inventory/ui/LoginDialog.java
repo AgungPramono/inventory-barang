@@ -65,8 +65,9 @@ public class LoginDialog extends javax.swing.JDialog {
             return;
         }
 
-        if (petugas != null && password.equalsIgnoreCase(
-                PasswordHelper.getPlainTextFromEncryptedText(petugas.getPassword())) && petugas.isActive()) {
+        if (password.equalsIgnoreCase(
+                PasswordHelper.getPlainTextFromEncryptedText(petugas.getPassword()))
+                && petugas.isActive()) {
 
             SecurityConfig.setActivePetugas(petugas);
 
@@ -115,6 +116,19 @@ public class LoginDialog extends javax.swing.JDialog {
         });
     }
 
+    private void login(){
+        try {
+            if (validasiForm()) {
+                prosesLogin();
+            } else {
+                JOptionPane.showMessageDialog(this, "Username atau Password masih kosong",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                txtUsername.requestFocus();
+            }
+        } catch (Exception e) {
+            LOG.error(e.getMessage());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -264,34 +278,12 @@ public class LoginDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBatalActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        try {
-            if (validasiForm()) {
-                prosesLogin();
-            } else {
-                JOptionPane.showMessageDialog(this, "Username atau Password masih kosong",
-                        "Error", JOptionPane.ERROR_MESSAGE);
-                txtUsername.requestFocus();
-            }
-        } catch (Exception e) {
-            LOG.error(e.getMessage());
-        }
-
+       login();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
-            try {
-                if (validasiForm()) {
-                    prosesLogin();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Username atau Password masih kosong",
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                    txtUsername.requestFocus();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                LOG.error(e.getMessage());
-            }
+            btnLogin.doClick();
         }
     }//GEN-LAST:event_txtPasswordKeyPressed
 
