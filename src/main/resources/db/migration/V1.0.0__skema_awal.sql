@@ -91,3 +91,5 @@ create table hibernate_sequence (
     );
 
 insert into hibernate_sequence values ( 1 );
+
+insert into petugas (nama,username,password,active) values ('admin',"admin","ENC(6Z3BSnvjtz8D4ocHPWGpIsmdE/oKzgQD)",true);

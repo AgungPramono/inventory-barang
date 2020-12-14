@@ -8,12 +8,14 @@ package com.agung.inventory;
 import com.agung.inventory.config.AppContext;
 import com.agung.inventory.config.SecurityConfig;
 import com.agung.inventory.ui.MainFrame;
+import com.agung.inventory.util.MigrationUtil;
 import com.jgoodies.looks.Options;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import com.jgoodies.looks.plastic.theme.BrownSugar;
 import com.jgoodies.looks.plastic.theme.DarkStar;
 import com.jgoodies.looks.plastic.theme.ExperienceRoyale;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.swing.*;
 import java.util.logging.Level;
@@ -26,6 +28,9 @@ public class Main {
 
     public static MainFrame mainFrame;
 
+    @Autowired
+    private static MigrationUtil migrationUtil;
+
     public static MainFrame getMainFrame() {
         return mainFrame;
     }
@@ -36,11 +41,13 @@ public class Main {
     }
 
     public static void main(String[] args) {
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 try {
                     SystemInfo();
+                    MigrationUtil.migrate();
                     AppContext.initContainer();
                     PlasticLookAndFeel laf = new PlasticXPLookAndFeel();
                     PlasticLookAndFeel.setCurrentTheme(new BrownSugar());

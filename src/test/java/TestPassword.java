@@ -16,7 +16,7 @@ public class TestPassword {
     
     @Test
     public void testGetPlainFromPassword(){
-        String pass = PasswordHelper.getEncryptedTextFromPlainText("agung123");
+        String pass = PasswordHelper.getEncryptedTextFromPlainText("admin123");
         System.out.println(pass);
     }
     

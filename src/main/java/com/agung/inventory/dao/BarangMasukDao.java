@@ -38,8 +38,9 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
     }
 
     @Override
-    public void deleteById(BarangMasuk t) {
-            
+    public void deleteById(BarangMasuk barangMasuk) {
+            sessionFactory.getCurrentSession()
+                    .delete(barangMasuk);
     }
 
     @Override
