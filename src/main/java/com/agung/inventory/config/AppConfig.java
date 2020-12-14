@@ -61,24 +61,24 @@ public class AppConfig {
 
     @Bean
     public DataSource dataSource() {
-        HikariConfig datasourceConfig = new HikariConfig();
-        datasourceConfig.setDriverClassName(jdbcDriver);
-        datasourceConfig.setJdbcUrl(jdbcUrl);
-        datasourceConfig.setUsername(jdbcUsername);
-        datasourceConfig.setPassword(jdbcPassword);
-        datasourceConfig.getMetricRegistry();
-        datasourceConfig.setMaxLifetime(30000);
-        datasourceConfig.setMinimumIdle(10);
-        datasourceConfig.setMaximumPoolSize(80);
-        datasourceConfig.addDataSourceProperty( "cachePrepStmts" , "true" );
-        datasourceConfig.addDataSourceProperty( "prepStmtCacheSize" , "250" );
-        datasourceConfig.addDataSourceProperty( "prepStmtCacheSqlLimit" , "2048" );
+        HikariConfig config = new HikariConfig();
+        config.setDriverClassName(jdbcDriver);
+        config.setJdbcUrl(jdbcUrl);
+        config.setUsername(jdbcUsername);
+        config.setPassword(jdbcPassword);
+        config.getMetricRegistry();
+        config.setMaxLifetime(30000);
+        config.setMinimumIdle(10);
+        config.setMaximumPoolSize(80);
+        config.addDataSourceProperty( "cachePrepStmts" , "true" );
+        config.addDataSourceProperty( "prepStmtCacheSize" , "250" );
+        config.addDataSourceProperty( "prepStmtCacheSqlLimit" , "2048" );
 
-        return new HikariDataSource(datasourceConfig);
+        return new HikariDataSource(config);
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {
+    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory);
         return transactionManager;
