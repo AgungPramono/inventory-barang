@@ -10,7 +10,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -26,18 +25,14 @@ public class BarangDao implements BaseCrudDao<Barang> {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Autowired
-    public void setDataSource(DataSource dataSource){
-    }
-
     @Override
-    public void simpan(Barang barang) throws SQLException {
+    public void save(Barang barang) throws SQLException {
         sessionFactory.getCurrentSession()
                 .saveOrUpdate(barang);
     }
 
     @Override
-    public Barang cariById(Barang barang) {
+    public Barang findById(Barang barang) {
        return (Barang) sessionFactory.getCurrentSession()
                .createQuery("select b from Barang b where b.id= :id")
                .setParameter("id", barang.getId())
@@ -55,7 +50,7 @@ public class BarangDao implements BaseCrudDao<Barang> {
     }
 
     @Override
-    public List<Barang> cariSemua() {
+    public List<Barang> findAll() {
         return sessionFactory.getCurrentSession()
                 .createQuery("from Barang b")
                 .list();
@@ -65,8 +60,9 @@ public class BarangDao implements BaseCrudDao<Barang> {
     public void setDataSource(Connection dataSource) {
     }
 
-    public List<Barang> cariBarangByName(String text) {
+    public List cariBarangByName(String text) {
         return sessionFactory.getCurrentSession()
+
                 .createQuery("select b from Barang b where b.nama like :nama")
                 .setParameter("nama", "%"+text+"%").list();
     }

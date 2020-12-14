@@ -41,17 +41,16 @@ public class TransactionService {
 
     @Transactional(readOnly = false)
     public void simpanBarangMasuk(BarangMasuk barangMasuk) throws Exception {
-        if (barangMasuk != null){
-            barangMasukDao.simpan(barangMasuk);
+        barangMasukDao.save(barangMasuk);
 
-            for (BarangMasukDetail detail : barangMasuk.getBarangMasukDetails()) {
-                Barang b = barangDao.cariById(detail.getBarang());
-                if (b != null) {
-                    BigDecimal newQty = b.getQty().add(detail.getQty());
-                    b.setQty(newQty);
-                    b.setId(detail.getBarang().getId());
-                    barangDao.updateQty(b);
-                }
+        for (BarangMasukDetail detail : barangMasuk.getBarangMasukDetails()) {
+
+            Barang b = barangDao.findById(detail.getBarang());
+            if (b != null) {
+                BigDecimal newQty = b.getQty().add(detail.getQty());
+                b.setQty(newQty);
+                b.setId(detail.getBarang().getId());
+                barangDao.updateQty(b);
             }
         }
     }
@@ -63,7 +62,7 @@ public class TransactionService {
         if (barangKeluar != null) {
             barangKeluarDao.simpan(barangKeluar);
             for (BarangKeluarDetail detail : barangKeluar.getBarangKeluarDetails()) {
-                Barang b = barangDao.cariById(detail.getBarang());
+                Barang b = barangDao.findById(detail.getBarang());
                 if (b != null) {
                     if (detail.getQty().compareTo(b.getQty()) > 0) {
                         throw new StokTidakCukupException("stock " + detail.getBarang().getNamaBarang() + " tidak mencukupi");
@@ -71,14 +70,14 @@ public class TransactionService {
                     BigDecimal newQty = b.getQty().subtract(detail.getQty());
                     b.setQty(newQty);
                     b.setId(detail.getBarang().getId());
-                    barangDao.simpan(b);
+                    barangDao.save(b);
                 }
             }
         }
     }
     
     public List<BarangMasuk> findAllBarangMasuk(){
-        return barangMasukDao.cariSemua();
+        return barangMasukDao.findAll();
     }
     
     public List<BarangMasuk> findBarangMasukMaster(){

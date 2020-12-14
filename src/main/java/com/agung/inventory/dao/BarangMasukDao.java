@@ -25,13 +25,13 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
     private SessionFactory sessionFactory;
 
     @Override
-    public void simpan(BarangMasuk barangMasuk) {
+    public void save(BarangMasuk barangMasuk) {
        sessionFactory.getCurrentSession()
                .saveOrUpdate(barangMasuk);
     }
 
     @Override
-    public BarangMasuk cariById(BarangMasuk t) {
+    public BarangMasuk findById(BarangMasuk t) {
         return (BarangMasuk) sessionFactory.getCurrentSession()
                 .createQuery("select bm from BarangMasuk bm where bm.id= :id")
                 .setParameter("id",t.getId())
@@ -44,7 +44,7 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
     }
 
     @Override
-    public List<BarangMasuk> cariSemua() {
+    public List<BarangMasuk> findAll() {
         return sessionFactory.getCurrentSession()
                 .createQuery("from BarangMasuk bm")
                 .list();

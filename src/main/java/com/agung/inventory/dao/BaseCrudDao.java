@@ -18,12 +18,12 @@ public interface BaseCrudDao<T> {
     
     void setDataSource(Connection dataSource);
     
-    void simpan(T t)throws SQLException;
+    void save(T t)throws SQLException;
     
-    T cariById(T t)throws SQLException;
+    T findById(T t)throws SQLException;
     
     void deleteById(T t)throws SQLException;
     
-    List<T> cariSemua()throws SQLException;
-    
+    List<T> findAll()throws SQLException;
+
 }

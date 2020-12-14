@@ -30,14 +30,17 @@ public class KategoriDao implements BaseCrudDao<Kategori> {
     }
 
     @Override
-    public void simpan(Kategori t)throws SQLException{
+    public void save(Kategori t)throws SQLException{
         sessionFactory.getCurrentSession()
                 .saveOrUpdate(t);
     }
 
     @Override
-    public Kategori cariById(Kategori t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Kategori findById(Kategori t) {
+        return (Kategori) sessionFactory.getCurrentSession()
+                .createQuery("from Kategori k where k.id= :id")
+                .setParameter("id", t.getId())
+                .uniqueResult();
     }
 
     @Override
@@ -48,7 +51,7 @@ public class KategoriDao implements BaseCrudDao<Kategori> {
 
 
     @Override
-    public List<Kategori> cariSemua() {
+    public List<Kategori> findAll() {
         return sessionFactory.getCurrentSession()
                 .createQuery("from Kategori k")
                 .list();

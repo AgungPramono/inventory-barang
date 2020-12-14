@@ -37,7 +37,8 @@ public class BarangMasuk extends BaseEntity {
 
     @OneToMany(mappedBy = "barangMasuk",
             cascade = CascadeType.ALL,
-            orphanRemoval = true
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
     )
     private List<BarangMasukDetail> barangMasukDetails =
             new ArrayList<>();
