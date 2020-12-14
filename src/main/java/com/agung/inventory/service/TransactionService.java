@@ -34,23 +34,20 @@ public class TransactionService {
     private BarangKeluarDao barangKeluarDao;
 
     @Autowired
-    private BarangKeluarDetailDao barangKeluarDetailDao;
-
-    @Autowired
-    private BarangDao barangDao;
+    private BarangDao itemDao;
 
     @Transactional(readOnly = false)
-    public void simpanBarangMasuk(BarangMasuk barangMasuk) throws Exception {
+    public void saveInTransaction(BarangMasuk barangMasuk) throws Exception {
         barangMasukDao.save(barangMasuk);
 
         for (BarangMasukDetail detail : barangMasuk.getBarangMasukDetails()) {
 
-            Barang b = barangDao.findById(detail.getBarang());
+            Barang b = itemDao.findById(detail.getBarang());
             if (b != null) {
                 BigDecimal newQty = b.getQty().add(detail.getQty());
                 b.setQty(newQty);
                 b.setId(detail.getBarang().getId());
-                barangDao.updateQty(b);
+                itemDao.updateQty(b);
             }
         }
     }
@@ -58,11 +55,11 @@ public class TransactionService {
     @Transactional(rollbackFor = {RuntimeException.class,
         StokTidakCukupException.class},
             readOnly = false, isolation = Isolation.READ_COMMITTED )
-    public void simpanBarangKeluar(BarangKeluar barangKeluar) throws Exception {
+    public void saveOutTransaction(BarangKeluar barangKeluar) throws Exception {
         if (barangKeluar != null) {
-            barangKeluarDao.simpan(barangKeluar);
+            barangKeluarDao.save(barangKeluar);
             for (BarangKeluarDetail detail : barangKeluar.getBarangKeluarDetails()) {
-                Barang b = barangDao.findById(detail.getBarang());
+                Barang b = itemDao.findById(detail.getBarang());
                 if (b != null) {
                     if (detail.getQty().compareTo(b.getQty()) > 0) {
                         throw new StokTidakCukupException("stock " + detail.getBarang().getNamaBarang() + " tidak mencukupi");
@@ -70,7 +67,7 @@ public class TransactionService {
                     BigDecimal newQty = b.getQty().subtract(detail.getQty());
                     b.setQty(newQty);
                     b.setId(detail.getBarang().getId());
-                    barangDao.save(b);
+                    itemDao.save(b);
                 }
             }
         }
@@ -81,7 +78,7 @@ public class TransactionService {
     }
     
     public List<BarangMasuk> findBarangMasukMaster(){
-        return barangMasukDao.cariSemuaBarangMasuksMaster();
+        return barangMasukDao.finAllTransactionMaster();
     }
     
     public List<BarangMasuk> findBarangMasukByParam(String kolom, String value){
@@ -89,11 +86,11 @@ public class TransactionService {
     }
     
     public List<BarangKeluar> findAllBarangKeluar(){
-        return barangKeluarDao.cariSemua();
+        return barangKeluarDao.findAll();
     }
     
      public List<BarangKeluar> findAllBarangKeluarByParam(String kolom, String value){
-        return barangKeluarDao.cariByParameter(kolom, value);
+        return barangKeluarDao.findByParameter(kolom, value);
     }
 
     public List<BarangMasukDetail> findAllBarangMasukDetailByIdMaster(Integer id){

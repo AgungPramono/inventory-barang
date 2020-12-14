@@ -145,7 +145,7 @@ public class DlgBarangKeluar extends javax.swing.JDialog {
         }
         loadFormToDomain();
         try {
-            AppContext.getTransactionService().simpanBarangKeluar(barangKeluar);
+            AppContext.getTransactionService().saveOutTransaction(barangKeluar);
             clearForm();
             JOptionPane.showMessageDialog(this, "Data Berhasil disimpan!",
                     "Sukses", JOptionPane.INFORMATION_MESSAGE);

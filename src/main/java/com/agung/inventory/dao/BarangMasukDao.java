@@ -50,7 +50,7 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
                 .list();
     }
 
-    public List cariSemuaBarangMasuksMaster() {
+    public List finAllTransactionMaster() {
        return sessionFactory.getCurrentSession()
                .createQuery("select bm from BarangMasuk bm order by bm.tanggalMasuk desc")
                .list();

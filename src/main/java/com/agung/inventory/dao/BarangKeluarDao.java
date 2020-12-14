@@ -24,29 +24,18 @@ public class BarangKeluarDao {
     @Autowired
     private SessionFactory sessionFactory;
     
-     private final String FIND_ALL_TRANSACTION_MASTER = "select bm.id,bm.tanggal,bm.no_transaksi,p.nama as nama_petugas,s.nama as nama_customer "
-            + "from barang_keluar bm "
-            + "join petugas p "
-            + "on p.id = bm.id_petugas "
-            + "join pelanggan s "
-            + "on s.id = bm.id_pelanggan ";
-   
-    @Autowired
-    private void setDataSource(DataSource dataSource){
-    }
-    
-    public void simpan(BarangKeluar barangKeluar){
+    public void save(BarangKeluar barangKeluar){
         sessionFactory.getCurrentSession()
                 .saveOrUpdate(barangKeluar);
     }
     
-    public List cariSemua(){
+    public List findAll(){
         return sessionFactory.getCurrentSession()
                 .createQuery("from BarangKeluar b")
                 .list();
     }
     
-    public List cariByParameter(String kolom, String value) {
+    public List findByParameter(String kolom, String value) {
         StringBuilder sql = new StringBuilder("select bk from BarangKeluar bk ");
 
         switch (kolom) {
