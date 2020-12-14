@@ -65,7 +65,7 @@ public class AppConfig {
         config.setJdbcUrl(jdbcUrl);
         config.setUsername(jdbcUsername);
         config.setPassword(jdbcPassword);
-        config.getMetricRegistry();
+//        config.getMetricRegistry();
         config.setMaxLifetime(30000);
         config.setMinimumIdle(10);
         config.setMaximumPoolSize(80);

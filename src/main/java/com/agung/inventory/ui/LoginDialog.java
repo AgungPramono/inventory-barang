@@ -60,6 +60,11 @@ public class LoginDialog extends javax.swing.JDialog {
 
         Petugas petugas = AppContext.getMasterService().findEmployeeByUsername(userName);
 
+        if (petugas == null){
+            JOptionPane.showMessageDialog(Main.getMainFrame(),"User tidak ditemukan","Info", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
         if (petugas != null && password.equalsIgnoreCase(
                 PasswordHelper.getPlainTextFromEncryptedText(petugas.getPassword())) && petugas.isActive()) {
 
@@ -92,6 +97,20 @@ public class LoginDialog extends javax.swing.JDialog {
                         txtPassword.selectAll();
                     }
                 }
+            }
+        });
+
+        txtUsername.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                txtUsername.selectAll();
+            }
+        });
+
+        txtPassword.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                txtPassword.selectAll();
             }
         });
     }

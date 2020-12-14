@@ -42,7 +42,6 @@ public class TransactionService {
     @Transactional(readOnly = false)
     public void saveInTransaction(BarangMasuk barangMasuk) throws Exception {
         barangMasukDao.save(barangMasuk);
-
         for (BarangMasukDetail detail : barangMasuk.getBarangMasukDetails()) {
             Barang b = itemDao.findById(detail.getBarang());
             if (b != null) {
