@@ -13,7 +13,10 @@ import com.agung.inventory.util.PasswordHelper;
 import com.agung.inventory.util.TableUtil;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -366,7 +369,6 @@ public class DlgPetugas extends javax.swing.JDialog {
         clearForm();
         enableForm(false);
         this.dispose();
-
     }//GEN-LAST:event_btnBatalActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed

@@ -6,6 +6,7 @@
 package com.agung.inventory.util;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -26,9 +27,12 @@ public class DateUtil {
     public static Date toDate(LocalDateTime localDateTime){
         return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
-    
-    
+
     public static DateTimeFormatter formatDate(LocalDateTime date){
         return DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss");
+    }
+
+    private static Date getDate(String date){
+        return Date.from(LocalDate.parse(date).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
     }
 }
