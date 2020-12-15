@@ -39,7 +39,11 @@ public class LoginDialog extends javax.swing.JDialog {
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
-                System.exit(0);
+                int option = JOptionPane.showConfirmDialog(null,"Apakah anda ingin keluar dari aplikasi??",
+                        "Konfirmasi",JOptionPane.YES_NO_OPTION);
+                if (option == 1){
+                    System.exit(0);
+                }
             }
         });
 
