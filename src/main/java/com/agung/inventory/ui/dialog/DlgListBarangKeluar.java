@@ -89,7 +89,7 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
 
     private void refresh() {
 
-        if(dateChooser.getDate() != null && dateChooser.getDateEditor().getUiComponent().isEnabled()){
+        if(dateChooser.getDate() != null && dateChooser.isEnabled()){
             String date = new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate());
             listBarangKeluars = AppContext.getTransactionService().findAllBarangKeluarByParam("tanggal", date);
         }

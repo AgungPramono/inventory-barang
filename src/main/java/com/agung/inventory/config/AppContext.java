@@ -13,6 +13,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 /**
  *
+ * aplikasi container untuk digunakan di class lain yang
+ * mengakses databases
  * @author agung
  */
 public class AppContext {

@@ -91,7 +91,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
     }
 
     private void refresh() {
-        if(dateChooser.getDate() != null && dateChooser.getDateEditor().getUiComponent().isEnabled()){
+        if(dateChooser.getDate() != null && dateChooser.isEnabled()){
             String tanggal = new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate());
             listBarangMasuk = AppContext.getTransactionService().findBarangMasukByParam("tanggal", tanggal);
         }

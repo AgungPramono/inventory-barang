@@ -23,6 +23,7 @@ import java.util.Properties;
 
 /**
  *
+ * Konfigurasi aplikasi dan koneksi database
  * @author agung
  */
 @Configuration

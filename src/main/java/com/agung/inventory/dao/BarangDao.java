@@ -60,11 +60,11 @@ public class BarangDao implements BaseCrudDao<Barang> {
     public void setDataSource(Connection dataSource) {
     }
 
-    public List cariBarangByName(String text) {
+    public List cariBarangByName(String name) {
         return sessionFactory.getCurrentSession()
 
                 .createQuery("select b from Barang b where b.nama like :nama")
-                .setParameter("nama", "%"+text+"%").list();
+                .setParameter("nama", "%"+name+"%").list();
     }
 
 }
