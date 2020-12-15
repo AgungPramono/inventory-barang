@@ -17,15 +17,14 @@ import com.agung.inventory.ui.tablemodel.BarangMasukDetailTableModel;
 import com.agung.inventory.ui.tablemodel.BarangMasukTableModelMaster;
 import com.agung.inventory.util.DateUtil;
 import com.agung.inventory.util.TableUtil;
-import org.springframework.util.StringUtils;
-
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import org.springframework.util.StringUtils;
 
 /**
  *
@@ -121,7 +120,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
         initTable(listBarangMasuk);
     }
 
-    private void loadDetail(Integer idMaster){
+    private void loadDetailById(Integer idMaster){
         List<BarangMasukDetail> listDetail = AppContext.getTransactionService().findAllBarangMasukDetailByIdMaster(idMaster);
         loadDetail(listDetail);
     }
@@ -475,7 +474,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
 
     private void printReport(Integer id) {
         DlgViewLaporan.getSingleton()
-                .showDialog(AppContext.getReportService().generateLaporanMasukById(id), null);
+                .showDialog(AppContext.getReportService().generateLaporanMasukById(id), "Laporan Barang Masuk");
     }
 
     private class TableSelection implements ListSelectionListener {
@@ -488,8 +487,7 @@ public class DlgListBarangMasuk extends javax.swing.JDialog {
 
             if (tblBarangMasuk.getSelectedRow() >= 0) {
                 barangMasuk = listBarangMasuk.get(tblBarangMasuk.getSelectedRow());
-//                loadDetail(barangMasuk.getId());
-                loadDetail(barangMasuk.getBarangMasukDetails());
+                loadDetailById(barangMasuk.getId());
             }
         }
 

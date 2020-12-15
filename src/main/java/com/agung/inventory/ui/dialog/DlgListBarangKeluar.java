@@ -15,15 +15,14 @@ import com.agung.inventory.ui.combo.model.PetugasComboModel;
 import com.agung.inventory.ui.tablemodel.BarangKeluarTableModelMaster;
 import com.agung.inventory.util.DateUtil;
 import com.agung.inventory.util.TableUtil;
-import org.springframework.util.StringUtils;
-
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import org.springframework.util.StringUtils;
 
 /**
  *
@@ -453,7 +452,7 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
 
     private void printReport(Integer id) {
         DlgViewLaporan.getSingleton()
-                .showDialog(AppContext.getReportService().generateLaporanKeluarById(id), null);
+                .showDialog(AppContext.getReportService().generateLaporanKeluarById(id), "Laporan Barang Keluar");
     }
 
     private class TableSelection implements ListSelectionListener {

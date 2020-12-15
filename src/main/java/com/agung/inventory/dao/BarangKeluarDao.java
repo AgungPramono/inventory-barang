@@ -6,11 +6,10 @@
 package com.agung.inventory.dao;
 
 import com.agung.inventory.entity.BarangKeluar;
+import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  *
@@ -30,7 +29,7 @@ public class BarangKeluarDao {
     
     public List findAll(){
         return sessionFactory.getCurrentSession()
-                .createQuery("select b from BarangKeluar b left join fetch b.barangKeluarDetails bk")
+                .createQuery("select b from BarangKeluar b order by b.tanggalMasuk desc")
                 .list();
     }
     
