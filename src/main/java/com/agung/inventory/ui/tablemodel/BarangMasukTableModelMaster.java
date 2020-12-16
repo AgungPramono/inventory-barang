@@ -6,10 +6,9 @@
 package com.agung.inventory.ui.tablemodel;
 
 import com.agung.inventory.entity.BarangMasuk;
-
-import javax.swing.table.AbstractTableModel;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -17,7 +16,7 @@ import java.util.List;
  */
 public class BarangMasukTableModelMaster extends AbstractTableModel {
 
-    private final String[] header = {"Tanggal","Kode Transaksi", "Petugas", "Supplier"};
+    private final String[] header = {"Tanggal","Kode Transaksi", "Petugas", "Supplier","Keterangan"};
     private final List<BarangMasuk> listBarangMasuk;
 
     public BarangMasukTableModelMaster(List<BarangMasuk> barangMasuks) {
@@ -51,6 +50,8 @@ public class BarangMasukTableModelMaster extends AbstractTableModel {
                 return master.getPetugas().getNama();
             case 3:
                 return master.getSupplier().getNama();
+            case 4:
+                return master.getKeterangan();
             default:
                 return "";
         }

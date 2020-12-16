@@ -15,13 +15,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- *
  * @author agung
  */
 
 @Repository
 public class BarangDao implements BaseCrudDao<Barang> {
-    
+
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -33,10 +32,10 @@ public class BarangDao implements BaseCrudDao<Barang> {
 
     @Override
     public Barang findById(Barang barang) {
-       return (Barang) sessionFactory.getCurrentSession()
-               .createQuery("select b from Barang b where b.id= :id")
-               .setParameter("id", barang.getId())
-               .uniqueResult();
+        return (Barang) sessionFactory.getCurrentSession()
+                .createQuery("select b from Barang b where b.id= :id")
+                .setParameter("id", barang.getId())
+                .uniqueResult();
     }
 
     @Override
@@ -60,11 +59,10 @@ public class BarangDao implements BaseCrudDao<Barang> {
     public void setDataSource(Connection dataSource) {
     }
 
-    public List cariBarangByName(String name) {
+    public List cariBarangByName(String text) {
         return sessionFactory.getCurrentSession()
-
                 .createQuery("select b from Barang b where b.nama like :nama")
-                .setParameter("nama", "%"+name+"%").list();
+                .setParameter("nama", "%" + text + "%").list();
     }
 
 }

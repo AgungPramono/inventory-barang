@@ -37,6 +37,9 @@ public class BarangMasuk extends BaseEntity {
     @JoinColumn(name = "id_supplier", nullable = false)
     private Supplier supplier;
 
+    @Column(name = "keterangan", nullable = true)
+    private String keterangan;
+
     @OneToMany(mappedBy = "barangMasuk",
             cascade = CascadeType.ALL,
             orphanRemoval = true,

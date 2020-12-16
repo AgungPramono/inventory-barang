@@ -34,8 +34,7 @@ public class Barang extends BaseEntity{
     
     @Column(name = "keterangan")
     private String keterangan;
-//
-//    @OneToMany(mappedBy = "barang",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    private List<BarangMasukDetail> barangMasukDetails;
-    
+
+    @Column(name = "satuan", nullable = true)
+    private String satuan;
 }

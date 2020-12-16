@@ -1,0 +1,15 @@
+master barang
+- satuan
+
+barang masuk
+- picker supplier
+-keterangan
+
+barang keluar
+-picker penerima
+-keterangam
+
+dashboard
+-grafik barang masuk perperiode
+-grafik barang masuk perperiode
+

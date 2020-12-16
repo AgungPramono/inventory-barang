@@ -46,6 +46,8 @@ public class DlgLaporan extends javax.swing.JDialog {
         } else {
             jDateChooser1.setEnabled(false);
             jDateChooser2.setEnabled(false);
+            jDateChooser1.setDate(null);
+            jDateChooser2.setDate(null);
         }
     }
 
@@ -88,6 +90,20 @@ public class DlgLaporan extends javax.swing.JDialog {
                 .showDialog(AppContext.getReportService()
                         .generateLaporanTransaksi(mulai, sampai, ReportConstant.LAPORAN_BARANG_KELUAR), "Laporan Barang Keluar");
 
+    }
+
+    private void selectReportOption(){
+        String pilih = (String) jComboBox1.getSelectedItem();
+        switch (pilih) {
+            case "Stok Barang":
+                setMode(false);
+                return;
+            case "Barang Masuk":
+                setMode(true);
+                return;
+            case "Barang Keluar":
+                setMode(true);
+        }
     }
 
     /**
@@ -249,18 +265,7 @@ public class DlgLaporan extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-
-        String pilih = (String) jComboBox1.getSelectedItem();
-        switch (pilih) {
-            case "Stok Barang":
-                setMode(false);
-                return;
-            case "Barang Masuk":
-                setMode(true);
-                return;
-            case "Barang Keluar":
-                setMode(true);
-        }
+        selectReportOption();
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
 
