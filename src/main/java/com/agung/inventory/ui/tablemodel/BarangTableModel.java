@@ -6,21 +6,23 @@
 package com.agung.inventory.ui.tablemodel;
 
 import com.agung.inventory.entity.Barang;
-import lombok.NoArgsConstructor;
-
-import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author agung
  */
-@NoArgsConstructor
 public class BarangTableModel extends AbstractTableModel{
 
     private List<Barang> listBarang = new ArrayList<>();
-    private final String[]headerTitle = {"kode","Nama","kategori","Stok","Keterangan"};
+    private final String[]headerTitle = {"kode Item","Nama Item","kategori","Stok","Satuan","Keterangan"};
+    
+    
+    public BarangTableModel(){
+        
+    }
 
     public BarangTableModel(List<Barang> barangs) {
         this.listBarang = barangs;
@@ -54,7 +56,8 @@ public class BarangTableModel extends AbstractTableModel{
             case 1:return barang.getNamaBarang();
             case 2:return barang.getKategori();
             case 3:return barang.getQty().longValue();
-            case 4:return barang.getKeterangan();
+            case 4:return barang.getSatuan();
+            case 5:return barang.getKeterangan();
             default:return "";
         }
 

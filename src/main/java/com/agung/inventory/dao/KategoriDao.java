@@ -6,13 +6,12 @@
 package com.agung.inventory.dao;
 
 import com.agung.inventory.entity.Kategori;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  *
@@ -53,7 +52,7 @@ public class KategoriDao implements BaseCrudDao<Kategori> {
     @Override
     public List<Kategori> findAll() {
         return sessionFactory.getCurrentSession()
-                .createQuery("from Kategori k")
+                .createQuery("select k from Kategori k order by k.nama asc")
                 .list();
     }
 

@@ -6,19 +6,18 @@
 package com.agung.inventory.ui.tablemodel;
 
 import com.agung.inventory.entity.BarangMasukDetail;
-
-import javax.swing.event.TableModelEvent;
-import javax.swing.table.AbstractTableModel;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author agung
  */
 public class BarangMasukDetailTableModel extends AbstractTableModel{
-    private final String[]header = {"Nama Barang","Kategori","Stok Akhir","Stock Masuk"};
+    private final String[]header = {"Barang","Kategori","Satuan","Stok Akhir","Stock Masuk"};
     private List<BarangMasukDetail> listDetail;
     private final NumberFormat numberFormat = NumberFormat.getInstance(new Locale("ID"));
 
@@ -53,8 +52,9 @@ public class BarangMasukDetailTableModel extends AbstractTableModel{
         switch(columnIndex){
             case 0:return bmd.getBarang().getNamaBarang();
             case 1:return bmd.getBarang().getKategori().getNama();
-            case 2:return numberFormat.format(bmd.getBarang().getQty());
-            case 3:return numberFormat.format(bmd.getQty());
+            case 2:return bmd.getBarang().getSatuan();
+            case 3:return numberFormat.format(bmd.getBarang().getQty());
+            case 4:return numberFormat.format(bmd.getQty());
             default:return "";
         }
     }

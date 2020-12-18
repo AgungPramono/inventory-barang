@@ -6,13 +6,12 @@
 package com.agung.inventory.dao;
 
 import com.agung.inventory.entity.Barang;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author agung
@@ -33,7 +32,7 @@ public class BarangDao implements BaseCrudDao<Barang> {
     @Override
     public Barang findById(Barang barang) {
         return (Barang) sessionFactory.getCurrentSession()
-                .createQuery("select b from Barang b where b.id= :id")
+                .createQuery("select b from Barang b where b.id= :id and active=TRUE")
                 .setParameter("id", barang.getId())
                 .uniqueResult();
     }
@@ -51,7 +50,7 @@ public class BarangDao implements BaseCrudDao<Barang> {
     @Override
     public List<Barang> findAll() {
         return sessionFactory.getCurrentSession()
-                .createQuery("from Barang b")
+                .createQuery("from Barang b where b.active=true order by nama asc")
                 .list();
     }
 
@@ -61,7 +60,7 @@ public class BarangDao implements BaseCrudDao<Barang> {
 
     public List cariBarangByName(String text) {
         return sessionFactory.getCurrentSession()
-                .createQuery("select b from Barang b where b.nama like :nama")
+                .createQuery("select b from Barang b where b.nama like :nama and active=true")
                 .setParameter("nama", "%" + text + "%").list();
     }
 

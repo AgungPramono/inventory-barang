@@ -5,11 +5,10 @@
  */
 package com.agung.inventory.entity;
 
+import java.math.BigDecimal;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.*;
-import java.math.BigDecimal;
 
 /**
  *
@@ -37,4 +36,7 @@ public class Barang extends BaseEntity{
 
     @Column(name = "satuan", nullable = true)
     private String satuan;
+    
+    @Column(name = "active")
+    private Boolean active;
 }

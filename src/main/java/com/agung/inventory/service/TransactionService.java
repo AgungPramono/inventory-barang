@@ -11,13 +11,12 @@ import com.agung.inventory.dao.BarangKeluarDao;
 import com.agung.inventory.dao.BarangMasukDao;
 import com.agung.inventory.dao.BarangMasukDetailDao;
 import com.agung.inventory.entity.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.math.BigDecimal;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -55,7 +54,7 @@ public class TransactionService {
 
     @Transactional(rollbackFor = {RuntimeException.class,
         StokTidakCukupException.class},
-            readOnly = false, isolation = Isolation.READ_COMMITTED )
+            readOnly = false,propagation = Propagation.REQUIRED)
     public void saveOutTransaction(BarangKeluar barangKeluar) throws Exception {
         if (barangKeluar != null) {
             barangKeluarDao.save(barangKeluar);

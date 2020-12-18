@@ -12,12 +12,11 @@ import com.agung.inventory.util.MigrationUtil;
 import com.jgoodies.looks.Options;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
-import com.jgoodies.looks.plastic.theme.Silver;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.swing.*;
+import com.jgoodies.looks.plastic.theme.DesertBlue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author agung
@@ -48,7 +47,7 @@ public class Main {
                     MigrationUtil.migrate();
                     AppContext.initContainer();
                     PlasticLookAndFeel laf = new PlasticXPLookAndFeel();
-                    PlasticLookAndFeel.setCurrentTheme(new Silver());
+                    PlasticLookAndFeel.setCurrentTheme(new DesertBlue());
                     Options.setPopupDropShadowEnabled(true);
                     UIManager.setLookAndFeel(laf);
                     mainFrame = new MainFrame();

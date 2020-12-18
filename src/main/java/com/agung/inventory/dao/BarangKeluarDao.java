@@ -34,7 +34,7 @@ public class BarangKeluarDao {
     }
     
     public List findByParameter(String kolom, String value) {
-        StringBuilder sql = new StringBuilder("select bk from BarangKeluar bk left join fetch bk.barangKeluarDetails bd ");
+        StringBuilder sql = new StringBuilder("select bk from BarangKeluar bk ");
 
         switch (kolom) {
             case "tanggal":

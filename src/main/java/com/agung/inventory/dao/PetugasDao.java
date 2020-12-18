@@ -6,13 +6,11 @@
 package com.agung.inventory.dao;
 
 import com.agung.inventory.entity.Petugas;
+import java.sql.Connection;
+import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
 
 /**
  *
@@ -48,7 +46,7 @@ public class PetugasDao implements BaseCrudDao<Petugas> {
     @Override
     public List<Petugas> findAll() {
        return sessionFactory.getCurrentSession()
-               .createQuery("from Petugas p")
+               .createQuery("select p from Petugas p order by p.nama asc")
                .list();
     }
     

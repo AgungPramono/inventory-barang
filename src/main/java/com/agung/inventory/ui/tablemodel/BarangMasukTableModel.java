@@ -6,10 +6,9 @@
 package com.agung.inventory.ui.tablemodel;
 
 import com.agung.inventory.entity.BarangMasukDetail;
-
-import javax.swing.table.AbstractTableModel;
 import java.math.BigDecimal;
 import java.util.List;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -17,7 +16,7 @@ import java.util.List;
  */
 public class BarangMasukTableModel extends AbstractTableModel {
 
-    private final String[] header = {"Kode Barang", "Nama Barang", "Jumlah"};
+    private final String[] header = {"Kode Item", "Nama Item","Satuan", "Jumlah"};
     private final List<BarangMasukDetail> listBarangMasukDetails;
 
     public BarangMasukTableModel(List<BarangMasukDetail> barangMasukDetails) {
@@ -48,6 +47,8 @@ public class BarangMasukTableModel extends AbstractTableModel {
             case 1:
                 return detail.getBarang().getNamaBarang();
             case 2:
+                return detail.getBarang().getSatuan();
+            case 3:
                 return detail.getQty();
             default:
                 return "";
@@ -56,7 +57,7 @@ public class BarangMasukTableModel extends AbstractTableModel {
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {   
-        if (columnIndex == 2) {
+        if (columnIndex == 3) {
             return BigDecimal.class;
         }
         return String.class;
@@ -64,13 +65,13 @@ public class BarangMasukTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex == 2;
+        return columnIndex == 3;
     }
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         BarangMasukDetail bdm = listBarangMasukDetails.get(rowIndex);
-        if (columnIndex == 2) {
+        if (columnIndex == 3) {
             bdm.setQty((BigDecimal) aValue);
         }
     }

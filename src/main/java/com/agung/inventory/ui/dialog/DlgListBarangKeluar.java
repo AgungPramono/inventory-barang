@@ -84,7 +84,7 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
         } else {
             tblBarangKeluar.setModel(new BarangKeluarTableModelMaster(new ArrayList<>()));
         }
-        TableUtil.initColumn(tblBarangKeluar);
+        TableUtil.initColumn(tblBarangKeluar,jScrollPane2);
     }
 
     private void refresh() {
@@ -131,7 +131,7 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblBarangKeluar = new org.jdesktop.swingx.JXTable();
+        tblBarangKeluar = new com.agung.inventory.ui.component.CustomTable();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -157,18 +157,16 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
 
         tblBarangKeluar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        tblBarangKeluar.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        tblBarangKeluar.setEditable(false);
-        tblBarangKeluar.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        tblBarangKeluar.setRowHeight(30);
         tblBarangKeluar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblBarangKeluarMouseClicked(evt);
@@ -180,20 +178,26 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2)
-                .addContainerGap())
+            .addGap(0, 1099, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1087, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+            .addGap(0, 321, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102));
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setText("Tanggal");
 
@@ -293,7 +297,7 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
                         .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
-                        .addGap(0, 534, Short.MAX_VALUE)))
+                        .addGap(0, 645, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
@@ -305,11 +309,11 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, jLabel1, jLabel2, jLabel3);
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3});
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, jButton2, jButton3, jButton4);
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton2, jButton3, jButton4});
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, cmbCustomer, txtKode);
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmbCustomer, txtKode});
 
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,12 +350,12 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
                             .addComponent(cmbCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, chEnableDate, cmbCustomer, dateChooser, jLabel1, jLabel2, jLabel3);
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {chEnableDate, cmbCustomer, dateChooser, jLabel1, jLabel2, jLabel3});
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, jButton2, jButton3, jButton4);
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton2, jButton3, jButton4});
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -430,15 +434,15 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void tblBarangKeluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBarangKeluarMouseClicked
-        if (evt.getClickCount() == 2 && barangKeluar != null) {
-            printReport(barangKeluar.getId());
-        }
-    }//GEN-LAST:event_tblBarangKeluarMouseClicked
-
     private void chEnableDateItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chEnableDateItemStateChanged
        changeDateEditor();
     }//GEN-LAST:event_chEnableDateItemStateChanged
+
+    private void tblBarangKeluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBarangKeluarMouseClicked
+        if (evt.getClickCount() == 2) {
+            printReport(barangKeluar.getId());
+        }
+    }//GEN-LAST:event_tblBarangKeluarMouseClicked
 
     private void changeDateEditor(){
         if (chEnableDate.isSelected()) {
@@ -493,7 +497,7 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private org.jdesktop.swingx.JXTable tblBarangKeluar;
+    private com.agung.inventory.ui.component.CustomTable tblBarangKeluar;
     private javax.swing.JTextField txtKode;
     // End of variables declaration//GEN-END:variables
 }
