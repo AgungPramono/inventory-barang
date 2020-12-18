@@ -57,6 +57,19 @@ public class PelangganDao implements BaseCrudDao<Pelanggan> {
                 .list();
     }
 
+    public List<Pelanggan> cariPelangganByParam(String column,String value){
+       StringBuilder query = new StringBuilder("select p from Pelanggan p ");
+        if (column.equalsIgnoreCase("kode")){
+            query.append("where p.kode = '").append(value).append("'");
+        }else if (column.equalsIgnoreCase("nama")){
+            query.append("where p.nama like '%").append(value).append("%'");
+        }
+        query.append(" order by p.nama asc ");
+        return sessionFactory.getCurrentSession()
+                .createQuery(query.toString())
+                .list();
+    }
+
     @Override
     public void setDataSource(Connection dataSource) {
 

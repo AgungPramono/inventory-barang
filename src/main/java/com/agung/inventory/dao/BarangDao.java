@@ -50,18 +50,37 @@ public class BarangDao implements BaseCrudDao<Barang> {
     @Override
     public List<Barang> findAll() {
         return sessionFactory.getCurrentSession()
-                .createQuery("from Barang b where b.active=true order by nama asc")
+                .createQuery("select b from Barang b where b.active=true order by nama asc")
                 .list();
     }
 
     @Override
     public void setDataSource(Connection dataSource) {
     }
-
     public List cariBarangByName(String text) {
         return sessionFactory.getCurrentSession()
                 .createQuery("select b from Barang b where b.nama like :nama and active=true")
                 .setParameter("nama", "%" + text + "%").list();
+    }
+
+    public List<Barang> cariBarangByParam(String column, String value){
+        StringBuilder query = new StringBuilder("select b from  Barang b ");
+
+        switch (column.toLowerCase()){
+            case "kode":
+                query.append("where b.kodeBarang='").append(value.toLowerCase()).append("'");
+                break;
+            case "nama":
+                query.append("where b.namaBarang like '%").append(value).append("%'");
+                break;
+            default:
+                break;
+        }
+
+        query.append(" order by b.namaBarang asc");
+        return sessionFactory.getCurrentSession()
+                .createQuery(query.toString())
+                .list();
     }
 
 }

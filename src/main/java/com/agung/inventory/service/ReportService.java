@@ -156,7 +156,7 @@ public class ReportService {
 
     private List<LaporanBarangDto> dataStokBarang() {
         List<LaporanBarangDto> result = new ArrayList<>();
-        List<Barang> listBarang = masterService.findAllBarang();
+        List<Barang> listBarang = masterService.findAllItem();
 
         for (Barang b : listBarang) {
             LaporanBarangDto barangDto = new LaporanBarangDto();

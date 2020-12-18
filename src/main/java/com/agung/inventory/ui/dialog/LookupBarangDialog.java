@@ -44,7 +44,7 @@ public class LookupBarangDialog extends javax.swing.JDialog {
     }
 
     private void refreshTable() {
-        listBarangs = AppContext.getMasterService().findAllBarang();
+        listBarangs = AppContext.getMasterService().findAllItem();
         loadDataToTable(listBarangs);
     }
 
@@ -58,7 +58,7 @@ public class LookupBarangDialog extends javax.swing.JDialog {
             listBarangs = AppContext.getMasterService().findItemByName(txtCari.getText());
             loadDataToTable(listBarangs);
         } else if (txtCari.getText().equals("")) {
-            listBarangs = AppContext.getMasterService().findAllBarang();
+            listBarangs = AppContext.getMasterService().findAllItem();
             loadDataToTable(listBarangs);
         }
     }

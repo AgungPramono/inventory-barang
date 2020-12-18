@@ -2,11 +2,13 @@ package com.agung.inventory.service;
 
 import com.agung.inventory.dao.*;
 import com.agung.inventory.entity.*;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -38,7 +40,7 @@ public class MasterService {
         barangDao.save(barang);
     }
 
-    public List<Barang> findAllBarang() {
+    public List<Barang> findAllItem() {
         return barangDao.findAll();
     }
 
@@ -51,6 +53,13 @@ public class MasterService {
         if (b != null) {
             barangDao.deleteById(b);
         }
+    }
+
+    public List<Barang> findItemByParam(String column,String value){
+        if (!StringUtils.isEmpty(column) && !StringUtils.isEmpty(value)){
+            return barangDao.cariBarangByParam(column,value);
+        }
+        return new ArrayList<>();
     }
 
     public List<Kategori> findAllCategori() {
@@ -127,5 +136,9 @@ public class MasterService {
 
     public List findItemByName(String text) {
         return itemDao.cariBarangByName(text);
+    }
+
+    public List<Pelanggan> findCustomerByParam(String column, String value) {
+        return pelangganDao.cariPelangganByParam(column,value);
     }
 }

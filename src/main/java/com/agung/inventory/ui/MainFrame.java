@@ -35,7 +35,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void loadDataToTable() {
-        List<Barang> listBarangMasukDetails = AppContext.getMasterService().findAllBarang();
+        List<Barang> listBarangMasukDetails = AppContext.getMasterService().findAllItem();
         if (listBarangMasukDetails != null || !listBarangMasukDetails.isEmpty()) {
             barangTableModel.setListBarang(listBarangMasukDetails);
             tblListTransaksi.setModel(barangTableModel);
