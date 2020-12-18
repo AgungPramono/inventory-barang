@@ -139,6 +139,9 @@ public class MasterService {
     }
 
     public List<Pelanggan> findCustomerByParam(String column, String value) {
-        return pelangganDao.cariPelangganByParam(column,value);
+        if (!StringUtils.isEmpty(column)&&!StringUtils.isEmpty(value)){
+            return pelangganDao.cariPelangganByParam(column,value);
+        }
+        return new ArrayList<>();
     }
 }
