@@ -39,7 +39,7 @@ public class PelangganDao implements BaseCrudDao<Pelanggan> {
     @Override
     public Pelanggan findById(Pelanggan t) {
         return (Pelanggan) sessionFactory.getCurrentSession()
-                .createQuery("select p from Pelanggan p where p.id= :id")
+                .createQuery("select p from Pelanggan p where p.id= :id order by p.nama asc")
                 .setParameter("id", t.getId())
                 .uniqueResult();
     }
@@ -53,7 +53,7 @@ public class PelangganDao implements BaseCrudDao<Pelanggan> {
     @Override
     public List<Pelanggan> findAll() {
         return sessionFactory.getCurrentSession()
-                .createQuery("from Pelanggan p")
+                .createQuery("select p from Pelanggan p order by p.nama asc")
                 .list();
     }
 
