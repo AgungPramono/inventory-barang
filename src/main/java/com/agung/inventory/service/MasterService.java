@@ -117,6 +117,13 @@ public class MasterService {
         }
     }
 
+    public List<Supplier> findSupplierByParam(String column,String value){
+        if (StringUtils.isEmpty(column) && StringUtils.isEmpty(value)){
+            return supplierDao.findSupplierByParan(column,value);
+        }
+        return new ArrayList<>();
+    }
+
     public List<Pelanggan> findAllCustomer() {
         return pelangganDao.findAll();
     }
@@ -135,6 +142,9 @@ public class MasterService {
     }
 
     public List findItemByName(String text) {
+        if (!StringUtils.isEmpty(text)){
+            return new ArrayList();
+        }
         return itemDao.cariBarangByName(text);
     }
 

@@ -9,6 +9,7 @@ import com.agung.inventory.config.AppContext;
 import com.agung.inventory.entity.Barang;
 import com.agung.inventory.entity.Kategori;
 import com.agung.inventory.ui.combo.model.KategoriComboModel;
+import com.agung.inventory.ui.component.DialogMgr;
 import com.agung.inventory.ui.tablemodel.BarangTableModel;
 import com.agung.inventory.util.TableUtil;
 import org.apache.commons.lang.StringUtils;
@@ -171,6 +172,8 @@ public class DlgBarang extends javax.swing.JDialog {
                     loadDataToTable();
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
+                    DialogMgr.showErrorDialog(this,"Gagal","Gagal hapus data barang",
+                            throwables.getMessage(),throwables);
                 }
 
             }           

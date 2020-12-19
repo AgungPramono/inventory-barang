@@ -11,6 +11,7 @@ import com.agung.inventory.ui.tablemodel.PelangganTableModel;
 import com.agung.inventory.util.TableUtil;
 import org.apache.commons.lang.StringUtils;
 
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -36,9 +37,11 @@ public class DlgPelanggan extends javax.swing.JDialog {
 
     private void initForm() {
         setLocationRelativeTo(null);
+        txtSearch.requestFocus();
         loadDataToTable();
         enableForm(false);
         tblPelanggan.getSelectionModel().addListSelectionListener(new TableSelection());
+        addSearchKeyEvent();
     }
 
     public void showDialog() {
@@ -138,7 +141,17 @@ public class DlgPelanggan extends javax.swing.JDialog {
         } else {
             loadDataToTable();
         }
-        txtSearch.selectAll();
+    }
+
+    private void addSearchKeyEvent(){
+        txtSearch.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (txtSearch.getText().length()>=3){
+                    search();
+                }
+            }
+        });
     }
 
     /**

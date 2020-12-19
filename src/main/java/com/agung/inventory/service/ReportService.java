@@ -11,6 +11,7 @@ import com.agung.inventory.dto.LaporanBarangDto;
 import com.agung.inventory.dto.LaporanBarangMasukDto;
 import com.agung.inventory.entity.Barang;
 import com.agung.inventory.entity.BarangMasuk;
+import com.agung.inventory.entity.Pelanggan;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JRDesignQuery;
@@ -184,5 +185,4 @@ public class ReportService {
         }
         return result;
     }
-
 }

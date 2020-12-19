@@ -57,7 +57,20 @@ public class SupplierDao implements BaseCrudDao<Supplier> {
         .createQuery("from Supplier s")
         .list();
     }
-    
+
+    public List<Supplier> findSupplierByParan(String column,String value){
+        StringBuilder query =new StringBuilder("select s from Supplier s ");
+        if (column.equalsIgnoreCase("nama")){
+            query.append("wher s.nama like '").append(value).append("'");
+        }else if (column.equalsIgnoreCase("kode")){
+            query.append("where s.kode ='").append(value).append("'");
+        }
+
+        query.append(" order by s.nama asc");
+        return sessionFactory.getCurrentSession()
+                .createQuery(query.toString())
+                .list();
+    }
      
     @Override
     public void setDataSource(Connection dataSource) {

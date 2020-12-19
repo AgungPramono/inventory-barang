@@ -50,7 +50,7 @@ public class BarangDao implements BaseCrudDao<Barang> {
     @Override
     public List<Barang> findAll() {
         return sessionFactory.getCurrentSession()
-                .createQuery("select b from Barang b where b.active=true order by nama asc")
+                .createQuery("select b from Barang b where b.active=true order by b.namaBarang asc")
                 .list();
     }
 
@@ -59,22 +59,17 @@ public class BarangDao implements BaseCrudDao<Barang> {
     }
     public List cariBarangByName(String text) {
         return sessionFactory.getCurrentSession()
-                .createQuery("select b from Barang b where b.nama like :nama and active=true")
+                .createQuery("select b from Barang b where b.namaBarang like :nama and active=true")
                 .setParameter("nama", "%" + text + "%").list();
     }
 
-    public List<Barang> cariBarangByParam(String column, String value){
+    public List cariBarangByParam(String column, String value){
         StringBuilder query = new StringBuilder("select b from  Barang b ");
 
-        switch (column.toLowerCase()){
-            case "kode":
-                query.append("where b.kodeBarang='").append(value.toLowerCase()).append("'");
-                break;
-            case "nama":
-                query.append("where b.namaBarang like '%").append(value).append("%'");
-                break;
-            default:
-                break;
+        if ("kode".equals(column.toLowerCase())) {
+            query.append("where b.kodeBarang='").append(value.toLowerCase()).append("'");
+        } else if ("nama".equals(column.toLowerCase())) {
+            query.append("where b.namaBarang like '%").append(value).append("%'");
         }
 
         query.append(" order by b.namaBarang asc");
