@@ -110,6 +110,11 @@
             <artifactId>flyway-core</artifactId>
             <version>5.2.4</version>
         </dependency>
+        <dependency>
+            <groupId>swing-component</groupId>
+            <artifactId>ag-wing-component</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

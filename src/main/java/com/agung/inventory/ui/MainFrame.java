@@ -69,9 +69,9 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblListTransaksi = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        btnBarangMasuk = new javax.swing.JButton();
-        btnBarangKeluar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnBarangMasuk = new com.agung.inventory.ui.component.SecondaryButton();
+        btnBarangKeluar = new com.agung.inventory.ui.component.SecondaryButton();
+        btnCetakLaporan = new com.agung.inventory.ui.component.SecondaryButton();
         jPanel4 = new javax.swing.JPanel();
         txtUser = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -115,40 +115,40 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 883, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
         );
 
         jPanel3.setBackground(new java.awt.Color(153, 153, 153));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
-        btnBarangMasuk.setText("Transaksi Barang Masuk");
+        btnBarangMasuk.setText("Transaksi Masuk");
         btnBarangMasuk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBarangMasukActionPerformed(evt);
             }
         });
 
-        btnBarangKeluar.setText("Transaksi Barang Keluar");
+        btnBarangKeluar.setText("Transaksi Keluar");
         btnBarangKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBarangKeluarActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Laporan");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCetakLaporan.setText("Cetak Laporan");
+        btnCetakLaporan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCetakLaporanActionPerformed(evt);
             }
         });
 
@@ -157,27 +157,24 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnBarangMasuk)
+                .addContainerGap(351, Short.MAX_VALUE)
+                .addComponent(btnBarangMasuk, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBarangKeluar)
-                .addGap(5, 5, 5)
-                .addComponent(jButton1)
+                .addComponent(btnBarangKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCetakLaporan, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnBarangMasuk, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnBarangKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBarangMasuk, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBarangKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCetakLaporan, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnBarangKeluar, jButton1});
 
         javax.swing.GroupLayout pnlDashboardLayout = new javax.swing.GroupLayout(pnlDashboard);
         pnlDashboard.setLayout(pnlDashboardLayout);
@@ -361,24 +358,10 @@ public class MainFrame extends javax.swing.JFrame {
         new DlgPetugas().showDialog();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void btnBarangMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangMasukActionPerformed
-        DlgBarangMasuk.getInstance().showDialog();
-        loadDataToTable();
-    }//GEN-LAST:event_btnBarangMasukActionPerformed
-
-    private void btnBarangKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangKeluarActionPerformed
-        DlgBarangKeluar.getInstance().showDialog();
-        loadDataToTable();
-    }//GEN-LAST:event_btnBarangKeluarActionPerformed
-
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         DlgListBarangKeluar.getSingleton().showDialog();
         loadDataToTable();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DlgLaporan.getInstance().showDialog();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
 
@@ -390,10 +373,24 @@ public class MainFrame extends javax.swing.JFrame {
         SecurityConfig.initLogin();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void btnBarangMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangMasukActionPerformed
+        DlgBarangMasuk.getInstance().showDialog();
+        loadDataToTable();
+    }//GEN-LAST:event_btnBarangMasukActionPerformed
+
+    private void btnBarangKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangKeluarActionPerformed
+        DlgBarangKeluar.getInstance().showDialog();
+        loadDataToTable();
+    }//GEN-LAST:event_btnBarangKeluarActionPerformed
+
+    private void btnCetakLaporanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakLaporanActionPerformed
+        DlgLaporan.getInstance().showDialog();
+    }//GEN-LAST:event_btnCetakLaporanActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBarangKeluar;
-    private javax.swing.JButton btnBarangMasuk;
-    private javax.swing.JButton jButton1;
+    private com.agung.inventory.ui.component.SecondaryButton btnBarangKeluar;
+    private com.agung.inventory.ui.component.SecondaryButton btnBarangMasuk;
+    private com.agung.inventory.ui.component.SecondaryButton btnCetakLaporan;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

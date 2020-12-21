@@ -222,9 +222,9 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" pref="883" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -233,7 +233,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" pref="353" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="354" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -284,12 +284,12 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnBarangMasuk" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="351" max="32767" attributes="0"/>
+                          <Component id="btnBarangMasuk" min="-2" pref="182" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnBarangKeluar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnBarangKeluar" min="-2" pref="182" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnCetakLaporan" min="-2" pref="162" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -298,12 +298,10 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="btnBarangMasuk" alignment="3" min="-2" pref="53" max="-2" attributes="0"/>
-                                  <Component id="btnBarangKeluar" linkSize="2" alignment="3" min="-2" pref="53" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jButton1" linkSize="2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnBarangMasuk" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
+                              <Component id="btnBarangKeluar" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
+                              <Component id="btnCetakLaporan" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -311,28 +309,28 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="btnBarangMasuk">
+                <Component class="com.agung.inventory.ui.component.SecondaryButton" name="btnBarangMasuk">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Transaksi Barang Masuk"/>
+                    <Property name="text" type="java.lang.String" value="Transaksi Masuk"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBarangMasukActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnBarangKeluar">
+                <Component class="com.agung.inventory.ui.component.SecondaryButton" name="btnBarangKeluar">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Transaksi Barang Keluar"/>
+                    <Property name="text" type="java.lang.String" value="Transaksi Keluar"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBarangKeluarActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton1">
+                <Component class="com.agung.inventory.ui.component.SecondaryButton" name="btnCetakLaporan">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Laporan"/>
+                    <Property name="text" type="java.lang.String" value="Cetak Laporan"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCetakLaporanActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>

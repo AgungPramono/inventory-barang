@@ -113,21 +113,27 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="jButton5" linkSize="8" min="-2" pref="143" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButton4" linkSize="8" min="-2" pref="149" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="jPanel4" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jTabbedPane1" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                           </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnTambah" linkSize="11" min="-2" pref="92" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="successButton1" linkSize="11" min="-2" pref="119" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="addItem" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -139,12 +145,19 @@
                       <Component id="jTabbedPane1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="jPanel4" max="32767" attributes="0"/>
-                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton4" linkSize="7" alignment="3" pref="41" max="32767" attributes="0"/>
-                          <Component id="jButton5" linkSize="7" alignment="3" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnTambah" linkSize="10" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="successButton1" linkSize="10" pref="43" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="addItem" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -166,25 +179,18 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jScrollPane1" max="32767" attributes="0"/>
-                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Component id="txtNamaBarang" min="-2" pref="326" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="addItem1" min="-2" pref="45" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="btnHapusSemua" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="btnHapusDipilih" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Component id="txtNamaBarang" min="-2" pref="326" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="btnAddBarang" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="deleteAll" min="-2" pref="138" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="delete" min="-2" pref="138" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="jScrollPane1" alignment="0" min="-2" pref="784" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -193,17 +199,17 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtNamaBarang" linkSize="3" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="btnAddBarang" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNamaBarang" linkSize="12" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="addItem1" linkSize="12" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="206" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnHapusSemua" linkSize="4" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                              <Component id="btnHapusDipilih" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="deleteAll" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="delete" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="18" max="32767" attributes="0"/>
+                          <EmptySpace pref="11" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -232,48 +238,32 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JButton" name="btnHapusSemua">
+                <Component class="com.agung.inventory.ui.component.SuccessButton" name="addItem1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="+"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addItem1ActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="com.agung.inventory.ui.component.DangerButton" name="deleteAll">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Hapus Semua"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHapusSemuaActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteAllActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnHapusDipilih">
+                <Component class="com.agung.inventory.ui.component.DangerButton" name="delete">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Hapus Yang Terpilih"/>
+                    <Property name="text" type="java.lang.String" value="Hapus"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHapusDipilihActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JButton" name="btnAddBarang">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Tambah Barang"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddBarangActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="jButton4">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Simpan"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="jButton5">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Tutup"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
-              </Events>
-            </Component>
             <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -434,6 +424,27 @@
                 </Container>
               </SubComponents>
             </Container>
+            <Component class="com.agung.inventory.ui.component.PrimaryButton" name="btnTambah">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Keluar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTambahActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="com.agung.inventory.ui.component.SuccessButton" name="successButton1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Simpan"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="successButton1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="com.agung.inventory.ui.component.SuccessButton" name="addItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="+"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>

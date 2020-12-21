@@ -73,30 +73,31 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnTambah" linkSize="8" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnEdit" linkSize="8" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnHapus" linkSize="8" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnSimpan" linkSize="6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnBatal" linkSize="6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnKeluar" linkSize="6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                              <Component id="btnTambah" linkSize="11" min="-2" pref="92" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="successButton1" linkSize="11" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnEdit" linkSize="11" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnHapus" linkSize="11" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnBatal" linkSize="11" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnKeluar" linkSize="11" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jTabbedPane1" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -107,43 +108,43 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <EmptySpace pref="15" max="32767" attributes="0"/>
                       <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnSimpan" linkSize="7" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                          <Component id="btnEdit" linkSize="9" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                          <Component id="btnTambah" linkSize="9" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnHapus" linkSize="9" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                          <Component id="btnBatal" linkSize="7" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnKeluar" linkSize="7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="btnTambah" linkSize="12" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                                          <Component id="successButton1" linkSize="12" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="btnBatal" linkSize="12" alignment="0" min="-2" pref="38" max="-2" attributes="0"/>
+                                          <Component id="btnHapus" linkSize="12" pref="0" max="32767" attributes="0"/>
+                                          <Component id="btnKeluar" linkSize="12" min="-2" pref="38" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace pref="12" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="jTabbedPane1" min="-2" pref="244" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jPanel4" pref="316" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="btnEdit" linkSize="12" min="-2" pref="38" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jTabbedPane1" min="-2" pref="244" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel4" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="btnSimpan">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Simpan"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSimpanActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnBatal">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Batal"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBatalActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -153,30 +154,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator1">
-            </Component>
-            <Component class="javax.swing.JButton" name="btnTambah">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Tambah"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTambahActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnEdit">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Edit"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnHapus">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Hapus"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHapusActionPerformed"/>
-              </Events>
             </Component>
             <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
               <Properties>
@@ -207,7 +184,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel3" linkSize="4" max="32767" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txtNama" pref="300" max="32767" attributes="0"/>
+                                      <Component id="txtNama" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -403,14 +380,14 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jScrollPane2" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Component id="cmbFilter" min="-2" pref="108" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtSearch" max="32767" attributes="0"/>
+                                  <Component id="txtSearch" pref="748" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnSearch" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -480,12 +457,52 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="btnKeluar">
+            <Component class="com.agung.inventory.ui.component.PrimaryButton" name="btnTambah">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tambah"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTambahActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="com.agung.inventory.ui.component.SecondaryButton" name="btnEdit">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Edit"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="com.agung.inventory.ui.component.DangerButton" name="btnHapus">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Hapus"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHapusActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="com.agung.inventory.ui.component.SecondaryButton" name="btnKeluar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Keluar"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKeluarActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="com.agung.inventory.ui.component.SecondaryButton" name="btnBatal">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Batal"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBatalActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="com.agung.inventory.ui.component.SuccessButton" name="successButton1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Simpan"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="successButton1ActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

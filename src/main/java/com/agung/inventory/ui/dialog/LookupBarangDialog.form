@@ -66,21 +66,25 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="txtCari" min="-2" pref="706" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnCari" min="-2" pref="87" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="btnBatal" linkSize="2" min="-2" pref="79" max="-2" attributes="0"/>
+                              <Component id="primaryButton1" linkSize="6" min="-2" pref="87" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnPilih" linkSize="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="secondaryButton1" linkSize="6" min="-2" pref="94" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="txtCari" min="-2" pref="718" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="secondaryButton2" min="-2" pref="82" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -90,19 +94,19 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtCari" linkSize="1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                          <Component id="btnCari" linkSize="1" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="txtCari" linkSize="7" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="secondaryButton2" linkSize="7" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="363" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnPilih" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnBatal" linkSize="3" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="secondaryButton1" linkSize="4" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
+                          <Component id="primaryButton1" linkSize="4" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="11" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -156,6 +160,7 @@
                         </Column>
                       </TableColumnModel>
                     </Property>
+                    <Property name="rowHeight" type="int" value="30"/>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
@@ -166,28 +171,28 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="btnPilih">
+            <Component class="com.agung.inventory.ui.component.PrimaryButton" name="primaryButton1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pilih"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPilihActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="primaryButton1ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnBatal">
+            <Component class="com.agung.inventory.ui.component.SecondaryButton" name="secondaryButton1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Batal"/>
+                <Property name="text" type="java.lang.String" value="Keluar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBatalActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="secondaryButton1ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnCari">
+            <Component class="com.agung.inventory.ui.component.SecondaryButton" name="secondaryButton2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cari"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCariActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="secondaryButton2ActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

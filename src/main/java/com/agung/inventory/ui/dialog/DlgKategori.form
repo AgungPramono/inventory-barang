@@ -123,19 +123,21 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="btnTambah" linkSize="4" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btnTambah1" linkSize="9" min="-2" pref="92" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnUbah" linkSize="4" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="successButton1" linkSize="9" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnHapus" linkSize="4" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="btnEdit" linkSize="9" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnSimpan" linkSize="6" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnHapus1" linkSize="9" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnBatal" linkSize="6" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnBatal1" linkSize="9" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnKeluar" linkSize="9" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -144,15 +146,18 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnUbah" linkSize="5" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                          <Component id="btnTambah" linkSize="5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnHapus" linkSize="5" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                          <Component id="btnBatal" linkSize="8" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="btnSimpan" linkSize="8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="btnTambah1" linkSize="10" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="successButton1" linkSize="10" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="btnBatal1" linkSize="10" alignment="0" min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="btnHapus1" linkSize="10" alignment="0" min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="btnKeluar" linkSize="10" alignment="0" min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="btnEdit" linkSize="10" alignment="0" min="-2" pref="38" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="205" max="-2" attributes="0"/>
@@ -178,7 +183,7 @@
                               <Component id="txtNama" min="-2" pref="271" max="-2" attributes="0"/>
                               <Component id="txtKode" min="-2" pref="128" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="458" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -217,46 +222,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="btnTambah">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Tambah"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTambahActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnUbah">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Ubah"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUbahActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnHapus">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Hapus"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHapusActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnBatal">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Batal"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBatalActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnSimpan">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Simpan"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSimpanActionPerformed"/>
-              </Events>
-            </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane2">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -274,6 +239,54 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="com.agung.inventory.ui.component.PrimaryButton" name="btnTambah1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tambah"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTambah1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="com.agung.inventory.ui.component.SuccessButton" name="successButton1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Simpan"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="successButton1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="com.agung.inventory.ui.component.SecondaryButton" name="btnEdit">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Edit"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="com.agung.inventory.ui.component.DangerButton" name="btnHapus1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Hapus"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHapus1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="com.agung.inventory.ui.component.SecondaryButton" name="btnBatal1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Batal"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBatal1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="com.agung.inventory.ui.component.SecondaryButton" name="btnKeluar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Keluar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKeluarActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>

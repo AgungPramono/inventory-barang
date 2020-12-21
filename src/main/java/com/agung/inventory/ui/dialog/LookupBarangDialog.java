@@ -85,9 +85,9 @@ public class LookupBarangDialog extends javax.swing.JDialog {
         txtCari = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBarang = new javax.swing.JTable();
-        btnPilih = new javax.swing.JButton();
-        btnBatal = new javax.swing.JButton();
-        btnCari = new javax.swing.JButton();
+        primaryButton1 = new com.agung.inventory.ui.component.PrimaryButton();
+        secondaryButton1 = new com.agung.inventory.ui.component.SecondaryButton();
+        secondaryButton2 = new com.agung.inventory.ui.component.SecondaryButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -114,6 +114,7 @@ public class LookupBarangDialog extends javax.swing.JDialog {
             }
         ));
         tblBarang.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tblBarang.setRowHeight(30);
         tblBarang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblBarangMouseClicked(evt);
@@ -121,24 +122,24 @@ public class LookupBarangDialog extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tblBarang);
 
-        btnPilih.setText("Pilih");
-        btnPilih.addActionListener(new java.awt.event.ActionListener() {
+        primaryButton1.setText("Pilih");
+        primaryButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPilihActionPerformed(evt);
+                primaryButton1ActionPerformed(evt);
             }
         });
 
-        btnBatal.setText("Batal");
-        btnBatal.addActionListener(new java.awt.event.ActionListener() {
+        secondaryButton1.setText("Keluar");
+        secondaryButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBatalActionPerformed(evt);
+                secondaryButton1ActionPerformed(evt);
             }
         });
 
-        btnCari.setText("Cari");
-        btnCari.addActionListener(new java.awt.event.ActionListener() {
+        secondaryButton2.setText("Cari");
+        secondaryButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCariActionPerformed(evt);
+                secondaryButton2ActionPerformed(evt);
             }
         });
 
@@ -146,44 +147,46 @@ public class LookupBarangDialog extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 706, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCari, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnBatal, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(primaryButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPilih)))
+                        .addComponent(secondaryButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(secondaryButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, btnBatal, btnPilih);
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {primaryButton1, secondaryButton1});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(7, 7, 7)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCari, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(secondaryButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPilih)
-                    .addComponent(btnBatal, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(secondaryButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(primaryButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, btnCari, txtCari);
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {primaryButton1, secondaryButton1});
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, btnBatal, btnPilih);
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {secondaryButton2, txtCari});
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -216,14 +219,6 @@ public class LookupBarangDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
-        dispose();
-    }//GEN-LAST:event_btnBatalActionPerformed
-
-    private void btnPilihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPilihActionPerformed
-        selectRow();
-    }//GEN-LAST:event_btnPilihActionPerformed
-
     private void txtCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCariKeyReleased
         search();
     }//GEN-LAST:event_txtCariKeyReleased
@@ -234,15 +229,23 @@ public class LookupBarangDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtCariKeyPressed
 
-    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
-        search();
-    }//GEN-LAST:event_btnCariActionPerformed
-
     private void tblBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBarangMouseClicked
         if (evt.getClickCount() == 2) {
             selectRow();
         }
     }//GEN-LAST:event_tblBarangMouseClicked
+
+    private void primaryButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_primaryButton1ActionPerformed
+        selectRow();
+    }//GEN-LAST:event_primaryButton1ActionPerformed
+
+    private void secondaryButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondaryButton1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_secondaryButton1ActionPerformed
+
+    private void secondaryButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondaryButton2ActionPerformed
+        search();
+    }//GEN-LAST:event_secondaryButton2ActionPerformed
 
     private class TableSelection implements ListSelectionListener {
 
@@ -259,12 +262,12 @@ public class LookupBarangDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBatal;
-    private javax.swing.JButton btnCari;
-    private javax.swing.JButton btnPilih;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.agung.inventory.ui.component.PrimaryButton primaryButton1;
+    private com.agung.inventory.ui.component.SecondaryButton secondaryButton1;
+    private com.agung.inventory.ui.component.SecondaryButton secondaryButton2;
     private javax.swing.JTable tblBarang;
     private javax.swing.JTextField txtCari;
     // End of variables declaration//GEN-END:variables
