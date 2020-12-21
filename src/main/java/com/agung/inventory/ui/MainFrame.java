@@ -291,7 +291,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
 
         jMenuItem4.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
-        jMenuItem4.setText("Barang Masuk");
+        jMenuItem4.setText("Daftar Transaksi Masuk");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -300,7 +300,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu3.add(jMenuItem4);
 
         jMenuItem5.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
-        jMenuItem5.setText("Barang Keluar");
+        jMenuItem5.setText("Daftar Transaksi Keluar");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);

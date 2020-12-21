@@ -106,7 +106,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="17" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Barang Masuk"/>
+                <Property name="text" type="java.lang.String" value="Daftar Transaksi Masuk"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem4ActionPerformed"/>
@@ -117,7 +117,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="17" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Barang Keluar"/>
+                <Property name="text" type="java.lang.String" value="Daftar Transaksi Keluar"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem5ActionPerformed"/>
