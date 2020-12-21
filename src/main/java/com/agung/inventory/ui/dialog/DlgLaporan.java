@@ -75,19 +75,19 @@ public class DlgLaporan extends javax.swing.JDialog {
     }
 
     private void generateInTransactionReport() {
-        LocalDateTime mulai = DateUtil.toLocalDateTime(jDateChooser1.getDate());
-        LocalDateTime sampai = DateUtil.toLocalDateTime(jDateChooser2.getDate());
+        LocalDateTime startDateTime = DateUtil.toLocalDateTime(jDateChooser1.getDate());
+        LocalDateTime endDateTime = DateUtil.toLocalDateTime(jDateChooser2.getDate());
         DlgViewLaporan.getSingleton()
                 .showDialog(AppContext.getReportService()
-                        .generateLaporanTransaksi(mulai, sampai, ReportConstant.LAPORAN_BARANG_MASUK), "Laporan Barang Masuk");
+                        .generateLaporanTransaksi(startDateTime, endDateTime, ReportConstant.LAPORAN_BARANG_MASUK), "Laporan Barang Masuk");
     }
 
     private void generateOutTransactionReport() {
-        LocalDateTime mulai = DateUtil.toLocalDateTime(jDateChooser1.getDate());
-        LocalDateTime sampai = DateUtil.toLocalDateTime(jDateChooser2.getDate());
+        LocalDateTime srartDateTime = DateUtil.toLocalDateTime(jDateChooser1.getDate());
+        LocalDateTime endDateTime = DateUtil.toLocalDateTime(jDateChooser2.getDate());
         DlgViewLaporan.getSingleton()
                 .showDialog(AppContext.getReportService()
-                        .generateLaporanTransaksi(mulai, sampai, ReportConstant.LAPORAN_BARANG_KELUAR), "Laporan Barang Keluar");
+                        .generateLaporanTransaksi(srartDateTime, endDateTime, ReportConstant.LAPORAN_BARANG_KELUAR), "Laporan Barang Keluar");
 
     }
 
@@ -129,6 +129,8 @@ public class DlgLaporan extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
         jPanel2.setBackground(new java.awt.Color(153, 153, 153));
 
         jLabel2.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
@@ -152,7 +154,8 @@ public class DlgLaporan extends javax.swing.JDialog {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jLabel1.setText("Laporan");
 
