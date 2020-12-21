@@ -27,6 +27,7 @@ public class LookupBarangDialog extends javax.swing.JDialog {
 
     public LookupBarangDialog() {
         super(new JFrame(), true);
+        setTitle("Lookup Barang");
         initComponents();
         refreshTable();
         setLocationRelativeTo(null);

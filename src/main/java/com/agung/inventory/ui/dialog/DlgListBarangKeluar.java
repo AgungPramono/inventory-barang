@@ -41,7 +41,7 @@ public class DlgListBarangKeluar extends javax.swing.JDialog {
     }
 
     private void initForm() {
-        setTitle("Barang Keluar");
+        setTitle("Daftar Barang Keluar");
         LocalDateTime dateNow = LocalDateTime.now();
         setLocationRelativeTo(null);
         tblBarangKeluar.getSelectionModel().addListSelectionListener(new TableSelection());

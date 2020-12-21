@@ -33,6 +33,7 @@ public class DlgPetugas extends javax.swing.JDialog {
     }
 
     private void initForm() {
+        setTitle("Master Petugas");
         setLocationRelativeTo(null);
         loadDataToTable();
         enableForm(false);

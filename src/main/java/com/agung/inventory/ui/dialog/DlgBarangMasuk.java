@@ -41,6 +41,7 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
     }
 
     private void initForm() {
+        setTitle("Transaksi Masuk");
         LocalDateTime dateNow = LocalDateTime.now();
         loadSupplierCombo();
         jdate.setDate(DateUtil.toDate(dateNow));
@@ -217,7 +218,6 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
         txtKeterangan = new javax.swing.JTextArea();
         btnTambah = new com.agung.inventory.ui.component.PrimaryButton();
         successButton1 = new com.agung.inventory.ui.component.SuccessButton();
-        addItem = new com.agung.inventory.ui.component.SuccessButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -246,7 +246,10 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
                 .addGap(19, 19, 19))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         tblBarangMasuk.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblBarangMasuk.setModel(new javax.swing.table.DefaultTableModel(
@@ -278,7 +281,7 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
             }
         });
 
-        delete.setText("Hapus");
+        delete.setText("-");
         delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteActionPerformed(evt);
@@ -299,7 +302,7 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(deleteAll, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 784, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -434,8 +437,6 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
             }
         });
 
-        addItem.setText("+");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -455,11 +456,6 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(successButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(addItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnTambah, successButton1});
@@ -476,11 +472,6 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
                     .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(successButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
                 .addGap(14, 14, 14))
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(addItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnTambah, successButton1});
@@ -559,7 +550,6 @@ public class DlgBarangMasuk extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.agung.inventory.ui.component.SuccessButton addItem;
     private com.agung.inventory.ui.component.SuccessButton addItem1;
     private com.agung.inventory.ui.component.PrimaryButton btnTambah;
     private com.agung.inventory.ui.component.CustomComboUI cmbSupplier;

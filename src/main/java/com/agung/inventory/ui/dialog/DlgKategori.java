@@ -36,6 +36,7 @@ public class DlgKategori extends javax.swing.JDialog {
     }
 
     private void initForm() {
+        setTitle("Master Kategori");
         setLocationRelativeTo(null);
         loadDataToTable();
         enableForm(false);

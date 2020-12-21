@@ -35,6 +35,7 @@ public class DlgPelanggan extends javax.swing.JDialog {
     }
 
     private void initForm() {
+        setTitle("Master Pelanggan");
         setLocationRelativeTo(null);
         txtSearch.requestFocus();
         loadDataToTable();

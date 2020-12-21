@@ -35,6 +35,7 @@ public class DlgSupplier extends javax.swing.JDialog {
     }
 
     private void initForm() {
+        setTitle("Master Supplier");
         setLocationRelativeTo(null);
         loadDataToTable();
         enableForm(false);

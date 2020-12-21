@@ -43,6 +43,7 @@ public class DlgBarang extends javax.swing.JDialog {
     }
 
     private void initForm() {
+        setTitle("Master Barang");
         setLocationRelativeTo(null);
         loadDataToTable();
         loadKategoriToCombo();
