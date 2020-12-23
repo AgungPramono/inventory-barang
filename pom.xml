@@ -15,6 +15,7 @@
         <module>inventory-data</module>
         <module>inventory-config</module>
         <module>inventory-ui</module>
+        <module>inventory-report</module>
     </modules>
     
     <properties>

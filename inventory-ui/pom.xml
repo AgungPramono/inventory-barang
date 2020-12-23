@@ -6,7 +6,11 @@
         <artifactId>aplikasi-inventory-barang</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    
     <artifactId>inventory-ui</artifactId>
+    
+    
+    <name>inventory-ui</name>
 
     <dependencies>
         <dependency>
@@ -56,5 +60,4 @@
             <artifactId>ag-swing-component</artifactId>
         </dependency>
     </dependencies>
-    <name>inventory-ui</name>
 </project>
