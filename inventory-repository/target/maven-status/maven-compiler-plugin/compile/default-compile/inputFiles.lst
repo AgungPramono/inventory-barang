@@ -1,0 +1,14 @@
+/home/agung/Documents/ag-coding/01.Personal/inventory-barang/inventory-repository/src/main/java/com/agung/inventory/service/TransactionService.java
+/home/agung/Documents/ag-coding/01.Personal/inventory-barang/inventory-repository/src/main/java/com/agung/inventory/dao/BarangKeluarDao.java
+/home/agung/Documents/ag-coding/01.Personal/inventory-barang/inventory-repository/src/main/java/com/agung/inventory/dao/KategoriDao.java
+/home/agung/Documents/ag-coding/01.Personal/inventory-barang/inventory-repository/src/main/java/com/agung/inventory/dto/LaporanBarangDto.java
+/home/agung/Documents/ag-coding/01.Personal/inventory-barang/inventory-repository/src/main/java/com/agung/inventory/dao/BaseCrudDao.java
+/home/agung/Documents/ag-coding/01.Personal/inventory-barang/inventory-repository/src/main/java/com/agung/inventory/dto/LaporanBarangMasukDto.java
+/home/agung/Documents/ag-coding/01.Personal/inventory-barang/inventory-repository/src/main/java/com/agung/inventory/dao/BarangMasukDetailDao.java
+/home/agung/Documents/ag-coding/01.Personal/inventory-barang/inventory-repository/src/main/java/com/agung/inventory/dao/BarangMasukDao.java
+/home/agung/Documents/ag-coding/01.Personal/inventory-barang/inventory-repository/src/main/java/com/agung/inventory/constan/StokTidakCukupException.java
+/home/agung/Documents/ag-coding/01.Personal/inventory-barang/inventory-repository/src/main/java/com/agung/inventory/service/MasterService.java
+/home/agung/Documents/ag-coding/01.Personal/inventory-barang/inventory-repository/src/main/java/com/agung/inventory/dao/PelangganDao.java
+/home/agung/Documents/ag-coding/01.Personal/inventory-barang/inventory-repository/src/main/java/com/agung/inventory/dao/SupplierDao.java
+/home/agung/Documents/ag-coding/01.Personal/inventory-barang/inventory-repository/src/main/java/com/agung/inventory/dao/PetugasDao.java
+/home/agung/Documents/ag-coding/01.Personal/inventory-barang/inventory-repository/src/main/java/com/agung/inventory/dao/BarangDao.java

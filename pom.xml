@@ -12,7 +12,7 @@
     <modules>
         <module>inventory-model</module>
         <module>inventory-util</module>
-        <module>inventory-data</module>
+        <module>inventory-repository</module>
         <module>inventory-config</module>
         <module>inventory-ui</module>
         <module>inventory-report</module>
@@ -64,7 +64,7 @@
             </dependency>
             <dependency>
                 <groupId>com.agung.inventory</groupId>
-                <artifactId>inventory-data</artifactId>
+                <artifactId>inventory-repository</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

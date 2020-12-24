@@ -20,7 +20,7 @@
             </dependency>
             <dependency>
                 <groupId>com.agung.inventory</groupId>
-                <artifactId>inventory-data</artifactId>
+                <artifactId>inventory-repository</artifactId>
             </dependency>
     </dependencies>
 </project>
