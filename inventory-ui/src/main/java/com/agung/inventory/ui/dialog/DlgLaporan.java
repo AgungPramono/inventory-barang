@@ -68,27 +68,29 @@ public class DlgLaporan extends javax.swing.JDialog {
 
     }
 
+    private LocalDateTime startDate(){
+        return DateUtil.toLocalDateTime(jDateChooser1.getDate());
+    }
+
+    private LocalDateTime endDate(){
+        return DateUtil.toLocalDateTime(jDateChooser2.getDate());
+    }
+
     private void generateItemReportStock() {
         DlgViewLaporan.getSingleton()
                 .showDialog(AppContext.getReportService().printLaporanStok(), "Laporan Barang");
-
     }
 
     private void generateInTransactionReport() {
-        LocalDateTime startDateTime = DateUtil.toLocalDateTime(jDateChooser1.getDate());
-        LocalDateTime endDateTime = DateUtil.toLocalDateTime(jDateChooser2.getDate());
         DlgViewLaporan.getSingleton()
                 .showDialog(AppContext.getReportService()
-                        .generateLaporanTransaksi(startDateTime, endDateTime, ReportConstant.LAPORAN_BARANG_MASUK), "Laporan Barang Masuk");
+                        .generateLaporanTransaksi(startDate(), endDate(), ReportConstant.LAPORAN_BARANG_MASUK), "Laporan Barang Masuk");
     }
 
     private void generateOutTransactionReport() {
-        LocalDateTime srartDateTime = DateUtil.toLocalDateTime(jDateChooser1.getDate());
-        LocalDateTime endDateTime = DateUtil.toLocalDateTime(jDateChooser2.getDate());
         DlgViewLaporan.getSingleton()
                 .showDialog(AppContext.getReportService()
-                        .generateLaporanTransaksi(srartDateTime, endDateTime, ReportConstant.LAPORAN_BARANG_KELUAR), "Laporan Barang Keluar");
-
+                        .generateLaporanTransaksi(startDate(), endDate(), ReportConstant.LAPORAN_BARANG_KELUAR), "Laporan Barang Keluar");
     }
 
     private void selectReportOption(){
