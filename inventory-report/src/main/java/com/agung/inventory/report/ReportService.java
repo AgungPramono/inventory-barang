@@ -3,24 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.agung.inventory.service;
+package com.agung.inventory.report;
 
-import com.agung.inventory.constan.ReportConstant;
-import com.agung.inventory.constan.SqlConstan;
-import com.agung.inventory.dto.LaporanBarangDto;
-import com.agung.inventory.dto.LaporanBarangMasukDto;
+
 import com.agung.inventory.entity.Barang;
-import com.agung.inventory.entity.BarangMasuk;
-import com.agung.inventory.entity.Pelanggan;
-import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.design.JRDesignQuery;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.sql.DataSource;
+import com.agung.inventory.report.dto.LaporanBarangDto;
+import com.agung.inventory.report.constan.SqlConstan;
+import com.agung.inventory.report.constan.ReportConstant;
+import com.agung.inventory.service.MasterService;
+import com.agung.inventory.service.TransactionService;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -30,6 +21,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sql.DataSource;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
@@ -171,18 +170,5 @@ public class ReportService {
 
         return result;
 
-    }
-
-    private List<LaporanBarangMasukDto> dataBarangMasuk() {
-        List<LaporanBarangMasukDto> result = new ArrayList<>();
-        List<BarangMasuk> listBarangMasuk = transactionService.findAllBarangMasuk();
-
-        for (BarangMasuk bm : listBarangMasuk) {
-            LaporanBarangMasukDto dto = new LaporanBarangMasukDto();
-            dto.setPetugas(bm.getPetugas().getNama());
-            dto.setSupplier(bm.getSupplier().getNama());
-            result.add(dto);
-        }
-        return result;
     }
 }

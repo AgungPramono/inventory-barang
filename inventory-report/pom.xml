@@ -10,6 +10,17 @@
     <artifactId>inventory-report</artifactId>
     
     <dependencies>
-        
+        <dependency>
+                <groupId>net.sf.jasperreports</groupId>
+                <artifactId>jasperreports</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-all</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.agung.inventory</groupId>
+                <artifactId>inventory-data</artifactId>
+            </dependency>
     </dependencies>
 </project>

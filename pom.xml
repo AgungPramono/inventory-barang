@@ -69,6 +69,11 @@
             </dependency>
             <dependency>
                 <groupId>com.agung.inventory</groupId>
+                <artifactId>inventory-report</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.agung.inventory</groupId>
                 <artifactId>inventory-config</artifactId>
                 <version>${project.version}</version>
             </dependency>

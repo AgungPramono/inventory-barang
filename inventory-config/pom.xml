@@ -32,5 +32,9 @@
             <groupId>com.agung.inventory</groupId>
             <artifactId>inventory-data</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.agung.inventory</groupId>
+            <artifactId>inventory-report</artifactId>
+        </dependency>
     </dependencies>
 </project>

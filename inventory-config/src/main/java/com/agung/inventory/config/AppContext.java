@@ -5,8 +5,8 @@
  */
 package com.agung.inventory.config;
 
+import com.agung.inventory.report.ReportService;
 import com.agung.inventory.service.MasterService;
-import com.agung.inventory.service.ReportService;
 import com.agung.inventory.service.TransactionService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -20,14 +20,14 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class AppContext {
 
     private static TransactionService transactionService;
-    private static ReportService reportService;
+    private static com.agung.inventory.report.ReportService reportService;
     private static MasterService masterService;
 
     public static void initContainer(){
         ApplicationContext context =
                 new AnnotationConfigApplicationContext(AppConfig.class);
         transactionService =  context.getBean(TransactionService.class);
-        reportService = context.getBean(ReportService.class);
+        reportService = context.getBean(com.agung.inventory.report.ReportService.class);
         masterService = context.getBean(MasterService.class);
     }
 
