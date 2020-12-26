@@ -11,10 +11,11 @@ import com.agung.inventory.entity.Barang;
 import com.agung.inventory.ui.dialog.*;
 import com.agung.inventory.ui.tablemodel.BarangTableModel;
 import com.agung.inventory.util.TableUtil;
+
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import javax.swing.*;
 
 /**
  * @author agung
@@ -54,6 +55,36 @@ public class MainFrame extends javax.swing.JFrame {
         timer.start();
     }
 
+    private void launchMenuBarang(){
+        DlgBarang.getnstance().showDialog();
+        loadDataToTable();
+    }
+
+    private void launchMenuBarangMasuk(){
+        DlgListBarangMasuk.getSingleton().showDialog();
+        loadDataToTable();
+    }
+
+    private void laungMenuKategori(){
+        DlgKategori.getInstance().showDialog();
+    }
+
+    private void launchMenuPelanggan(){
+        new DlgPelanggan().showDialog();
+    }
+
+    private void launchMenuSupplier(){
+        new DlgSupplier().showDialog();
+    }
+
+    private void launchMenuPetugas(){
+        new DlgPetugas().showDialog();
+    }
+
+    private void launchMenuBarangKeluar(){
+        DlgListBarangKeluar.getSingleton().showDialog();
+        loadDataToTable();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -332,35 +363,31 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        DlgBarang.getnstance().showDialog();
-        loadDataToTable();
+       launchMenuBarang();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-//       DlgBarangMasuk.getInstance().showDialog();
-        DlgListBarangMasuk.getSingleton().showDialog();
-        loadDataToTable();
+       launchMenuBarangMasuk();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        DlgKategori.getInstance().showDialog();
+       laungMenuKategori();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        new DlgPelanggan().showDialog();
+       launchMenuPelanggan();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        new DlgSupplier().showDialog();
+       launchMenuSupplier();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        new DlgPetugas().showDialog();
+       launchMenuPetugas();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        DlgListBarangKeluar.getSingleton().showDialog();
-        loadDataToTable();
+       launchMenuBarangKeluar();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
