@@ -7,11 +7,10 @@ package com.agung.inventory.report;
 
 
 import com.agung.inventory.entity.Barang;
-import com.agung.inventory.report.dto.LaporanBarangDto;
-import com.agung.inventory.report.constan.SqlConstan;
 import com.agung.inventory.report.constan.ReportConstant;
+import com.agung.inventory.report.constan.SqlConstan;
+import com.agung.inventory.report.dto.LaporanBarangDto;
 import com.agung.inventory.service.MasterService;
-import com.agung.inventory.service.TransactionService;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -39,9 +38,6 @@ public class ReportService {
 
     @Autowired
     private MasterService masterService;
-
-    @Autowired
-    private TransactionService transactionService;
 
     @Autowired
     private DataSource dataSource;
