@@ -369,6 +369,8 @@ public class DlgBarang extends javax.swing.JDialog {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        tblBarang.setBackground(new java.awt.Color(255, 255, 255));
+        tblBarang.setForeground(new java.awt.Color(0, 0, 0));
         tblBarang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -380,6 +382,7 @@ public class DlgBarang extends javax.swing.JDialog {
 
             }
         ));
+        tblBarang.setGridColor(new java.awt.Color(0, 0, 204));
         tblBarang.setRowHeight(30);
         jScrollPane2.setViewportView(tblBarang);
 

@@ -22,13 +22,13 @@ import java.util.List;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    private BarangTableModel barangTableModel  = new BarangTableModel();
+    private BarangTableModel barangTableModel = new BarangTableModel();
 
     public MainFrame() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         loadDataToTable();
-//        autoRefreshData();
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
 
     public JLabel getTxtUser() {
@@ -41,7 +41,7 @@ public class MainFrame extends javax.swing.JFrame {
             barangTableModel.setListBarang(listBarangMasukDetails);
             tblListTransaksi.setModel(barangTableModel);
         }
-        TableUtil.initColumn(tblListTransaksi,jScrollPane1);
+        TableUtil.initColumn(tblListTransaksi, jScrollPane1);
     }
 
     private void autoRefreshData() {
@@ -55,36 +55,43 @@ public class MainFrame extends javax.swing.JFrame {
         timer.start();
     }
 
-    private void launchMenuBarang(){
+    private void launchMenuBarang() {
         DlgBarang.getnstance().showDialog();
         loadDataToTable();
     }
 
-    private void launchMenuBarangMasuk(){
+    private void launchMenuBarangMasuk() {
         DlgListBarangMasuk.getSingleton().showDialog();
         loadDataToTable();
     }
 
-    private void laungMenuKategori(){
+    private void laungMenuKategori() {
         DlgKategori.getInstance().showDialog();
     }
 
-    private void launchMenuPelanggan(){
+    private void launchMenuPelanggan() {
         new DlgPelanggan().showDialog();
     }
 
-    private void launchMenuSupplier(){
+    private void launchMenuSupplier() {
         new DlgSupplier().showDialog();
     }
 
-    private void launchMenuPetugas(){
+    private void launchMenuPetugas() {
         new DlgPetugas().showDialog();
     }
 
-    private void launchMenuBarangKeluar(){
+    private void launchMenuBarangKeluar() {
         DlgListBarangKeluar.getSingleton().showDialog();
         loadDataToTable();
     }
+
+    private void logoutAction() {
+        SecurityConfig.setActivePetugas(null);
+        this.dispose();
+        SecurityConfig.initLogin();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -363,31 +370,31 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-       launchMenuBarang();
+        launchMenuBarang();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-       launchMenuBarangMasuk();
+        launchMenuBarangMasuk();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-       laungMenuKategori();
+        laungMenuKategori();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-       launchMenuPelanggan();
+        launchMenuPelanggan();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-       launchMenuSupplier();
+        launchMenuSupplier();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       launchMenuPetugas();
+        launchMenuPetugas();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-       launchMenuBarangKeluar();
+        launchMenuBarangKeluar();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
@@ -395,9 +402,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        SecurityConfig.setActivePetugas(null);
-        this.dispose();
-        SecurityConfig.initLogin();
+        logoutAction();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void btnBarangMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangMasukActionPerformed
