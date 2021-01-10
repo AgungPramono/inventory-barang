@@ -35,8 +35,8 @@ public class DlgLaporan extends javax.swing.JDialog {
     }
 
     private void initializeDate(){
-        jDateChooser1.setDate(DateUtil.toDate(LocalDateTime.now()));
-        jDateChooser2.setDate(DateUtil.toDate(LocalDateTime.now().plusDays(6)));
+        jDateChooser1.setDate(DateUtil.initStartDate());
+        jDateChooser2.setDate(DateUtil.initEndDate());
     }
 
     public void showDialog() {

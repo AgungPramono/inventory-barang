@@ -35,4 +35,12 @@ public class DateUtil {
     public static Date getDate(String date){
         return Date.from(LocalDate.parse(date).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
     }
+
+    public static Date initStartDate(){
+        return toDate(LocalDateTime.now());
+    }
+
+    public static Date initEndDate(){
+        return toDate(LocalDateTime.now().plusDays(6));
+    }
 }
