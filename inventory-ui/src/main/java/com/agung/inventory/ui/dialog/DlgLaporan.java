@@ -34,6 +34,11 @@ public class DlgLaporan extends javax.swing.JDialog {
         return INSTANCE;
     }
 
+    private void initializeDate(){
+        jDateChooser1.setDate(DateUtil.toDate(LocalDateTime.now()));
+        jDateChooser2.setDate(DateUtil.toDate(LocalDateTime.now().plusDays(6)));
+    }
+
     public void showDialog() {
         this.setVisible(true);
     }
@@ -93,17 +98,19 @@ public class DlgLaporan extends javax.swing.JDialog {
                         .generateLaporanTransaksi(startDate(), endDate(), ReportConstant.LAPORAN_BARANG_KELUAR), "Laporan Barang Keluar");
     }
 
-    private void selectReportOption(){
-        String pilih = (String) jComboBox1.getSelectedItem();
-        switch (pilih) {
+    private void setStateReportComponent(){
+        String option = (String) jComboBox1.getSelectedItem();
+        switch (option) {
             case "Stok Barang":
                 setMode(false);
                 return;
             case "Barang Masuk":
                 setMode(true);
+                initializeDate();
                 return;
             case "Barang Keluar":
                 setMode(true);
+                initializeDate();
         }
     }
 
@@ -267,7 +274,7 @@ public class DlgLaporan extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-        selectReportOption();
+        setStateReportComponent();
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void successButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_successButton1ActionPerformed
