@@ -12,7 +12,6 @@ import com.jgoodies.looks.Options;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import com.jgoodies.looks.plastic.theme.DesertBlue;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.swing.*;
 import java.util.logging.Level;
@@ -24,10 +23,6 @@ import java.util.logging.Logger;
 public class Main {
 
     public static MainFrame mainFrame;
-
-    @Autowired
-    private static MigrationUtil migrationUtil;
-
     public static MainFrame getMainFrame() {
         return mainFrame;
     }
