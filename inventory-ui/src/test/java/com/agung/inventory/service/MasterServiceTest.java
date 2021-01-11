@@ -54,21 +54,49 @@ public class MasterServiceTest extends BaseTest {
     @Test
     @DisplayName("test cari barang by parameter kolom dan value")
     void findItemByParam() {
-        List<Barang>barangList = masterService.findItemByParam("kode","B-001");
+        List<Barang> barangList = masterService.findItemByParam("kode", "B-001");
         assertFalse(barangList.isEmpty());
-        assertEquals(1,barangList.size());
+        assertEquals(1, barangList.size());
 
-        List<Barang>barangList2 = masterService.findItemByParam("kode","B-00xx");
+        List<Barang> barangList2 = masterService.findItemByParam("kode", "B-00xx");
         assertTrue(barangList2.isEmpty());
-        assertEquals(0,barangList2.size());
+        assertEquals(0, barangList2.size());
 
-        List<Barang>list3 = masterService.findItemByParam("nama","barang test 1");
-        for (Barang b:list3){
+        List<Barang> list3 = masterService.findItemByParam("nama", "barang test 1");
+        for (Barang b : list3) {
             System.out.println(b.getNamaBarang());
         }
         assertFalse(list3.isEmpty());
-        assertEquals(2,list3.size());
+        assertEquals(2, list3.size());
         assertEquals("barang test 1", list3.get(0).getNamaBarang());
+    }
+
+    @Test
+    @DisplayName("test simpan kategori")
+    void saveCategory() throws SQLException {
+        for (int i = 0; i <= 10; i++) {
+            Kategori kategori = new Kategori();
+            kategori.setKode("k-00" + i);
+            kategori.setNama("Kategori " + i);
+            masterService.saveCategory(kategori);
+        }
+        List<Kategori> kategoris = masterService.findAllCategori();
+        assertEquals(11, kategoris.size());
+        assertNotEquals(0, kategoris.size());
+        assertFalse(kategoris.isEmpty());
+    }
+
+    @Test
+    @DisplayName("test hapus kategori")
+    void testDeleteKategori() throws SQLException {
+        List<Kategori> result = masterService.findAllCategori();
+        for (Kategori k:result){
+            masterService.deleteById(k);
+        }
+        result = masterService.findAllCategori();
+        assertEquals(0, result.size());
+        assertNotEquals(10, result.size());
+        assertTrue(result.isEmpty());
     }
 
 }
