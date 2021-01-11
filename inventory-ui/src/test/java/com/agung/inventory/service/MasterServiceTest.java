@@ -3,6 +3,9 @@ package com.agung.inventory.service;
 
 import com.agung.inventory.entity.Barang;
 import com.agung.inventory.entity.Kategori;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -11,9 +14,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Tags({
+        @Tag("master-service"),
+        @Tag("integration-test")
+})
+@DisplayName("test modul master service")
 public class MasterServiceTest extends BaseTest {
 
     @Test
+    @DisplayName("test hapus barang")
     public void deleteTest() throws SQLException {
         List<Barang> barangList = masterService.findAllItem();
         for (Barang b : barangList) {
@@ -24,6 +33,7 @@ public class MasterServiceTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("test simpan barang")
     void saveBarang() throws SQLException {
         List<Kategori> kategoris = masterService.findAllCategori();
         for (int i = 1; i <= 10; i++) {
@@ -42,6 +52,7 @@ public class MasterServiceTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("test cari barang by parameter kolom dan value")
     void findItemByParam() {
         List<Barang>barangList = masterService.findItemByParam("kode","B-001");
         assertFalse(barangList.isEmpty());
