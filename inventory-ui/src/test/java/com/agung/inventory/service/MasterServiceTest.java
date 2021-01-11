@@ -3,6 +3,8 @@ package com.agung.inventory.service;
 
 import com.agung.inventory.entity.Barang;
 import com.agung.inventory.entity.Kategori;
+import com.agung.inventory.entity.Petugas;
+import com.agung.inventory.util.PasswordHelper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
@@ -99,4 +101,34 @@ public class MasterServiceTest extends BaseTest {
         assertTrue(result.isEmpty());
     }
 
+    @Test
+    @DisplayName("test simpan petugas")
+    void saveEmployee() {
+        for(int i=0; i<10; i++){
+            Petugas petugas = new Petugas();
+            petugas.setNama("Petugas "+i);
+            petugas.setUsername("petugas_"+i);
+            petugas.setPassword(PasswordHelper.getEncryptedTextFromPlainText("petugas"+i));
+            petugas.setActive(true);
+            masterService.saveEmployee(petugas);
+        }
+
+        List<Petugas> result = masterService.findAllEmployee();
+        assertEquals(10, result.size());
+        assertNotEquals(0, result.size());
+        assertFalse(result.isEmpty());
+    }
+
+    @Test
+    @DisplayName("test hapus petugas")
+    void deleteEmployee() throws Exception {
+        List<Petugas> result = masterService.findAllEmployee();
+        for (Petugas petugas:result){
+            masterService.deleteEmployee(petugas);
+        }
+        result = masterService.findAllEmployee();
+        assertEquals(0, result.size());
+        assertNotEquals(10, result.size());
+        assertTrue(result.isEmpty());
+    }
 }
