@@ -1,6 +1,6 @@
 
 import com.agung.inventory.util.PasswordHelper;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,6 +18,9 @@ public class TestPassword {
     public void testGetPlainFromPassword(){
         String pass = PasswordHelper.getEncryptedTextFromPlainText("admin123");
         System.out.println(pass);
+        for(int i=1; i<=10;i++){
+            System.out.println(i);
+        }
     }
     
 }

@@ -44,17 +44,16 @@
             <artifactId>jgoodies-common</artifactId>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.swinglabs</groupId>
             <artifactId>swingx</artifactId>
         </dependency>
         <dependency>
             <groupId>com.agung.swing.component</groupId>
             <artifactId>ag-swing-component</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
         </dependency>
     </dependencies>
 </project>

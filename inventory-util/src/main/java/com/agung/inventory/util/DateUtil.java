@@ -32,6 +32,11 @@ public class DateUtil {
         return DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss");
     }
 
+    /**
+     * example 2021-03-11
+     * @param date
+     * @return
+     */
     public static Date getDate(String date){
         return Date.from(LocalDate.parse(date).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
     }
@@ -40,7 +45,7 @@ public class DateUtil {
         return toDate(LocalDateTime.now());
     }
 
-    public static Date initEndDate(){
-        return toDate(LocalDateTime.now().plusDays(6));
+    public static Date initEndDate(Long plusDate){
+        return toDate(LocalDateTime.now().plusDays(plusDate));
     }
 }
