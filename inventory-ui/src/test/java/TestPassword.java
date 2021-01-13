@@ -23,6 +23,9 @@ public class TestPassword {
         for(int i=1; i<=10;i++){
             System.out.println(i);
         }
+        
+        String encrypt = PasswordHelper.getEncryptedTextFromPlainText2("71040788799");
+        System.out.println(encrypt);
     }
     
 }
