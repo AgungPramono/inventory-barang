@@ -4,6 +4,7 @@ package com.agung.inventory.service;
 import com.agung.inventory.entity.Barang;
 import com.agung.inventory.entity.Kategori;
 import com.agung.inventory.entity.Petugas;
+import com.agung.inventory.entity.Supplier;
 import com.agung.inventory.util.PasswordHelper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -130,5 +131,32 @@ public class MasterServiceTest extends BaseTest {
         assertEquals(0, result.size());
         assertNotEquals(10, result.size());
         assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void testInsertSupplier(){
+        for (int i=0; i<10; i++){
+            Supplier supplier = new Supplier();
+            supplier.setKode("s-00"+i);
+            supplier.setNama("Supplier "+i);
+            supplier.setAlamat("alamat "+i);
+            supplier.setTelepon("08042"+i);
+            masterService.saveSupplier(supplier);
+        }
+
+        List<Supplier> result = masterService.findAllSupplier();
+        assertEquals(10, result.size());
+        assertFalse(result.isEmpty());
+    }
+
+    @Test
+    void deleteSupplier(){
+        List<Supplier> result = masterService.findAllSupplier();
+        for (Supplier s:result){
+            masterService.deleteSupplierById(s);
+        }
+        result = masterService.findAllSupplier();
+        assertTrue(result.isEmpty());
+        assertNotEquals(10, result.size());
     }
 }
