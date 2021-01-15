@@ -11,11 +11,12 @@ import com.agung.inventory.dao.BarangMasukDetailDao;
 import com.agung.inventory.entity.Barang;
 import com.agung.inventory.entity.BarangMasuk;
 import com.agung.inventory.entity.BarangMasukDetail;
+
+import javax.sql.DataSource;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sql.DataSource;
 
 /**
  *
@@ -61,6 +62,12 @@ public class TransaksiService {
                 this.dataSource.getConnection().rollback();
             } catch (SQLException ex1) {
                 Logger.getLogger(TransaksiService.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }finally {
+            try {
+                dataSource.getConnection().close();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
     }
