@@ -6,6 +6,8 @@
 package com.agung.inventory.dao;
 
 import com.agung.inventory.entity.Pelanggan;
+
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,10 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sql.DataSource;
 
 /**
- *
  * @author agung
  */
 public class PelangganDao implements BaseCrudDao<Pelanggan> {
@@ -35,21 +35,17 @@ public class PelangganDao implements BaseCrudDao<Pelanggan> {
 
     @Override
     public void simpan(Pelanggan t) {
-        if (t.getId() == null) {
-            try {
-                Connection con = dataSource.getConnection();
+        try (Connection con = dataSource.getConnection()) {
+            if (t.getId() == null) {
                 PreparedStatement ps = con.prepareStatement(SQL_SIMPAN_PELANGGAN);
                 ps.setString(1, t.getKode());
                 ps.setString(2, t.getNama());
                 ps.setString(3, t.getAlamat());
                 ps.setString(4, t.getNoTelepon());
                 ps.executeUpdate();
-            } catch (SQLException ex) {
-                Logger.getLogger(PelangganDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            try {
-                Connection con = dataSource.getConnection();
+                ps.close();
+
+            } else {
                 PreparedStatement ps = con.prepareStatement(SQL_UPDATE_PELANGGAN);
                 ps.setString(1, t.getKode());
                 ps.setString(2, t.getNama());
@@ -57,11 +53,11 @@ public class PelangganDao implements BaseCrudDao<Pelanggan> {
                 ps.setString(4, t.getNoTelepon());
                 ps.setInt(5, t.getId());
                 ps.executeUpdate();
-            } catch (SQLException ex) {
-                Logger.getLogger(PelangganDao.class.getName()).log(Level.SEVERE, null, ex);
+                ps.close();
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
     }
 
     @Override
@@ -71,11 +67,11 @@ public class PelangganDao implements BaseCrudDao<Pelanggan> {
 
     @Override
     public void deleteById(Pelanggan t) {
-        try {
-            Connection conn = dataSource.getConnection();
+        try (Connection conn=dataSource.getConnection()){
             PreparedStatement ps = conn.prepareStatement(SQL_DELETE_PELANGGAN);
             ps.setInt(1, t.getId());
             ps.executeUpdate();
+            ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(BarangDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -85,20 +81,22 @@ public class PelangganDao implements BaseCrudDao<Pelanggan> {
     public List<Pelanggan> cariSemua() {
         List<Pelanggan> listPelanggans = new ArrayList<>();
 
-        try {
-            Connection con = dataSource.getConnection();
+        try(Connection con=dataSource.getConnection()) {
             PreparedStatement ps = con.prepareStatement(SQL_SELECT_ALL_PELANGGAN);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Pelanggan p = new Pelanggan();
-                p.setId(rs.getInt("id"));
-                p.setKode(rs.getString("kode"));
-                p.setNama(rs.getString("nama"));
-                p.setAlamat(rs.getString("alamat"));
-                p.setNoTelepon(rs.getString("telepon"));
-                listPelanggans.add(p);
+            try(ResultSet rs = ps.executeQuery()){
+                while (rs.next()) {
+                    Pelanggan p = new Pelanggan();
+                    p.setId(rs.getInt("id"));
+                    p.setKode(rs.getString("kode"));
+                    p.setNama(rs.getString("nama"));
+                    p.setAlamat(rs.getString("alamat"));
+                    p.setNoTelepon(rs.getString("telepon"));
+                    listPelanggans.add(p);
+                }
+                return listPelanggans;
+            }catch (SQLException e){
+                e.printStackTrace();
             }
-            return listPelanggans;
         } catch (SQLException ex) {
             Logger.getLogger(PelangganDao.class.getName()).log(Level.SEVERE, null, ex);
         }

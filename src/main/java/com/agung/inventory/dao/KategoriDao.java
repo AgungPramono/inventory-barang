@@ -6,6 +6,8 @@
 package com.agung.inventory.dao;
 
 import com.agung.inventory.entity.Kategori;
+
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sql.DataSource;
 
 /**
  *
@@ -38,27 +39,23 @@ public class KategoriDao implements BaseCrudDao<Kategori> {
 
     @Override
     public void simpan(Kategori t) {
+        try(Connection con= dataSource.getConnection()) {
         if (t.getId() == null) {
-            try {
-                Connection con = dataSource.getConnection();
                 PreparedStatement ps = con.prepareStatement(SQL_INSERT_KATEGORI);
                 ps.setString(1, t.getKode());
                 ps.setString(2, t.getNamaKategori());
                 int resp = ps.executeUpdate();
-            } catch (SQLException ex) {
-                Logger.getLogger(KategoriDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                ps.close();
         } else {
-            try {
-                Connection con = dataSource.getConnection();
                 PreparedStatement ps = con.prepareStatement(SQL_UPDATE_KATEGORI);
                 ps.setString(1, t.getKode());
                 ps.setString(2, t.getNamaKategori());
                 ps.setInt(3, t.getId());
                 int resp = ps.executeUpdate();
-            } catch (SQLException ex) {
-                Logger.getLogger(KategoriDao.class.getName()).log(Level.SEVERE, null, ex);
+                ps.close();
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(KategoriDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -75,18 +72,21 @@ public class KategoriDao implements BaseCrudDao<Kategori> {
     @Override
     public List<Kategori> cariSemua() {
         List<Kategori> kategoris = new ArrayList<>();
-        try {
-            Connection con = dataSource.getConnection();
+        try(Connection con=dataSource.getConnection()) {
             PreparedStatement ps = con.prepareStatement(SQL_SELECT_ALL_KATEGORI);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Kategori k = new Kategori();
-                k.setId(rs.getInt("id"));
-                k.setKode(rs.getString("kode"));
-                k.setNamaKategori(rs.getString("nama"));
-                kategoris.add(k);
+            try(ResultSet rs = ps.executeQuery()){
+                while (rs.next()) {
+                    Kategori k = new Kategori();
+                    k.setId(rs.getInt("id"));
+                    k.setKode(rs.getString("kode"));
+                    k.setNamaKategori(rs.getString("nama"));
+                    kategoris.add(k);
+                }
+                return kategoris;
+            }catch (SQLException e){
+                e.printStackTrace();
             }
-            return kategoris;
+
         } catch (SQLException ex) {
             Logger.getLogger(KategoriDao.class.getName()).log(Level.SEVERE, null, ex);
         }

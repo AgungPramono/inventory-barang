@@ -6,13 +6,14 @@
 package com.agung.inventory.dao;
 
 import com.agung.inventory.entity.BarangMasukDetail;
+
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sql.DataSource;
 
 /**
  *
@@ -30,13 +31,13 @@ public class BarangMasukDetailDao implements BaseCrudDao<BarangMasukDetail>{
 
     @Override
     public void simpan(BarangMasukDetail bmd) {
-        try {
-            Connection connection = datasource.getConnection();
-            PreparedStatement ps2 = connection.prepareStatement(SQL_INSERT_DETAIL);
+        try(Connection conn=datasource.getConnection()) {
+            PreparedStatement ps2 = conn.prepareStatement(SQL_INSERT_DETAIL);
             ps2.setInt(1, bmd.getBarangMasuk().getId());
             ps2.setInt(2, bmd.getBarang().getId());
             ps2.setBigDecimal(3, bmd.getQty());
             ps2.executeUpdate();
+            ps2.close();
         } catch (SQLException ex) {
             Logger.getLogger(BarangMasukDao.class.getName()).log(Level.SEVERE, null, ex);
         }

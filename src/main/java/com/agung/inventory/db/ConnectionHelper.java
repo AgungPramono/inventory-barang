@@ -14,10 +14,11 @@ import com.zaxxer.hikari.HikariDataSource;
  */
 public class ConnectionHelper {
     
-    private static HikariConfig config = new HikariConfig();
+    private static final HikariConfig config;
     private static HikariDataSource hikariDataSource;
     
     static{
+        config = new HikariConfig();
         config.setDriverClassName("com.mysql.cj.jdbc.Driver");
         config.setJdbcUrl( "jdbc:mysql://localhost:3306/inventory?serverTimezone=UTC" );
         config.setUsername( "admin" );

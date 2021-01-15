@@ -9,15 +9,12 @@ import com.agung.inventory.entity.Barang;
 import com.agung.inventory.entity.BarangMasuk;
 import com.agung.inventory.entity.BarangMasukDetail;
 import com.agung.inventory.entity.Gudang;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+
+import javax.sql.DataSource;
+import java.sql.*;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sql.DataSource;
 
 /**
  *
@@ -41,16 +38,18 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
     @Override
     public void simpan(BarangMasuk t) {
         if (t.getId() == null) {
-            try {
-                Connection conn = dataSource.getConnection();
+            try(Connection conn=dataSource.getConnection()) {
                 PreparedStatement ps = conn.prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
                 ps.setTimestamp(1, Timestamp.valueOf(t.getTanggalMasuk()));
                 ps.setInt(2, t.getPetugas().getId());
                 ps.setInt(3, t.getSupplier().getId());
                 ps.executeUpdate();
-                ResultSet rs  = ps.getGeneratedKeys();
-                if (rs.next()) {
-                    t.setId(rs.getInt(1));
+                try(ResultSet rs  = ps.getGeneratedKeys()){
+                    if (rs.next()) {
+                        t.setId(rs.getInt(1));
+                    }
+                }catch (SQLException e){
+                    e.printStackTrace();
                 }
                 
             } catch (SQLException ex) {
@@ -65,10 +64,10 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
     }
 
     private void hapusDetail(BarangMasukDetail bmd) {
-        try {
-            Connection conn = dataSource.getConnection();
+        try(Connection conn= dataSource.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(SQL_DELETE_DETAIL);
-            ResultSet executeQuery = ps.executeQuery();
+            ps.executeQuery();
+            ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(BarangMasukDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -76,13 +75,15 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
 
     @Override
     public BarangMasuk cariById(BarangMasuk t) {
-        try {
-            Connection conn = dataSource.getConnection();
+        try(Connection conn=dataSource.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(SQL_CARI_BARANG_MASUK);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                BarangMasuk barangMasuk = new BarangMasuk();
-                return barangMasuk;
+            try(ResultSet rs = ps.executeQuery()){
+                while (rs.next()) {
+                    BarangMasuk barangMasuk = new BarangMasuk();
+                    return barangMasuk;
+                }
+            }catch (SQLException e){
+                e.printStackTrace();
             }
         } catch (SQLException ex) {
             Logger.getLogger(BarangMasukDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,13 +93,13 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
 
     @Override
     public void deleteById(BarangMasuk t) {
-        try {
-            Connection conn = dataSource.getConnection();
+        try (Connection conn= dataSource.getConnection()){
             PreparedStatement ps = conn.prepareStatement(SQL_HAPUS_HEADER);
             ps.executeUpdate();
             for(BarangMasukDetail detail:t.getBarangMasukDetails()){
                 hapusDetail(detail);
             }
+            ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(BarangMasukDao.class.getName()).log(Level.SEVERE, null, ex);
         }

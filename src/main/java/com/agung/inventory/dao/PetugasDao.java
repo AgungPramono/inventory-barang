@@ -6,7 +6,8 @@
 package com.agung.inventory.dao;
 
 import com.agung.inventory.entity.Petugas;
-import com.agung.inventory.db.ConnectionHelper;
+
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sql.DataSource;
 
 /**
  *
@@ -39,18 +39,20 @@ public class PetugasDao implements BaseCrudDao<Petugas> {
 
     @Override
     public Petugas cariById(Petugas t) {
-        try {
-            Connection con = dataSource.getConnection();
+        try(Connection con=dataSource.getConnection()) {
             PreparedStatement ps = con.prepareStatement(SQL_FIND_BY_ID);
             ps.setInt(1, t.getId());
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                Petugas p = new Petugas();
-                p.setId(rs.getInt("id"));
-                p.setNama(rs.getString("nama"));
-                p.setUsername(rs.getString("username"));
-                p.setPassword(rs.getString("password"));
-                return p;
+            try(ResultSet rs = ps.executeQuery()){
+                if (rs.next()) {
+                    Petugas p = new Petugas();
+                    p.setId(rs.getInt("id"));
+                    p.setNama(rs.getString("nama"));
+                    p.setUsername(rs.getString("username"));
+                    p.setPassword(rs.getString("password"));
+                    return p;
+                }
+            }catch (SQLException e){
+                e.printStackTrace();
             }
         } catch (SQLException ex) {
             Logger.getLogger(PetugasDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -65,20 +67,21 @@ public class PetugasDao implements BaseCrudDao<Petugas> {
 
     @Override
     public List<Petugas> cariSemua() {
-        try {
+        try(Connection con=dataSource.getConnection()) {
             List<Petugas> result = new ArrayList<>();
-            Connection con = dataSource.getConnection();
             PreparedStatement ps = con.prepareStatement(SQL_SELECT_ALL);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Petugas p = new Petugas();
-                p.setId(rs.getInt("id"));
-                p.setNama(rs.getString("nama"));
-                p.setUsername(rs.getString("username"));
-                p.setPassword(rs.getString("password"));
-                result.add(p);
+            try(ResultSet rs = ps.executeQuery()){
+                while (rs.next()) {
+                    Petugas p = new Petugas();
+                    p.setId(rs.getInt("id"));
+                    p.setNama(rs.getString("nama"));
+                    p.setUsername(rs.getString("username"));
+                    p.setPassword(rs.getString("password"));
+                    result.add(p);
+                }
+            }catch (SQLException e){
+                e.printStackTrace();
             }
-            return result;
         } catch (SQLException ex) {
             Logger.getLogger(PetugasDao.class.getName()).log(Level.SEVERE, null, ex);
         }
