@@ -18,7 +18,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author agung
  */
 public class KategoriDao implements BaseCrudDao<Kategori> {
@@ -32,27 +31,27 @@ public class KategoriDao implements BaseCrudDao<Kategori> {
     @Override
     public void setDataSource(Connection dataSource) {
     }
-    
-    public KategoriDao(DataSource dataSource){
+
+    public KategoriDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     @Override
     public void simpan(Kategori t) {
-        try(Connection con= dataSource.getConnection()) {
-        if (t.getId() == null) {
-                PreparedStatement ps = con.prepareStatement(SQL_INSERT_KATEGORI);
-                ps.setString(1, t.getKode());
-                ps.setString(2, t.getNamaKategori());
-                int resp = ps.executeUpdate();
-                ps.close();
-        } else {
-                PreparedStatement ps = con.prepareStatement(SQL_UPDATE_KATEGORI);
-                ps.setString(1, t.getKode());
-                ps.setString(2, t.getNamaKategori());
-                ps.setInt(3, t.getId());
-                int resp = ps.executeUpdate();
-                ps.close();
+        try (Connection con = dataSource.getConnection()) {
+            if (t.getId() == null) {
+                try (PreparedStatement ps = con.prepareStatement(SQL_INSERT_KATEGORI)) {
+                    ps.setString(1, t.getKode());
+                    ps.setString(2, t.getNamaKategori());
+                    int resp = ps.executeUpdate();
+                }
+            } else {
+                try (PreparedStatement ps = con.prepareStatement(SQL_UPDATE_KATEGORI)) {
+                    ps.setString(1, t.getKode());
+                    ps.setString(2, t.getNamaKategori());
+                    ps.setInt(3, t.getId());
+                    int resp = ps.executeUpdate();
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(KategoriDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,21 +71,19 @@ public class KategoriDao implements BaseCrudDao<Kategori> {
     @Override
     public List<Kategori> cariSemua() {
         List<Kategori> kategoris = new ArrayList<>();
-        try(Connection con=dataSource.getConnection()) {
-            PreparedStatement ps = con.prepareStatement(SQL_SELECT_ALL_KATEGORI);
-            try(ResultSet rs = ps.executeQuery()){
-                while (rs.next()) {
-                    Kategori k = new Kategori();
-                    k.setId(rs.getInt("id"));
-                    k.setKode(rs.getString("kode"));
-                    k.setNamaKategori(rs.getString("nama"));
-                    kategoris.add(k);
+        try (Connection con = dataSource.getConnection()) {
+            try (PreparedStatement ps = con.prepareStatement(SQL_SELECT_ALL_KATEGORI)) {
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        Kategori k = new Kategori();
+                        k.setId(rs.getInt("id"));
+                        k.setKode(rs.getString("kode"));
+                        k.setNamaKategori(rs.getString("nama"));
+                        kategoris.add(k);
+                    }
+                    return kategoris;
                 }
-                return kategoris;
-            }catch (SQLException e){
-                e.printStackTrace();
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(KategoriDao.class.getName()).log(Level.SEVERE, null, ex);
         }

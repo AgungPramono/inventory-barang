@@ -37,23 +37,22 @@ public class SupplierDao implements BaseCrudDao<Supplier> {
     public void simpan(Supplier t) {
         try (Connection con = dataSource.getConnection()) {
             if (t.getId() == null) {
-                PreparedStatement ps = con.prepareStatement(SQL_SIMPAN_SUPPLIER);
-                ps.setString(1, t.getKode());
-                ps.setString(2, t.getName());
-                ps.setString(3, t.getAlamat());
-                ps.setString(4, t.getNoTelpon());
-                ps.executeUpdate();
-                ps.close();
-
+                try (PreparedStatement ps = con.prepareStatement(SQL_SIMPAN_SUPPLIER)) {
+                    ps.setString(1, t.getKode());
+                    ps.setString(2, t.getName());
+                    ps.setString(3, t.getAlamat());
+                    ps.setString(4, t.getNoTelpon());
+                    ps.executeUpdate();
+                }
             } else {
-                PreparedStatement ps = con.prepareStatement(SQL_UPDATE_SUPPLIER);
-                ps.setString(1, t.getKode());
-                ps.setString(2, t.getName());
-                ps.setString(3, t.getAlamat());
-                ps.setString(4, t.getNoTelpon());
-                ps.setInt(5, t.getId());
-                ps.executeUpdate();
-                ps.close();
+                try (PreparedStatement ps = con.prepareStatement(SQL_UPDATE_SUPPLIER)) {
+                    ps.setString(1, t.getKode());
+                    ps.setString(2, t.getName());
+                    ps.setString(3, t.getAlamat());
+                    ps.setString(4, t.getNoTelpon());
+                    ps.setInt(5, t.getId());
+                    ps.executeUpdate();
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,11 +66,11 @@ public class SupplierDao implements BaseCrudDao<Supplier> {
 
     @Override
     public void deleteById(Supplier t) {
-        try (Connection conn= dataSource.getConnection()){
-            PreparedStatement ps = conn.prepareStatement(SQL_DELETE_SUPPLIER);
-            ps.setInt(1, t.getId());
-            ps.executeUpdate();
-            ps.close();
+        try (Connection conn = dataSource.getConnection()) {
+            try (PreparedStatement ps = conn.prepareStatement(SQL_DELETE_SUPPLIER)) {
+                ps.setInt(1, t.getId());
+                ps.executeUpdate();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(BarangDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -81,21 +80,20 @@ public class SupplierDao implements BaseCrudDao<Supplier> {
     public List<Supplier> cariSemua() {
         List<Supplier> listSupplier = new ArrayList<>();
 
-        try (Connection con=dataSource.getConnection()){
-            PreparedStatement ps = con.prepareStatement(SQL_SELECT_ALL_SUPPLIER);
-            try(ResultSet rs = ps.executeQuery()){
-                while (rs.next()) {
-                    Supplier p = new Supplier();
-                    p.setId(rs.getInt("id"));
-                    p.setKode(rs.getString("kode"));
-                    p.setName(rs.getString("nama"));
-                    p.setAlamat(rs.getString("alamat"));
-                    p.setNoTelpon(rs.getString("telepon"));
-                    listSupplier.add(p);
+        try (Connection con = dataSource.getConnection()) {
+            try (PreparedStatement ps = con.prepareStatement(SQL_SELECT_ALL_SUPPLIER)) {
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        Supplier p = new Supplier();
+                        p.setId(rs.getInt("id"));
+                        p.setKode(rs.getString("kode"));
+                        p.setName(rs.getString("nama"));
+                        p.setAlamat(rs.getString("alamat"));
+                        p.setNoTelpon(rs.getString("telepon"));
+                        listSupplier.add(p);
+                    }
+                    return listSupplier;
                 }
-                return listSupplier;
-            }catch (SQLException e){
-                e.printStackTrace();
             }
         } catch (SQLException ex) {
             Logger.getLogger(PelangganDao.class.getName()).log(Level.SEVERE, null, ex);

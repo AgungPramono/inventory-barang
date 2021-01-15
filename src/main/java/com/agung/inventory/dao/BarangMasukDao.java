@@ -17,7 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author agung
  */
 public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
@@ -27,47 +26,43 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
     public BarangMasukDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
+
     private String SQL_INSERT = "insert into barang_masuk (tanggal,id_petugas,id_supplier) values (?,?,?)";
     private String SQL_DELETE_DETAIL = "delete from barang_masuk_detail where id=?";
     private String SQL_CARI_BARANG_MASUK;
     private String SQL_HAPUS_HEADER = "delete from barang_masuk where id=?";
 
-    
-    
 
     @Override
     public void simpan(BarangMasuk t) {
         if (t.getId() == null) {
-            try(Connection conn=dataSource.getConnection()) {
-                PreparedStatement ps = conn.prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-                ps.setTimestamp(1, Timestamp.valueOf(t.getTanggalMasuk()));
-                ps.setInt(2, t.getPetugas().getId());
-                ps.setInt(3, t.getSupplier().getId());
-                ps.executeUpdate();
-                try(ResultSet rs  = ps.getGeneratedKeys()){
-                    if (rs.next()) {
-                        t.setId(rs.getInt(1));
+            try (Connection conn = dataSource.getConnection()) {
+                try (PreparedStatement ps = conn.prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
+                    ps.setTimestamp(1, Timestamp.valueOf(t.getTanggalMasuk()));
+                    ps.setInt(2, t.getPetugas().getId());
+                    ps.setInt(3, t.getSupplier().getId());
+                    ps.executeUpdate();
+                    try (ResultSet rs = ps.getGeneratedKeys()) {
+                        if (rs.next()) {
+                            t.setId(rs.getInt(1));
+                        }
                     }
-                }catch (SQLException e){
-                    e.printStackTrace();
                 }
-                
             } catch (SQLException ex) {
                 Logger.getLogger(BarangMasukDao.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
     }
 
     private void simpanDetail(BarangMasukDetail bmd) {
-        
+
     }
 
     private void hapusDetail(BarangMasukDetail bmd) {
-        try(Connection conn= dataSource.getConnection()) {
-            PreparedStatement ps = conn.prepareStatement(SQL_DELETE_DETAIL);
-            ps.executeQuery();
-            ps.close();
+        try (Connection conn = dataSource.getConnection()) {
+            try (PreparedStatement ps = conn.prepareStatement(SQL_DELETE_DETAIL)) {
+                ps.executeQuery();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(BarangMasukDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -75,15 +70,14 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
 
     @Override
     public BarangMasuk cariById(BarangMasuk t) {
-        try(Connection conn=dataSource.getConnection()) {
-            PreparedStatement ps = conn.prepareStatement(SQL_CARI_BARANG_MASUK);
-            try(ResultSet rs = ps.executeQuery()){
-                while (rs.next()) {
-                    BarangMasuk barangMasuk = new BarangMasuk();
-                    return barangMasuk;
+        try (Connection conn = dataSource.getConnection()) {
+            try (PreparedStatement ps = conn.prepareStatement(SQL_CARI_BARANG_MASUK)) {
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        BarangMasuk barangMasuk = new BarangMasuk();
+                        return barangMasuk;
+                    }
                 }
-            }catch (SQLException e){
-                e.printStackTrace();
             }
         } catch (SQLException ex) {
             Logger.getLogger(BarangMasukDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -93,13 +87,13 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
 
     @Override
     public void deleteById(BarangMasuk t) {
-        try (Connection conn= dataSource.getConnection()){
-            PreparedStatement ps = conn.prepareStatement(SQL_HAPUS_HEADER);
-            ps.executeUpdate();
-            for(BarangMasukDetail detail:t.getBarangMasukDetails()){
-                hapusDetail(detail);
+        try (Connection conn = dataSource.getConnection()) {
+            try (PreparedStatement ps = conn.prepareStatement(SQL_HAPUS_HEADER)) {
+                ps.executeUpdate();
+                for (BarangMasukDetail detail : t.getBarangMasukDetails()) {
+                    hapusDetail(detail);
+                }
             }
-            ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(BarangMasukDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -139,7 +133,7 @@ public class BarangMasukDao implements BaseCrudDao<BarangMasuk> {
 
     }
 
-    
+
     @Override
     public void setDataSource(Connection dataSource) {
     }

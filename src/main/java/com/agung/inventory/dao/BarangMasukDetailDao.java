@@ -32,12 +32,12 @@ public class BarangMasukDetailDao implements BaseCrudDao<BarangMasukDetail>{
     @Override
     public void simpan(BarangMasukDetail bmd) {
         try(Connection conn=datasource.getConnection()) {
-            PreparedStatement ps2 = conn.prepareStatement(SQL_INSERT_DETAIL);
-            ps2.setInt(1, bmd.getBarangMasuk().getId());
-            ps2.setInt(2, bmd.getBarang().getId());
-            ps2.setBigDecimal(3, bmd.getQty());
-            ps2.executeUpdate();
-            ps2.close();
+           try( PreparedStatement ps2 = conn.prepareStatement(SQL_INSERT_DETAIL)){
+               ps2.setInt(1, bmd.getBarangMasuk().getId());
+               ps2.setInt(2, bmd.getBarang().getId());
+               ps2.setBigDecimal(3, bmd.getQty());
+               ps2.executeUpdate();
+           }
         } catch (SQLException ex) {
             Logger.getLogger(BarangMasukDao.class.getName()).log(Level.SEVERE, null, ex);
         }

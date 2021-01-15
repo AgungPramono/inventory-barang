@@ -79,6 +79,7 @@ public class PetugasDao implements BaseCrudDao<Petugas> {
                     p.setPassword(rs.getString("password"));
                     result.add(p);
                 }
+                return result;
             }catch (SQLException e){
                 e.printStackTrace();
             }
