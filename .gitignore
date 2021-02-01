@@ -23,3 +23,9 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+/inventory-util/target/
+/inventory-repository/target/
+/inventory-config/target/
+/inventory-ui/target/
+/inventory-model/target/
+/inventory-report/target/
