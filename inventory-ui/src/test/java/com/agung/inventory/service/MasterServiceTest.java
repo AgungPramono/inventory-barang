@@ -6,10 +6,7 @@ import com.agung.inventory.entity.Kategori;
 import com.agung.inventory.entity.Petugas;
 import com.agung.inventory.entity.Supplier;
 import com.agung.inventory.util.PasswordHelper;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -158,5 +155,26 @@ public class MasterServiceTest extends BaseTest {
         result = masterService.findAllSupplier();
         assertTrue(result.isEmpty());
         assertNotEquals(10, result.size());
+    }
+
+    @Test
+    @Disabled
+    @DisplayName("test pencarian supplier dengan parameter kolom dan valuenya")
+    void testFindSupplierByParam(){
+        List<Supplier> resultSupplier = masterService.findSupplierByParam("kode", "S-001");
+                assertFalse(resultSupplier.isEmpty());
+        assertEquals(1, resultSupplier.size());
+
+        List<Supplier> resultSupplier2 = masterService.findSupplierByParam("kode", "S-00xx");
+        assertTrue(resultSupplier2.isEmpty());
+        assertEquals(0, resultSupplier2.size());
+
+        List<Supplier> result = masterService.findSupplierByParam("nama", "Supplier 1");
+        for (Supplier supplier : result) {
+            System.out.println(supplier.getNama());
+        }
+        assertFalse(result.isEmpty());
+        assertEquals(2, result.size());
+        assertEquals("barang test 1", result.get(0).getNama());
     }
 }
