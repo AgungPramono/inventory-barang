@@ -17,7 +17,16 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "barang")
+@Table(name = "barang",
+        indexes = {
+            @Index(
+                    name = "index_kode_nama_qty",
+                    columnList = "kode,nama,qty",
+                    unique = true
+            )
+        }
+
+)
 public class Barang extends BaseEntity{
     
     @Column(name = "kode", nullable = false)

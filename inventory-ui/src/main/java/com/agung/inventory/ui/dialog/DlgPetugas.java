@@ -126,6 +126,7 @@ public class DlgPetugas extends javax.swing.JDialog {
     private void addAction(){
         clearForm();
         enableForm(true);
+        cbAktif.setSelected(true);
     }
 
     /**

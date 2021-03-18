@@ -107,6 +107,7 @@ public class DlgSupplier extends javax.swing.JDialog {
         if (tblSupplier.getSelectedRow() >= 0 && supplier != null) {
             AppContext.getMasterService().deleteSupplierById(supplier);
             JOptionPane.showMessageDialog(this, "Berhasil Hapus", null, JOptionPane.INFORMATION_MESSAGE);
+            loadDataToTable();
         }
     }
 

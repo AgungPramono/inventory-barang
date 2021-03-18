@@ -44,10 +44,16 @@
         <flyway.version>5.2.4</flyway.version>
         <ag.swing.component.version>1.0</ag.swing.component.version>
         <junit.version>5.7.0</junit.version>
+        <postgre.version>42.2.8</postgre.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgre.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>

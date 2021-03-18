@@ -7,7 +7,6 @@ package com.agung.inventory.ui;
 
 import com.agung.inventory.SecurityConfig;
 import com.agung.inventory.config.AppContext;
-import com.agung.inventory.entity.Barang;
 import com.agung.inventory.ui.dialog.*;
 import com.agung.inventory.ui.tablemodel.BarangTableModel;
 import com.agung.inventory.util.TableUtil;
@@ -36,7 +35,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void loadDataToTable() {
-        List<Barang> listBarangMasukDetails = AppContext.getMasterService().findAllItem();
+        List<com.agung.inventory.entity.Barang> listBarangMasukDetails = AppContext.getMasterService().findAllItem();
         if (listBarangMasukDetails != null || !listBarangMasukDetails.isEmpty()) {
             barangTableModel.setListBarang(listBarangMasukDetails);
             tblListTransaksi.setModel(barangTableModel);
